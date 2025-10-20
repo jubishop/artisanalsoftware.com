@@ -23,10 +23,9 @@ A Node.js Express server that provides web pages for displaying podcast informat
 #### Acceptance Criteria
 
 1. WHEN a GET request is made to "/podhaven/podcast" with a valid feedURL parameter, THE Podcast_Server SHALL return a Podcast_Page with HTML content
-2. THE Podcast_Server SHALL parse the RSS_Feed and display title, description, author, podcast image, podcast link, episode list, and PodHaven_Link for the podcast within 5 seconds
+2. THE Podcast_Server SHALL parse the RSS_Feed and display title, description, author, podcast image, podcast link, episode list, and PodHaven_Link for the podcast
 3. IF the feedURL parameter is missing or invalid, THEN THE Podcast_Server SHALL return an HTML error page with 400 status code
 4. THE Podcast_Server SHALL return an HTML error page with 500 status code if the RSS_Feed cannot be fetched or parsed
-5. THE Podcast_Server SHALL complete the request within 10 seconds or return a timeout error page
 
 ### Requirement 2
 
@@ -38,7 +37,7 @@ A Node.js Express server that provides web pages for displaying podcast informat
 2. THE Podcast_Server SHALL parse the RSS_Feed and locate the episode matching the provided Episode_GUID
 3. IF the feedURL or guid parameters are missing, THEN THE Podcast_Server SHALL return an HTML error page with 400 status code
 4. IF the Episode_GUID is not found in the RSS_Feed, THEN THE Podcast_Server SHALL return an HTML error page with 404 status code
-5. THE Podcast_Server SHALL display episode title, description, episode image, audio player, publication date, duration, PodHaven_Link for the episode, and a link back to the podcast page when available
+5. THE Podcast_Server SHALL display episode title, description, episode image, audio player, publication date, duration, PodHaven_Link for the episode, and a link back to the podcast page.
 
 ### Requirement 3
 
@@ -50,7 +49,6 @@ A Node.js Express server that provides web pages for displaying podcast informat
 2. WHEN an unhandled error occurs, THE Podcast_Server SHALL return a 500 status code with a generic error message
 3. THE Podcast_Server SHALL validate all input parameters before processing requests
 4. THE Podcast_Server SHALL handle network timeouts when fetching RSS feeds
-5. THE Podcast_Server SHALL sanitize error messages to prevent information leakage
 
 ### Requirement 4
 
@@ -62,7 +60,6 @@ A Node.js Express server that provides web pages for displaying podcast informat
 2. THE Podcast_Server SHALL use consistent CSS styling across all pages
 3. THE Podcast_Server SHALL include proper HTTP status codes for all response types
 4. THE Podcast_Server SHALL render responsive HTML that works on mobile and desktop browsers
-5. THE Podcast_Server SHALL return page responses within 30 seconds maximum
 
 ### Requirement 5
 
@@ -70,7 +67,7 @@ A Node.js Express server that provides web pages for displaying podcast informat
 
 #### Acceptance Criteria
 
-1. THE Podcast_Server SHALL generate PodHaven_Link URLs using the format "podhaven://share?url=" followed by the RSS feed URL for podcast pages
+1. THE Podcast_Server SHALL generate PodHaven_Link URLs using the format "podhaven://share?url=" followed by the podcast's direct URL for podcast pages
 2. THE Podcast_Server SHALL generate PodHaven_Link URLs using the format "podhaven://share?url=" followed by the episode's direct URL for episode pages
 3. THE Podcast_Server SHALL display PodHaven_Link as clickable links on all podcast and episode pages
 4. THE Podcast_Server SHALL include PodHaven_Link for each episode in the episode list on podcast pages

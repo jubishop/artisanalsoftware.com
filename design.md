@@ -44,7 +44,7 @@ The Podcast Server is a Node.js Express application that renders server-side HTM
 - Fetches RSS feeds from URLs with timeout handling
 - Parses XML content into structured data
 - Extracts podcast metadata and episode information
-- Prioritizes `<content:encoded>` for descriptions (HTML), falls back to `<description>` (plain text)
+- Prioritizes `<content:encoded>` for descriptions (HTML), falls back to `<description>`/`<itunes:summary>` (plain text)
 - Handles parsing errors gracefully
 
 #### 3. Route Controllers (`controllers/`)
@@ -110,7 +110,7 @@ Controllers pass parsed RSS data directly to EJS/Handlebars templates for server
 ### Episode Model
 - **guid**: Unique identifier from RSS `<guid>`
 - **title**: Episode title from RSS `<title>`
-- **description**: Episode description from RSS `<description>` (plain text fallback)
+- **description**: Episode description from RSS `<description>`/`<itunes:summary>` (plain text fallback)
 - **descriptionHtml**: Rich HTML description from RSS `<content:encoded>` (preferred)
 - **imageUrl**: Episode artwork (fallback to podcast imageUrl if episode has no image)
 - **pubDate**: Publication date from RSS `<pubDate>`
@@ -130,7 +130,6 @@ Controllers pass parsed RSS data directly to EJS/Handlebars templates for server
 - Missing guid parameter for episodes
 
 #### 2. RSS Feed Errors (500)
-- Network timeout (10 second limit)
 - Invalid XML format
 - Feed parsing failures
 - HTTP errors from feed source
@@ -216,7 +215,6 @@ Controllers pass parsed RSS data directly to EJS/Handlebars templates for server
 ### Error Information Disclosure
 - Generic error messages for external users
 - Detailed logging for debugging (server-side only)
-- No sensitive information in client responses
 
 ## Deployment and Configuration
 
@@ -241,7 +239,7 @@ Controllers pass parsed RSS data directly to EJS/Handlebars templates for server
 - Episode lists with condensed information display
 - Optimized image sizes for mobile bandwidth
 
-#### Desktop Layout  
+#### Desktop Layout
 - Multi-column layout with sidebar for episode navigation
 - Larger images and more detailed episode information
 - Enhanced typography and spacing
