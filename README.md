@@ -207,6 +207,77 @@ The server handles errors gracefully:
 - Pagination for large episode lists
 - Rate limiting
 
+## Deployment
+
+### Heroku Deployment
+
+The application is configured for Heroku deployment:
+
+**Prerequisites:**
+- Heroku account
+- Heroku CLI installed
+
+**Deploy Steps:**
+
+1. **Verify Heroku remote is configured:**
+   ```bash
+   git remote -v
+   # Should show: heroku  https://git.heroku.com/artisanalsoftware.git
+   ```
+
+2. **Push to Heroku:**
+   ```bash
+   git push heroku main
+   ```
+
+3. **Verify deployment:**
+   ```bash
+   heroku open
+   ```
+
+4. **View logs:**
+   ```bash
+   heroku logs --tail
+   ```
+
+**Environment Configuration:**
+
+Set environment variables on Heroku (optional):
+```bash
+heroku config:set NODE_ENV=production
+heroku config:set RSS_TIMEOUT=10000
+```
+
+**Custom Domain:**
+
+The application is configured for `www.artisanalsoftware.com`:
+
+```bash
+heroku domains:add www.artisanalsoftware.com
+heroku domains:add artisanalsoftware.com
+```
+
+Configure your DNS:
+- Add CNAME record: `www` → `[your-app-name].herokudns.com`
+- Add ALIAS/ANAME record: `@` → `[your-app-name].herokudns.com`
+
+**Health Check:**
+
+The server logs all requests and is ready to accept traffic immediately on startup.
+
+**Scaling:**
+
+```bash
+# Check current dynos
+heroku ps
+
+# Scale up
+heroku ps:scale web=2
+
+# Scale down
+heroku ps:scale web=1
+```
+
 ## Browser Support
 
 - Modern browsers (Chrome, Firefox, Safari, Edge)
