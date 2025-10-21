@@ -542,3 +542,105 @@ body {
     display: none;
   }
 }
+
+/* ===================================
+   Dark Mode (prefers-color-scheme: dark)
+   =================================== */
+
+@media (prefers-color-scheme: dark) {
+  body {
+    color: #e0e0e0;
+    background-color: #1a1a1a;
+  }
+
+  /* Card backgrounds */
+  .podcast-header,
+  .episode-header,
+  .episodes-section,
+  .episode-description-section,
+  .error-content {
+    background: #2a2a2a;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Headings */
+  .podcast-title,
+  .episode-title,
+  .episodes-section h2,
+  .episode-description-section h2,
+  .error-title {
+    color: #f5f5f5;
+  }
+
+  /* Text colors */
+  .podcast-description,
+  .episode-description,
+  .error-message {
+    color: #d0d0d0;
+  }
+
+  .podcast-author,
+  .episode-podcast,
+  .episode-date,
+  .episode-duration {
+    color: #a0a0a0;
+  }
+
+  /* Links */
+  .episode-title a,
+  .episode-podcast a,
+  .episode-description a {
+    color: #4da3ff;
+  }
+
+  .episode-title a:hover,
+  .episode-podcast a:hover,
+  .episode-description a:hover {
+    color: #80bdff;
+  }
+
+  /* Episode items */
+  .episode-item {
+    border-color: #3a3a3a;
+    background: #2a2a2a;
+  }
+
+  .episode-item:hover {
+    border-color: #4da3ff;
+    box-shadow: 0 2px 8px rgba(77, 163, 255, 0.2);
+  }
+
+  /* Buttons */
+  .btn-primary,
+  .error-link {
+    background-color: #0d7aff;
+  }
+
+  .btn-primary:hover,
+  .btn-primary:focus,
+  .error-link:hover {
+    background-color: #4da3ff;
+    box-shadow: 0 4px 12px rgba(77, 163, 255, 0.4);
+  }
+
+  .btn-secondary {
+    background-color: #4a4a4a;
+    color: #e0e0e0;
+  }
+
+  .btn-secondary:hover,
+  .btn-secondary:focus {
+    background-color: #5a5a5a;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+  }
+
+  /* Error page */
+  .error-code {
+    color: #4da3ff;
+  }
+
+  /* Audio player - dark mode support */
+  .episode-audio audio {
+    filter: invert(0.9) hue-rotate(180deg);
+  }
+}
