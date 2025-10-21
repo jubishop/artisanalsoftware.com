@@ -1,5 +1,5 @@
 const { findEpisodeByGuid } = require('../services/rssParser');
-const { generateEpisodeLink, generatePodcastWebUrl, isValidUrl } = require('../services/urlHelper');
+const { generateEpisodeLink, generateEpisodeWebUrl, generatePodcastWebUrl, isValidUrl } = require('../services/urlHelper');
 
 /**
  * Episode Page Controller
@@ -67,6 +67,7 @@ async function showEpisode(req, res) {
 
     // Generate links
     const episodeShareLink = generateEpisodeLink(feedURL, guid);
+    const episodeWebUrl = generateEpisodeWebUrl(feedURL, guid);
     const podcastPageUrl = `/podhaven/podcast?feedURL=${encodeURIComponent(feedURL)}`;
 
     // Use episode image or fallback to podcast image
@@ -78,6 +79,7 @@ async function showEpisode(req, res) {
       podcast: episodeData.podcast,
       episodeImage,
       episodeShareLink,
+      episodeWebUrl,
       podcastPageUrl,
       feedURL
     });

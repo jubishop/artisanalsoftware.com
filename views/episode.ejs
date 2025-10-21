@@ -3,14 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="<%= episode.description.substring(0, 160) %>">
 
   <!-- Page Title -->
-  <title><%= episode.title %></title>
+  <title><%= episode.title %> - <%= podcast.title %></title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="<%= episode.description.replace(/<[^>]*>/g, '').substring(0, 160) %>">
+  <meta name="author" content="<%= podcast.title %>">
 
   <!-- Favicon -->
   <% if (episodeImage) { %>
   <link rel="icon" href="<%= episodeImage %>" type="image/x-icon">
+  <link rel="apple-touch-icon" href="<%= episodeImage %>">
+  <% } %>
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="<%= episode.title %>">
+  <meta property="og:description" content="<%= episode.description.replace(/<[^>]*>/g, '').substring(0, 200) %>">
+  <% if (episodeImage) { %>
+  <meta property="og:image" content="<%= episodeImage %>">
+  <% } %>
+  <meta property="og:url" content="<%= episodeWebUrl %>">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="PodHaven">
+  <% if (episode.audioUrl) { %>
+  <meta property="og:audio" content="<%= episode.audioUrl %>">
+  <% } %>
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<%= episode.title %>">
+  <meta name="twitter:description" content="<%= episode.description.replace(/<[^>]*>/g, '').substring(0, 200) %>">
+  <% if (episodeImage) { %>
+  <meta name="twitter:image" content="<%= episodeImage %>">
   <% } %>
 
   <!-- CSS -->
