@@ -19,6 +19,9 @@
     "url": "https://github.com/jubishop/artisanalsoftware.com/issues"
   },
   "homepage": "https://github.com/jubishop/artisanalsoftware.com#readme",
+  "engines": {
+    "node": "24.x"
+  },
   "dependencies": {
     "ejs": "^3.1.10",
     "express": "^5.1.0",
