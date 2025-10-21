@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const podcastController = require('./controllers/podcastController');
+const episodeController = require('./controllers/episodeController');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -21,6 +22,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.get('/podhaven/podcast', podcastController.showPodcast);
+app.get('/podhaven/episode', episodeController.showEpisode);
 
 // 404 handler
 app.use((req, res) => {

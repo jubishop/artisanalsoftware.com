@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="<%= episode.description.substring(0, 160) %>">
+
+  <!-- Page Title -->
+  <title><%= episode.title %></title>
+
+  <!-- Favicon -->
+  <% if (episodeImage) { %>
+  <link rel="icon" href="<%= episodeImage %>" type="image/x-icon">
+  <% } %>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="episode-header">
+      <% if (episodeImage) { %>
+      <img src="<%= episodeImage %>" alt="<%= episode.title %>" class="episode-image">
+      <% } %>
+
+      <div class="episode-info">
+        <h1 class="episode-title"><%= episode.title %></h1>
+
+        <p class="episode-podcast">
+          From <a href="<%= podcastPageUrl %>"><%= podcast.title %></a>
+        </p>
+
+        <div class="episode-meta">
+          <p class="episode-date">
+            <%= new Date(episode.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %>
+          </p>
+          <% if (episode.duration) { %>
+          <p class="episode-duration">Duration: <%= episode.duration %></p>
+          <% } %>
+        </div>
+
+        <% if (episode.audioUrl) { %>
+        <div class="episode-audio">
+          <audio controls>
+            <source src="<%= episode.audioUrl %>" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+        <% } %>
+
+        <div class="episode-links">
+          <a href="<%= episodeShareLink %>" class="btn btn-primary">Open in PodHaven</a>
+          <a href="<%= podcastPageUrl %>" class="btn btn-secondary">View Podcast</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="episode-description-section">
+      <h2>Episode Description</h2>
+      <% if (episode.descriptionHtml) { %>
+      <div class="episode-description"><%- episode.descriptionHtml %></div>
+      <% } else { %>
+      <p class="episode-description"><%= episode.description %></p>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>
