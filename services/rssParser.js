@@ -11,11 +11,18 @@ const fs = require('fs').promises;
 const RSS_TIMEOUT = parseInt(process.env.RSS_TIMEOUT) || 10000;
 
 /**
- * Fetch RSS feed from URL with timeout
+ * Fetch RSS feed from URL with timeout and redirect support
  * @param {string} feedURL - The URL of the RSS feed
+ * @param {number} redirectCount - Current redirect depth (internal use)
  * @returns {Promise<string>} The RSS feed XML content
  */
-async function fetchFeedWithTimeout(feedURL) {
+async function fetchFeedWithTimeout(feedURL, redirectCount = 0) {
+  const MAX_REDIRECTS = 5;
+
+  if (redirectCount > MAX_REDIRECTS) {
+    throw new Error('Too many redirects');
+  }
+
   const url = new URL(feedURL);
 
   // Support file:// URLs for testing
@@ -35,6 +42,21 @@ async function fetchFeedWithTimeout(feedURL) {
 
     req = protocol.get(feedURL, (res) => {
       clearTimeout(timeout);
+
+      // Handle redirects
+      if (res.statusCode === 301 || res.statusCode === 302 || res.statusCode === 307 || res.statusCode === 308) {
+        const redirectUrl = res.headers.location;
+        if (!redirectUrl) {
+          reject(new Error(`HTTP ${res.statusCode}: Redirect without location header`));
+          return;
+        }
+
+        // Follow the redirect
+        fetchFeedWithTimeout(redirectUrl, redirectCount + 1)
+          .then(resolve)
+          .catch(reject);
+        return;
+      }
 
       if (res.statusCode !== 200) {
         reject(new Error(`HTTP ${res.statusCode}: Failed to fetch RSS feed`));
