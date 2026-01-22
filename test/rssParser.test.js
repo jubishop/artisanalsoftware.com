@@ -85,5 +85,69 @@ describe('RSS Parser Service', function() {
         expect(error.message).to.equal('Episode not found');
       }
     });
+
+    it('should find episode with whitespace in GUID', async function() {
+      const feedPath = path.join(__dirname, 'fixtures', 'sample-valid-feed.xml');
+      const feedURL = 'file://' + feedPath;
+
+      const podcastData = await parsePodcastFeed(feedURL);
+      const firstEpisodeGuid = podcastData.episodes[0].guid;
+
+      // Test with leading/trailing whitespace - should still find the episode
+      const result = await findEpisodeByGuid(feedURL, '  ' + firstEpisodeGuid + '  ');
+
+      expect(result.episode.guid).to.equal(firstEpisodeGuid);
+    });
+  });
+
+  describe('HTML detection in descriptions', function() {
+    it('should detect HTML tags in podcast description and set descriptionHtml', async function() {
+      const feedPath = path.join(__dirname, 'fixtures', 'feed-with-html-description.xml');
+      const feedURL = 'file://' + feedPath;
+
+      const podcastData = await parsePodcastFeed(feedURL);
+
+      // Podcast description has HTML tags, so descriptionHtml should be set
+      expect(podcastData.descriptionHtml).to.not.be.null;
+      expect(podcastData.descriptionHtml).to.include('<p>');
+      expect(podcastData.descriptionHtml).to.include('<a href=');
+    });
+
+    it('should detect HTML tags in episode description and set descriptionHtml', async function() {
+      const feedPath = path.join(__dirname, 'fixtures', 'feed-with-html-description.xml');
+      const feedURL = 'file://' + feedPath;
+
+      const podcastData = await parsePodcastFeed(feedURL);
+
+      // Find the episode with HTML in description
+      const htmlEpisode = podcastData.episodes.find(ep => ep.guid === 'episode-with-html-desc');
+      expect(htmlEpisode.descriptionHtml).to.not.be.null;
+      expect(htmlEpisode.descriptionHtml).to.include('<p>');
+      expect(htmlEpisode.descriptionHtml).to.include('<strong>');
+    });
+
+    it('should not set descriptionHtml for plain text descriptions', async function() {
+      const feedPath = path.join(__dirname, 'fixtures', 'feed-with-html-description.xml');
+      const feedURL = 'file://' + feedPath;
+
+      const podcastData = await parsePodcastFeed(feedURL);
+
+      // Find the episode with plain text description
+      const plainEpisode = podcastData.episodes.find(ep => ep.guid === 'episode-with-plain-desc');
+      expect(plainEpisode.descriptionHtml).to.be.null;
+      expect(plainEpisode.description).to.equal('This is just plain text with no HTML tags at all.');
+    });
+
+    it('should detect HTML entities as HTML content', async function() {
+      const feedPath = path.join(__dirname, 'fixtures', 'feed-with-html-description.xml');
+      const feedURL = 'file://' + feedPath;
+
+      const podcastData = await parsePodcastFeed(feedURL);
+
+      // Find the episode with only HTML entities
+      const entityEpisode = podcastData.episodes.find(ep => ep.guid === 'episode-with-entities-only');
+      // Entities like &amp; &nbsp; &mdash; should be detected as HTML
+      expect(entityEpisode.descriptionHtml).to.not.be.null;
+    });
   });
 });

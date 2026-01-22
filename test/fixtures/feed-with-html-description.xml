@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
+  <channel>
+    <title>Test Podcast with HTML Description</title>
+    <description><![CDATA[<p>A podcast about things that are not what they seem.</p><p>Season 2 tells the story of enterprise &amp; entrepreneurship.</p><p>Visit us at <a href="https://example.com">example.com</a></p>]]></description>
+    <link>https://example.com/podcast</link>
+    <itunes:author>Test Author</itunes:author>
+    <itunes:image href="https://example.com/podcast-image.jpg"/>
+    <item>
+      <guid>episode-with-html-desc</guid>
+      <title>Episode With HTML in Description</title>
+      <description><![CDATA[<p>This episode has HTML in its description field.</p><p>It includes &nbsp; entities and <strong>bold text</strong>.</p>]]></description>
+      <pubDate>Mon, 20 Jan 2025 10:00:00 +0000</pubDate>
+      <enclosure url="https://example.com/episode1.mp3" type="audio/mpeg" length="12345678"/>
+      <itunes:duration>30:00</itunes:duration>
+    </item>
+    <item>
+      <guid>episode-with-plain-desc</guid>
+      <title>Episode With Plain Text Description</title>
+      <description>This is just plain text with no HTML tags at all.</description>
+      <pubDate>Mon, 13 Jan 2025 10:00:00 +0000</pubDate>
+      <enclosure url="https://example.com/episode2.mp3" type="audio/mpeg" length="12345678"/>
+      <itunes:duration>25:00</itunes:duration>
+    </item>
+    <item>
+      <guid>episode-with-entities-only</guid>
+      <title>Episode With HTML Entities Only</title>
+      <description>This has entities like &amp;amp; and &amp;nbsp; and &amp;mdash; but no tags.</description>
+      <pubDate>Mon, 06 Jan 2025 10:00:00 +0000</pubDate>
+      <enclosure url="https://example.com/episode3.mp3" type="audio/mpeg" length="12345678"/>
+      <itunes:duration>20:00</itunes:duration>
+    </item>
+  </channel>
+</rss>
