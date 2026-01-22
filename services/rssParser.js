@@ -23,6 +23,17 @@ function sanitizeMediaUrl(url) {
 }
 
 /**
+ * Check if a string contains HTML tags
+ * @param {string} str - The string to check
+ * @returns {boolean} True if the string contains HTML tags
+ */
+function containsHtml(str) {
+  if (!str || typeof str !== 'string') return false
+  // Check for common HTML tags or entities
+  return /<[a-z][\s\S]*>/i.test(str) || /&[a-z]+;/i.test(str) || /&#\d+;/i.test(str)
+}
+
+/**
  * Fetch RSS feed from URL with timeout and redirect support
  * @param {string} feedURL - The URL of the RSS feed
  * @param {number} redirectCount - Current redirect depth (internal use)
@@ -120,10 +131,12 @@ async function parsePodcastFeed(feedURL) {
     const feed = await parser.parseString(feedXml)
 
     // Extract podcast metadata
+    const description = feed.description || feed.itunes?.summary || ''
     const podcastData = {
       title: feed.title || 'Unknown Podcast',
-      description: feed.description || feed.itunes?.summary || '',
-      descriptionHtml: feed.contentEncoded || null,
+      description: description,
+      // Use contentEncoded if available, otherwise check if description contains HTML
+      descriptionHtml: feed.contentEncoded || (containsHtml(description) ? description : null),
       author: feed.itunesAuthor || feed.author || feed.itunes?.owner?.name || 'Unknown Author',
       imageUrl: sanitizeMediaUrl(feed.itunes?.image || feed.image?.url || ''),
       link: feed.link || '',
@@ -144,11 +157,13 @@ async function parsePodcastFeed(feedURL) {
           episodeImageUrl = sanitizeMediaUrl(item.itunes.image)
         }
 
+        const episodeDescription = item.itunesSummary || item.description || item.content || ''
         return {
           guid: item.guid || item.link || '',
           title: item.title || 'Untitled Episode',
-          description: item.itunesSummary || item.description || item.content || '',
-          descriptionHtml: item.contentEncoded || null,
+          description: episodeDescription,
+          // Use contentEncoded if available, otherwise check if description contains HTML
+          descriptionHtml: item.contentEncoded || (containsHtml(episodeDescription) ? episodeDescription : null),
           imageUrl: episodeImageUrl,
           audioUrl: audioEnclosure,
           pubDate: item.pubDate ? new Date(item.pubDate) : new Date(),
