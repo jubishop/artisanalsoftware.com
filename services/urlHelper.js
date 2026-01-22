@@ -3,7 +3,9 @@
  * Generates PodHaven app deep links and handles URL encoding
  */
 
-const BASE_URL = 'https://artisanalsoftware.com';
+const config = require('../config')
+
+const ALLOWED_PROTOCOLS = ['http:', 'https:']
 
 /**
  * Generate PodHaven app link for a podcast
@@ -11,8 +13,8 @@ const BASE_URL = 'https://artisanalsoftware.com';
  * @returns {string} PodHaven deep link
  */
 function generatePodcastLink(feedURL) {
-  const webUrl = `${BASE_URL}/podhaven/podcast?feedURL=${encodeURIComponent(feedURL)}`;
-  return `podhaven://share?url=${encodeURIComponent(webUrl)}`;
+  const webUrl = `${config.baseUrl}/podhaven/podcast?feedURL=${encodeURIComponent(feedURL)}`
+  return `podhaven://share?url=${encodeURIComponent(webUrl)}`
 }
 
 /**
@@ -22,8 +24,8 @@ function generatePodcastLink(feedURL) {
  * @returns {string} PodHaven deep link
  */
 function generateEpisodeLink(feedURL, guid) {
-  const webUrl = `${BASE_URL}/podhaven/episode?feedURL=${encodeURIComponent(feedURL)}&guid=${encodeURIComponent(guid)}`;
-  return `podhaven://share?url=${encodeURIComponent(webUrl)}`;
+  const webUrl = `${config.baseUrl}/podhaven/episode?feedURL=${encodeURIComponent(feedURL)}&guid=${encodeURIComponent(guid)}`
+  return `podhaven://share?url=${encodeURIComponent(webUrl)}`
 }
 
 /**
@@ -32,7 +34,7 @@ function generateEpisodeLink(feedURL, guid) {
  * @returns {string} Web URL
  */
 function generatePodcastWebUrl(feedURL) {
-  return `${BASE_URL}/podhaven/podcast?feedURL=${encodeURIComponent(feedURL)}`;
+  return `${config.baseUrl}/podhaven/podcast?feedURL=${encodeURIComponent(feedURL)}`
 }
 
 /**
@@ -42,20 +44,37 @@ function generatePodcastWebUrl(feedURL) {
  * @returns {string} Web URL
  */
 function generateEpisodeWebUrl(feedURL, guid) {
-  return `${BASE_URL}/podhaven/episode?feedURL=${encodeURIComponent(feedURL)}&guid=${encodeURIComponent(guid)}`;
+  return `${config.baseUrl}/podhaven/episode?feedURL=${encodeURIComponent(feedURL)}&guid=${encodeURIComponent(guid)}`
 }
 
 /**
- * Validate if a string is a valid URL
+ * Validate if a string is a valid HTTP/HTTPS URL
+ * Only allows http: and https: protocols for security
  * @param {string} url - The URL to validate
- * @returns {boolean} True if valid URL
+ * @returns {boolean} True if valid HTTP/HTTPS URL
  */
 function isValidUrl(url) {
   try {
-    new URL(url);
-    return true;
+    const parsed = new URL(url)
+    return ALLOWED_PROTOCOLS.includes(parsed.protocol)
   } catch (error) {
-    return false;
+    return false
+  }
+}
+
+/**
+ * Validate if a URL uses a safe protocol (http/https)
+ * Used for validating media URLs from RSS feeds
+ * @param {string} url - The URL to validate
+ * @returns {boolean} True if safe protocol
+ */
+function isSafeMediaUrl(url) {
+  if (!url || typeof url !== 'string') return false
+  try {
+    const parsed = new URL(url)
+    return ALLOWED_PROTOCOLS.includes(parsed.protocol)
+  } catch (error) {
+    return false
   }
 }
 
@@ -64,5 +83,6 @@ module.exports = {
   generateEpisodeLink,
   generatePodcastWebUrl,
   generateEpisodeWebUrl,
-  isValidUrl
-};
+  isValidUrl,
+  isSafeMediaUrl
+}

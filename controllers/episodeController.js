@@ -1,5 +1,6 @@
-const { findEpisodeByGuid } = require('../services/rssParser');
-const { generateEpisodeLink, generateEpisodeWebUrl, generatePodcastWebUrl, isValidUrl } = require('../services/urlHelper');
+const { findEpisodeByGuid } = require('../services/rssParser')
+const { generateEpisodeLink, generateEpisodeWebUrl } = require('../services/urlHelper')
+const { createMetaDescription, createOgDescription } = require('../services/htmlHelper')
 
 /**
  * Episode Page Controller
@@ -9,45 +10,19 @@ const { generateEpisodeLink, generateEpisodeWebUrl, generatePodcastWebUrl, isVal
 /**
  * Render episode page
  * GET /podhaven/episode?feedURL=...&guid=...
+ * Note: feedURL and guid validation is handled by middleware
  */
 async function showEpisode(req, res) {
   try {
-    const { feedURL, guid } = req.query;
-
-    // Validate feedURL parameter
-    if (!feedURL) {
-      return res.status(400).render('error', {
-        statusCode: 400,
-        errorTitle: 'Missing Feed URL',
-        errorMessage: 'Please provide a valid RSS feed URL using the feedURL parameter.'
-      });
-    }
-
-    // Validate guid parameter
-    if (!guid) {
-      return res.status(400).render('error', {
-        statusCode: 400,
-        errorTitle: 'Missing Episode GUID',
-        errorMessage: 'Please provide a valid episode GUID using the guid parameter.'
-      });
-    }
-
-    // Validate URL format
-    if (!isValidUrl(feedURL)) {
-      return res.status(400).render('error', {
-        statusCode: 400,
-        errorTitle: 'Invalid Feed URL',
-        errorMessage: 'The provided feed URL is not valid. Please check the URL and try again.'
-      });
-    }
+    const { feedURL, guid } = req.query
 
     // Fetch episode data
-    let episodeData;
+    let episodeData
     try {
-      episodeData = await findEpisodeByGuid(feedURL, guid);
+      episodeData = await findEpisodeByGuid(feedURL, guid)
     } catch (error) {
       // Log error for debugging
-      console.error(`[ERROR] Failed to fetch/find episode: ${error.message}`);
+      console.error(`[ERROR] Failed to fetch/find episode: ${error.message}`)
 
       // Check if it's a "not found" error vs a feed error
       if (error.message === 'Episode not found') {
@@ -55,23 +30,27 @@ async function showEpisode(req, res) {
           statusCode: 404,
           errorTitle: 'Episode Not Found',
           errorMessage: 'The requested episode could not be found in the podcast feed.'
-        });
+        })
       }
 
       return res.status(500).render('error', {
         statusCode: 500,
         errorTitle: 'Feed Error',
         errorMessage: 'Unable to fetch or parse the podcast feed. Please verify the feed URL is correct and accessible.'
-      });
+      })
     }
 
     // Generate links
-    const episodeShareLink = generateEpisodeLink(feedURL, guid);
-    const episodeWebUrl = generateEpisodeWebUrl(feedURL, guid);
-    const podcastPageUrl = `/podhaven/podcast?feedURL=${encodeURIComponent(feedURL)}`;
+    const episodeShareLink = generateEpisodeLink(feedURL, guid)
+    const episodeWebUrl = generateEpisodeWebUrl(feedURL, guid)
+    const podcastPageUrl = `/podhaven/podcast?feedURL=${encodeURIComponent(feedURL)}`
 
     // Use episode image or fallback to podcast image
-    const episodeImage = episodeData.episode.imageUrl || episodeData.podcast.imageUrl;
+    const episodeImage = episodeData.episode.imageUrl || episodeData.podcast.imageUrl
+
+    // Pre-process descriptions for meta tags
+    const metaDescription = createMetaDescription(episodeData.episode.description)
+    const ogDescription = createOgDescription(episodeData.episode.description)
 
     // Render episode page
     res.render('episode', {
@@ -81,21 +60,23 @@ async function showEpisode(req, res) {
       episodeShareLink,
       episodeWebUrl,
       podcastPageUrl,
-      feedURL
-    });
+      feedURL,
+      metaDescription,
+      ogDescription
+    })
 
   } catch (error) {
     // Catch-all for unexpected errors
-    console.error(`[ERROR] Unexpected error in showEpisode: ${error.message}`);
+    console.error(`[ERROR] Unexpected error in showEpisode: ${error.message}`)
 
     res.status(500).render('error', {
       statusCode: 500,
       errorTitle: 'Server Error',
       errorMessage: 'An unexpected error occurred. Please try again later.'
-    });
+    })
   }
 }
 
 module.exports = {
   showEpisode
-};
+}

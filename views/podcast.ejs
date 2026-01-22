@@ -8,7 +8,7 @@
   <title><%= podcast.title %></title>
 
   <!-- SEO Meta Tags -->
-  <meta name="description" content="<%= podcast.description.replace(/<[^>]*>/g, '').substring(0, 160) %>">
+  <meta name="description" content="<%= metaDescription %>">
   <meta name="author" content="<%= podcast.author %>">
 
   <!-- Favicon -->
@@ -19,7 +19,7 @@
 
   <!-- Open Graph Meta Tags -->
   <meta property="og:title" content="<%= podcast.title %>">
-  <meta property="og:description" content="<%= podcast.description.replace(/<[^>]*>/g, '').substring(0, 200) %>">
+  <meta property="og:description" content="<%= ogDescription %>">
   <% if (podcast.imageUrl) { %>
   <meta property="og:image" content="<%= podcast.imageUrl %>">
   <% } %>
@@ -30,7 +30,7 @@
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="<%= podcast.title %>">
-  <meta name="twitter:description" content="<%= podcast.description.replace(/<[^>]*>/g, '').substring(0, 200) %>">
+  <meta name="twitter:description" content="<%= ogDescription %>">
   <% if (podcast.imageUrl) { %>
   <meta name="twitter:image" content="<%= podcast.imageUrl %>">
   <% } %>

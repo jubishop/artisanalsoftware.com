@@ -1,14 +1,26 @@
-const Parser = require('rss-parser');
-const https = require('https');
-const http = require('http');
-const fs = require('fs').promises;
+const Parser = require('rss-parser')
+const https = require('https')
+const http = require('http')
+const fs = require('fs').promises
+
+const config = require('../config')
+const { isSafeMediaUrl } = require('./urlHelper')
 
 /**
  * RSS Parser Service
  * Fetches and parses podcast RSS feeds with timeout handling
  */
 
-const RSS_TIMEOUT = parseInt(process.env.RSS_TIMEOUT) || 10000;
+const MAX_REDIRECTS = 5
+
+/**
+ * Sanitize a media URL - returns empty string if unsafe
+ * @param {string} url - The URL to sanitize
+ * @returns {string} The URL if safe, empty string otherwise
+ */
+function sanitizeMediaUrl(url) {
+  return isSafeMediaUrl(url) ? url : ''
+}
 
 /**
  * Fetch RSS feed from URL with timeout and redirect support
@@ -17,67 +29,68 @@ const RSS_TIMEOUT = parseInt(process.env.RSS_TIMEOUT) || 10000;
  * @returns {Promise<string>} The RSS feed XML content
  */
 async function fetchFeedWithTimeout(feedURL, redirectCount = 0) {
-  const MAX_REDIRECTS = 5;
-
   if (redirectCount > MAX_REDIRECTS) {
-    throw new Error('Too many redirects');
+    throw new Error('Too many redirects')
   }
 
-  const url = new URL(feedURL);
+  const url = new URL(feedURL)
 
-  // Support file:// URLs for testing
+  // Support file:// URLs for testing only (not in production)
   if (url.protocol === 'file:') {
-    const filePath = url.pathname;
-    return await fs.readFile(filePath, 'utf-8');
+    if (config.isProduction) {
+      throw new Error('File URLs are not supported in production')
+    }
+    const filePath = url.pathname
+    return await fs.readFile(filePath, 'utf-8')
   }
 
   return new Promise((resolve, reject) => {
-    const protocol = url.protocol === 'https:' ? https : http;
-    let req;
+    const protocol = url.protocol === 'https:' ? https : http
+    let req
 
     const timeout = setTimeout(() => {
-      if (req) req.destroy();
-      reject(new Error(`Request timeout after ${RSS_TIMEOUT}ms`));
-    }, RSS_TIMEOUT);
+      if (req) req.destroy()
+      reject(new Error(`Request timeout after ${config.rssTimeout}ms`))
+    }, config.rssTimeout)
 
     req = protocol.get(feedURL, (res) => {
-      clearTimeout(timeout);
+      clearTimeout(timeout)
 
       // Handle redirects
       if (res.statusCode === 301 || res.statusCode === 302 || res.statusCode === 307 || res.statusCode === 308) {
-        const redirectUrl = res.headers.location;
+        const redirectUrl = res.headers.location
         if (!redirectUrl) {
-          reject(new Error(`HTTP ${res.statusCode}: Redirect without location header`));
-          return;
+          reject(new Error(`HTTP ${res.statusCode}: Redirect without location header`))
+          return
         }
 
         // Follow the redirect
         fetchFeedWithTimeout(redirectUrl, redirectCount + 1)
           .then(resolve)
-          .catch(reject);
-        return;
+          .catch(reject)
+        return
       }
 
       if (res.statusCode !== 200) {
-        reject(new Error(`HTTP ${res.statusCode}: Failed to fetch RSS feed`));
-        return;
+        reject(new Error(`HTTP ${res.statusCode}: Failed to fetch RSS feed`))
+        return
       }
 
-      let data = '';
+      let data = ''
       res.on('data', (chunk) => {
-        data += chunk;
-      });
+        data += chunk
+      })
 
       res.on('end', () => {
-        resolve(data);
-      });
-    });
+        resolve(data)
+      })
+    })
 
     req.on('error', (err) => {
-      clearTimeout(timeout);
-      reject(new Error(`Failed to fetch RSS feed: ${err.message}`));
-    });
-  });
+      clearTimeout(timeout)
+      reject(new Error(`Failed to fetch RSS feed: ${err.message}`))
+    })
+  })
 }
 
 /**
@@ -88,7 +101,7 @@ async function fetchFeedWithTimeout(feedURL, redirectCount = 0) {
 async function parsePodcastFeed(feedURL) {
   try {
     // Fetch the feed with timeout
-    const feedXml = await fetchFeedWithTimeout(feedURL);
+    const feedXml = await fetchFeedWithTimeout(feedURL)
 
     // Configure parser to extract custom fields
     const parser = new Parser({
@@ -101,10 +114,10 @@ async function parsePodcastFeed(feedURL) {
           ['content:encoded', 'contentEncoded']
         ]
       }
-    });
+    })
 
     // Parse the feed
-    const feed = await parser.parseString(feedXml);
+    const feed = await parser.parseString(feedXml)
 
     // Extract podcast metadata
     const podcastData = {
@@ -112,23 +125,23 @@ async function parsePodcastFeed(feedURL) {
       description: feed.description || feed.itunes?.summary || '',
       descriptionHtml: feed.contentEncoded || null,
       author: feed.itunesAuthor || feed.author || feed.itunes?.owner?.name || 'Unknown Author',
-      imageUrl: feed.itunes?.image || feed.image?.url || '',
+      imageUrl: sanitizeMediaUrl(feed.itunes?.image || feed.image?.url || ''),
       link: feed.link || '',
       episodes: []
-    };
+    }
 
     // Parse episodes
     if (feed.items && feed.items.length > 0) {
       podcastData.episodes = feed.items.map(item => {
-        // Find audio enclosure
-        const audioEnclosure = item.enclosure?.url || '';
+        // Find audio enclosure and sanitize
+        const audioEnclosure = sanitizeMediaUrl(item.enclosure?.url || '')
 
         // Get episode image - try itunes:image first, then fall back to podcast image
-        let episodeImageUrl = null;
+        let episodeImageUrl = null
         if (item.itunesImage && item.itunesImage.href) {
-          episodeImageUrl = item.itunesImage.href;
+          episodeImageUrl = sanitizeMediaUrl(item.itunesImage.href)
         } else if (item.itunes && item.itunes.image) {
-          episodeImageUrl = item.itunes.image;
+          episodeImageUrl = sanitizeMediaUrl(item.itunes.image)
         }
 
         return {
@@ -140,18 +153,18 @@ async function parsePodcastFeed(feedURL) {
           audioUrl: audioEnclosure,
           pubDate: item.pubDate ? new Date(item.pubDate) : new Date(),
           duration: item.duration || null
-        };
-      });
+        }
+      })
     }
 
-    return podcastData;
+    return podcastData
   } catch (error) {
     if (error.message.includes('timeout')) {
-      throw new Error('RSS feed request timed out');
+      throw new Error('RSS feed request timed out')
     } else if (error.message.includes('HTTP')) {
-      throw error;
+      throw error
     } else {
-      throw new Error(`Failed to parse RSS feed: ${error.message}`);
+      throw new Error(`Failed to parse RSS feed: ${error.message}`)
     }
   }
 }
@@ -163,12 +176,14 @@ async function parsePodcastFeed(feedURL) {
  * @returns {Promise<Object>} The episode data with podcast info
  */
 async function findEpisodeByGuid(feedURL, guid) {
-  const podcastData = await parsePodcastFeed(feedURL);
+  const podcastData = await parsePodcastFeed(feedURL)
 
-  const episode = podcastData.episodes.find(ep => ep.guid === guid);
+  // Trim whitespace from both sides for more robust matching
+  const normalizedGuid = guid.trim()
+  const episode = podcastData.episodes.find(ep => ep.guid.trim() === normalizedGuid)
 
   if (!episode) {
-    throw new Error('Episode not found');
+    throw new Error('Episode not found')
   }
 
   // Return episode with podcast context for fallback image
@@ -179,10 +194,10 @@ async function findEpisodeByGuid(feedURL, guid) {
       imageUrl: podcastData.imageUrl,
       link: podcastData.link
     }
-  };
+  }
 }
 
 module.exports = {
   parsePodcastFeed,
   findEpisodeByGuid
-};
+}

@@ -109,7 +109,12 @@ describe('URL Helper Service', function() {
     it('should return false for invalid URLs', function() {
       expect(isValidUrl('not a url')).to.be.false;
       expect(isValidUrl('')).to.be.false;
-      expect(isValidUrl('ftp://example.com')).to.be.true; // FTP is technically valid
+    });
+
+    it('should return false for non-HTTP protocols', function() {
+      expect(isValidUrl('ftp://example.com')).to.be.false;
+      expect(isValidUrl('file:///path/to/file')).to.be.false;
+      expect(isValidUrl('javascript:alert(1)')).to.be.false;
     });
 
     it('should return false for null or undefined', function() {
