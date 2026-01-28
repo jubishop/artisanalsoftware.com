@@ -27,7 +27,7 @@
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="PodHaven">
   <% if (episode.audioUrl) { %>
-  <meta property="og:audio" content="<%= episode.audioUrl %>">
+  <meta property="og:audio" content="<%= episode.audioUrl %><%= startTime ? '#t=' + startTime : '' %>">
   <% } %>
 
   <!-- Twitter Card Meta Tags -->
@@ -67,7 +67,7 @@
         <% if (episode.audioUrl) { %>
         <div class="episode-audio">
           <audio controls>
-            <source src="<%= episode.audioUrl %>" type="audio/mpeg">
+            <source src="<%= episode.audioUrl %><%= startTime ? '#t=' + startTime : '' %>" type="audio/mpeg">
             Your browser does not support the audio element.
           </audio>
         </div>

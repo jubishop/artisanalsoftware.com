@@ -1,5 +1,5 @@
 const { findEpisodeByGuid } = require('../services/rssParser')
-const { generateEpisodeLink, generateEpisodeWebUrl } = require('../services/urlHelper')
+const { generateEpisodeLink, generateEpisodeWebUrl, parseTimestamp } = require('../services/urlHelper')
 const { createMetaDescription, createOgDescription } = require('../services/htmlHelper')
 
 /**
@@ -9,12 +9,16 @@ const { createMetaDescription, createOgDescription } = require('../services/html
 
 /**
  * Render episode page
- * GET /podhaven/episode?feedURL=...&guid=...
+ * GET /podhaven/episode?feedURL=...&guid=...&startTime=...
  * Note: feedURL and guid validation is handled by middleware
+ * Optional startTime parameter specifies start time in seconds
  */
 async function showEpisode(req, res) {
   try {
-    const { feedURL, guid } = req.query
+    const { feedURL, guid, startTime: startTimeParam } = req.query
+
+    // Parse optional timestamp parameter
+    const startTime = parseTimestamp(startTimeParam)
 
     // Fetch episode data
     let episodeData
@@ -40,9 +44,9 @@ async function showEpisode(req, res) {
       })
     }
 
-    // Generate links
-    const episodeShareLink = generateEpisodeLink(feedURL, guid)
-    const episodeWebUrl = generateEpisodeWebUrl(feedURL, guid)
+    // Generate links (include timestamp if provided)
+    const episodeShareLink = generateEpisodeLink(feedURL, guid, startTime)
+    const episodeWebUrl = generateEpisodeWebUrl(feedURL, guid, startTime)
     const podcastPageUrl = `/podhaven/podcast?feedURL=${encodeURIComponent(feedURL)}`
 
     // Use episode image or fallback to podcast image
@@ -62,7 +66,8 @@ async function showEpisode(req, res) {
       podcastPageUrl,
       feedURL,
       metaDescription,
-      ogDescription
+      ogDescription,
+      startTime
     })
 
   } catch (error) {

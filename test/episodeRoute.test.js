@@ -127,5 +127,61 @@ describe('Episode Route Integration Tests', function() {
 
       expect(response.text).to.include('Feed Error');
     });
+
+    it('should include timestamp in audio player when startTime parameter is provided', async function() {
+      const feedPath = path.join(__dirname, 'fixtures', 'sample-valid-feed.xml');
+      const feedURL = 'file://' + feedPath;
+
+      const response = await request(app)
+        .get('/podhaven/episode')
+        .query({ feedURL, guid: validGuid, startTime: '90' })
+        .expect(200);
+
+      // Check for media fragment in audio source
+      expect(response.text).to.include('#t=90');
+    });
+
+    it('should include timestamp in og:url when startTime parameter is provided', async function() {
+      const feedPath = path.join(__dirname, 'fixtures', 'sample-valid-feed.xml');
+      const feedURL = 'file://' + feedPath;
+
+      const response = await request(app)
+        .get('/podhaven/episode')
+        .query({ feedURL, guid: validGuid, startTime: '90' })
+        .expect(200);
+
+      // Check for timestamp in og:url meta tag
+      expect(response.text).to.include('og:url');
+      expect(response.text).to.include('&amp;startTime=90');
+    });
+
+    it('should include timestamp in PodHaven share link when startTime parameter is provided', async function() {
+      const feedPath = path.join(__dirname, 'fixtures', 'sample-valid-feed.xml');
+      const feedURL = 'file://' + feedPath;
+
+      const response = await request(app)
+        .get('/podhaven/episode')
+        .query({ feedURL, guid: validGuid, startTime: '90' })
+        .expect(200);
+
+      // Check for timestamp in PodHaven link (will be encoded)
+      expect(response.text).to.include('podhaven://share?url=');
+      // The startTime=90 will be encoded in the URL
+      expect(response.text).to.match(/podhaven:\/\/share\?url=.*startTime%3D90/);
+    });
+
+    it('should ignore invalid startTime parameter', async function() {
+      const feedPath = path.join(__dirname, 'fixtures', 'sample-valid-feed.xml');
+      const feedURL = 'file://' + feedPath;
+
+      const response = await request(app)
+        .get('/podhaven/episode')
+        .query({ feedURL, guid: validGuid, startTime: 'invalid' })
+        .expect(200);
+
+      // Should render page without timestamp in audio
+      expect(response.text).to.include('<audio');
+      expect(response.text).to.not.include('#t=invalid');
+    });
   });
 });

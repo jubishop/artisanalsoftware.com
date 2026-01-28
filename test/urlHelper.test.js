@@ -4,7 +4,8 @@ const {
   generateEpisodeLink,
   generatePodcastWebUrl,
   generateEpisodeWebUrl,
-  isValidUrl
+  isValidUrl,
+  parseTimestamp
 } = require('../services/urlHelper');
 
 describe('URL Helper Service', function() {
@@ -52,6 +53,26 @@ describe('URL Helper Service', function() {
       // The GUID should be encoded
       expect(link).to.not.include('?id=123');
     });
+
+    it('should include timestamp in link when provided', function() {
+      const feedURL = 'https://feeds.example.com/podcast.xml';
+      const guid = 'episode-123';
+      const link = generateEpisodeLink(feedURL, guid, 90);
+
+      const decodedUrl = decodeURIComponent(link.replace('podhaven://share?url=', ''));
+      expect(decodedUrl).to.include('&startTime=90');
+    });
+
+    it('should not include timestamp when zero or null', function() {
+      const feedURL = 'https://feeds.example.com/podcast.xml';
+      const guid = 'episode-123';
+
+      const linkWithZero = generateEpisodeLink(feedURL, guid, 0);
+      const linkWithNull = generateEpisodeLink(feedURL, guid, null);
+
+      expect(linkWithZero).to.not.include('&startTime=');
+      expect(linkWithNull).to.not.include('&startTime=');
+    });
   });
 
   describe('generatePodcastWebUrl', function() {
@@ -92,6 +113,41 @@ describe('URL Helper Service', function() {
       expect(webUrl).to.include('guid=');
       // Check that special characters are encoded
       expect(webUrl).to.include('%3A%2F%2F'); // encoded '://'
+    });
+
+    it('should include timestamp when provided', function() {
+      const feedURL = 'https://feeds.example.com/podcast.xml';
+      const guid = 'episode-123';
+      const webUrl = generateEpisodeWebUrl(feedURL, guid, 90);
+
+      expect(webUrl).to.include('&startTime=90');
+    });
+
+    it('should not include timestamp when zero or null', function() {
+      const feedURL = 'https://feeds.example.com/podcast.xml';
+      const guid = 'episode-123';
+
+      const urlWithZero = generateEpisodeWebUrl(feedURL, guid, 0);
+      const urlWithNull = generateEpisodeWebUrl(feedURL, guid, null);
+
+      expect(urlWithZero).to.not.include('&startTime=');
+      expect(urlWithNull).to.not.include('&startTime=');
+    });
+  });
+
+  describe('parseTimestamp', function() {
+    it('should parse seconds as integer string', function() {
+      expect(parseTimestamp('90')).to.equal(90);
+      expect(parseTimestamp('0')).to.equal(0);
+      expect(parseTimestamp('3600')).to.equal(3600);
+    });
+
+    it('should return null for non-numeric strings', function() {
+      expect(parseTimestamp('abc')).to.be.null;
+      expect(parseTimestamp('1:30')).to.be.null;
+      expect(parseTimestamp('')).to.be.null;
+      expect(parseTimestamp(null)).to.be.null;
+      expect(parseTimestamp(undefined)).to.be.null;
     });
   });
 

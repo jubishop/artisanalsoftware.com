@@ -21,10 +21,14 @@ function generatePodcastLink(feedURL) {
  * Generate PodHaven app link for an episode
  * @param {string} feedURL - The RSS feed URL
  * @param {string} guid - The episode GUID
+ * @param {number} [startTime] - Optional start time in seconds
  * @returns {string} PodHaven deep link
  */
-function generateEpisodeLink(feedURL, guid) {
-  const webUrl = `${config.baseUrl}/podhaven/episode?feedURL=${encodeURIComponent(feedURL)}&guid=${encodeURIComponent(guid)}`
+function generateEpisodeLink(feedURL, guid, startTime) {
+  let webUrl = `${config.baseUrl}/podhaven/episode?feedURL=${encodeURIComponent(feedURL)}&guid=${encodeURIComponent(guid)}`
+  if (startTime && startTime > 0) {
+    webUrl += `&startTime=${startTime}`
+  }
   return `podhaven://share?url=${encodeURIComponent(webUrl)}`
 }
 
@@ -41,10 +45,31 @@ function generatePodcastWebUrl(feedURL) {
  * Generate web URL for an episode page
  * @param {string} feedURL - The RSS feed URL
  * @param {string} guid - The episode GUID
+ * @param {number} [startTime] - Optional start time in seconds
  * @returns {string} Web URL
  */
-function generateEpisodeWebUrl(feedURL, guid) {
-  return `${config.baseUrl}/podhaven/episode?feedURL=${encodeURIComponent(feedURL)}&guid=${encodeURIComponent(guid)}`
+function generateEpisodeWebUrl(feedURL, guid, startTime) {
+  let url = `${config.baseUrl}/podhaven/episode?feedURL=${encodeURIComponent(feedURL)}&guid=${encodeURIComponent(guid)}`
+  if (startTime && startTime > 0) {
+    url += `&startTime=${startTime}`
+  }
+  return url
+}
+
+/**
+ * Parse a timestamp string into seconds
+ * @param {string} timestamp - The timestamp in seconds
+ * @returns {number|null} Seconds, or null if invalid
+ */
+function parseTimestamp(timestamp) {
+  if (!timestamp || typeof timestamp !== 'string') return null
+
+  if (/^\d+$/.test(timestamp)) {
+    const seconds = parseInt(timestamp, 10)
+    return seconds >= 0 ? seconds : null
+  }
+
+  return null
 }
 
 /**
@@ -84,5 +109,6 @@ module.exports = {
   generatePodcastWebUrl,
   generateEpisodeWebUrl,
   isValidUrl,
-  isSafeMediaUrl
+  isSafeMediaUrl,
+  parseTimestamp
 }
