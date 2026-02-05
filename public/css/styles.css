@@ -314,6 +314,26 @@ body {
   color: #0051D5;
 }
 
+/* Timestamp links in episode descriptions */
+.timestamp-link {
+  display: inline-flex;
+  align-items: center;
+  background-color: rgba(0, 122, 255, 0.1);
+  color: #007AFF;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'SF Mono', SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.9em;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.timestamp-link:hover {
+  background-color: rgba(0, 122, 255, 0.2);
+  color: #0051D5;
+  text-decoration: none;
+}
+
 /* ===================================
    Error Page
    =================================== */
@@ -644,5 +664,16 @@ body {
   /* Audio player - dark mode support */
   .episode-audio audio {
     filter: invert(0.9) hue-rotate(180deg);
+  }
+
+  /* Timestamp links in dark mode */
+  .timestamp-link {
+    background-color: rgba(77, 163, 255, 0.15);
+    color: #4da3ff;
+  }
+
+  .timestamp-link:hover {
+    background-color: rgba(77, 163, 255, 0.25);
+    color: #80bdff;
   }
 }

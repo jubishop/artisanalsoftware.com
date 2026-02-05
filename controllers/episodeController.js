@@ -1,6 +1,6 @@
 const { findEpisodeByGuid } = require('../services/rssParser')
 const { generateEpisodeLink, generateEpisodeWebUrl, parseTimestamp } = require('../services/urlHelper')
-const { createMetaDescription, createOgDescription } = require('../services/htmlHelper')
+const { createMetaDescription, createOgDescription, processTimestamps } = require('../services/htmlHelper')
 
 /**
  * Episode Page Controller
@@ -55,6 +55,16 @@ async function showEpisode(req, res) {
     // Pre-process descriptions for meta tags
     const metaDescription = createMetaDescription(episodeData.episode.description)
     const ogDescription = createOgDescription(episodeData.episode.description)
+
+    // Process timestamps in HTML description to make them clickable
+    // Use the base episode URL (without startTime) for timestamp links
+    const baseEpisodeUrl = `/podhaven/episode?feedURL=${encodeURIComponent(feedURL)}&guid=${encodeURIComponent(guid)}`
+    if (episodeData.episode.descriptionHtml) {
+      episodeData.episode.descriptionHtml = processTimestamps(
+        episodeData.episode.descriptionHtml,
+        baseEpisodeUrl
+      )
+    }
 
     // Render episode page
     res.render('episode', {
