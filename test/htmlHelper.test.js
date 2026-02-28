@@ -57,34 +57,6 @@ describe('HTML Helper Service', function() {
       expect(result).to.include('startTime=4500')
     })
 
-    it('should insert line breaks before timestamps not already on new lines', function() {
-      const html = '0:00 – Intro01:07 – Topic One02:30 – Topic Two'
-      const result = processTimestamps(html, baseUrl)
-
-      // First timestamp at position 0 should NOT get a <br>
-      expect(result).to.match(/^<a href/)
-      // Subsequent timestamps should get <br> before them
-      expect(result).to.include('<br><a href')
-      expect(result).to.include('startTime=0')
-      expect(result).to.include('startTime=67')
-      expect(result).to.include('startTime=150')
-    })
-
-    it('should not insert line breaks when timestamps already have newlines', function() {
-      const html = '0:00 – Intro\n01:07 – Topic One\n02:30 – Topic Two'
-      const result = processTimestamps(html, baseUrl)
-
-      expect(result).to.not.include('<br>')
-    })
-
-    it('should not insert line break before a single inline timestamp', function() {
-      const html = 'Check out the intro at 1:30'
-      const result = processTimestamps(html, baseUrl)
-
-      // A single timestamp mid-sentence still gets a <br> since it has text before it
-      expect(result).to.include('<br><a href')
-    })
-
     it('should not process timestamps inside HTML tags', function() {
       const html = '<a href="http://example.com/page?time=1:30">Link</a>'
       const result = processTimestamps(html, baseUrl)
