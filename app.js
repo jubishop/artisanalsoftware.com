@@ -58,6 +58,11 @@ app.set('views', path.join(__dirname, 'views'))
 // Serve static files (CSS, images, etc.)
 app.use('/public', express.static(path.join(__dirname, 'public')))
 
+// Health check (before logging to avoid log spam)
+app.get('/health', (req, res) => {
+  res.status(200).send('ok')
+})
+
 // Request logging middleware
 app.use((req, res, next) => {
   const timestamp = new Date().toISOString()
