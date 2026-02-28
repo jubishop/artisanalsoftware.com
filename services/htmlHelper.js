@@ -139,12 +139,20 @@ function processTimestamps(html, episodeUrl) {
       result += part
     } else {
       // This is text content, process timestamps
-      result += part.replace(timestampRegex, (match) => {
+      result += part.replace(timestampRegex, (match, _group, offset) => {
         const seconds = timestampToSeconds(match)
         // Determine the separator based on whether episodeUrl already has query params
         const separator = episodeUrl.includes('?') ? '&' : '?'
         const href = `${episodeUrl}${separator}startTime=${seconds}`
-        return `<a href="${href}" class="timestamp-link">${match}</a>`
+        const link = `<a href="${href}" class="timestamp-link">${match}</a>`
+
+        // Insert a line break before the timestamp if it's not already
+        // at the start of a line (handles chapter lists without newlines)
+        const textBefore = part.substring(0, offset)
+        if (offset > 0 && !/\n\s*$/.test(textBefore) && textBefore.trim().length > 0) {
+          return `<br>${link}`
+        }
+        return link
       })
     }
   }
