@@ -9,8 +9,3 @@ services:
     autoDeploy: true
     domains:
       - artisanalsoftware.com
-    envVars:
-      - key: NODE_ENV
-        value: production
-      - key: BASE_URL
-        value: https://artisanalsoftware.com
