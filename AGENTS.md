@@ -7,7 +7,7 @@
 ## 🏗️ Infrastructure
 
 - **Hosting**: Railway (Node.js web service)
-- **Domain**: `artisanalsoftware.com` — registered on **Squarespace**, DNS managed in **Cloudflare** (nameservers pointed to Cloudflare)
+- **Domain**: `artisanalsoftware.com` — registered and DNS managed in **Cloudflare**
 
 ## 🔑 Key Architectural Decisions
 

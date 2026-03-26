@@ -203,79 +203,23 @@ The server handles errors gracefully:
 
 ### Future Enhancements
 - RSS feed caching
-- Gzip compression
 - Pagination for large episode lists
-- Rate limiting
 
 ## Deployment
 
-### Heroku Deployment
+The application is hosted on **Railway** with DNS managed by **Cloudflare**.
 
-The application is configured for Heroku deployment:
+- Auto-deploys from `main` branch on GitHub
+- Domain: `artisanalsoftware.com` (and `www.artisanalsoftware.com`)
 
-**Prerequisites:**
-- Heroku account
-- Heroku CLI installed
-
-**Deploy Steps:**
-
-1. **Verify Heroku remote is configured:**
-   ```bash
-   git remote -v
-   # Should show: heroku  https://git.heroku.com/artisanalsoftware.git
-   ```
-
-2. **Push to Heroku:**
-   ```bash
-   git push heroku main
-   ```
-
-3. **Verify deployment:**
-   ```bash
-   heroku open
-   ```
-
-4. **View logs:**
-   ```bash
-   heroku logs --tail
-   ```
-
-**Environment Configuration:**
-
-Set environment variables on Heroku (optional):
+**View logs:**
 ```bash
-heroku config:set NODE_ENV=production
-heroku config:set RSS_TIMEOUT=10000
+railway logs
 ```
 
-**Custom Domain:**
-
-The application is configured for `www.artisanalsoftware.com`:
-
+**Manual deploy:**
 ```bash
-heroku domains:add www.artisanalsoftware.com
-heroku domains:add artisanalsoftware.com
-```
-
-Configure your DNS:
-- Add CNAME record: `www` → `[your-app-name].herokudns.com`
-- Add ALIAS/ANAME record: `@` → `[your-app-name].herokudns.com`
-
-**Health Check:**
-
-The server logs all requests and is ready to accept traffic immediately on startup.
-
-**Scaling:**
-
-```bash
-# Check current dynos
-heroku ps
-
-# Scale up
-heroku ps:scale web=2
-
-# Scale down
-heroku ps:scale web=1
+railway up
 ```
 
 ## Browser Support
