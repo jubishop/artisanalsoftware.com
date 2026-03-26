@@ -23,7 +23,7 @@ module.exports = {
 
   // Rate limiting
   rateLimitWindowMs: 15 * 60 * 1000, // 15 minutes
-  rateLimitMaxRequests: 100, // requests per window
+  rateLimitMaxRequests: 150, // requests per window
 
   // Meta description length limits
   metaDescriptionLength: 160,

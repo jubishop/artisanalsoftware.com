@@ -4,6 +4,11 @@
 **Purpose**: Display podcast/episode pages server-side with deep links to the PodHaven mobile app.
 **Key Constraint**: Server-side rendering only - NO client-side JavaScript.
 
+## 🏗️ Infrastructure
+
+- **Hosting**: Railway (Node.js web service)
+- **Domain**: `artisanalsoftware.com` — registered on **Squarespace**, DNS managed in **Cloudflare** (nameservers pointed to Cloudflare)
+
 ## 🔑 Key Architectural Decisions
 
 ### 1. **Trusted RSS Content Model**
