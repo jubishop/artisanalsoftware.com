@@ -5,7 +5,8 @@ const {
   createOgDescription,
   processTimestamps,
   timestampToSeconds,
-  secondsToTimestamp
+  secondsToTimestamp,
+  formatDuration
 } = require('../services/htmlHelper')
 
 describe('HTML Helper Service', function() {
@@ -63,6 +64,36 @@ describe('HTML Helper Service', function() {
 
     it('should truncate fractional seconds', function() {
       expect(secondsToTimestamp(90.9)).to.equal('1:30')
+    })
+  })
+
+  describe('formatDuration', function() {
+    it('should format raw seconds strings as timestamps', function() {
+      expect(formatDuration('1253')).to.equal('20:53')
+      expect(formatDuration('3600')).to.equal('1:00:00')
+      expect(formatDuration('45')).to.equal('0:45')
+    })
+
+    it('should accept numeric durations', function() {
+      expect(formatDuration(1253)).to.equal('20:53')
+      expect(formatDuration(0)).to.equal('0:00')
+    })
+
+    it('should normalize existing timestamps', function() {
+      expect(formatDuration('20:53')).to.equal('20:53')
+      expect(formatDuration('01:23:45')).to.equal('1:23:45')
+      expect(formatDuration('  15:30  ')).to.equal('15:30')
+    })
+
+    it('should return null for missing values', function() {
+      expect(formatDuration(null)).to.equal(null)
+      expect(formatDuration(undefined)).to.equal(null)
+      expect(formatDuration('')).to.equal(null)
+      expect(formatDuration('   ')).to.equal(null)
+    })
+
+    it('should pass through unrecognized formats unchanged', function() {
+      expect(formatDuration('about an hour')).to.equal('about an hour')
     })
   })
 

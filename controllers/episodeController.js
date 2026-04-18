@@ -1,6 +1,6 @@
 const { findEpisodeByGuid } = require('../services/rssParser')
 const { generateEpisodeLink, generateEpisodeWebUrl, parseTimestamp } = require('../services/urlHelper')
-const { createMetaDescription, createOgDescription, processTimestamps, secondsToTimestamp } = require('../services/htmlHelper')
+const { createMetaDescription, createOgDescription, processTimestamps, secondsToTimestamp, formatDuration } = require('../services/htmlHelper')
 
 /**
  * Episode Page Controller
@@ -52,6 +52,9 @@ async function showEpisode(req, res) {
 
     // Use episode image or fallback to podcast image
     const episodeImage = episodeData.episode.imageUrl || episodeData.podcast.imageUrl
+
+    // Normalize duration (iTunes feeds may return raw seconds or HH:MM:SS)
+    episodeData.episode.duration = formatDuration(episodeData.episode.duration)
 
     // Pre-process descriptions for meta tags
     const metaDescription = createMetaDescription(episodeData.episode.description)

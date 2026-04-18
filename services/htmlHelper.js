@@ -114,6 +114,31 @@ function secondsToTimestamp(totalSeconds) {
 }
 
 /**
+ * Format a raw iTunes duration value for display.
+ * Accepts raw seconds ("1253") or an existing timestamp ("20:53", "1:23:45")
+ * and returns a normalized H:MM:SS / M:SS string. Returns null for missing
+ * input and passes through unrecognized formats unchanged.
+ * @param {string|number|null|undefined} duration
+ * @returns {string|null}
+ */
+function formatDuration(duration) {
+  if (duration === null || duration === undefined) return null
+
+  const raw = String(duration).trim()
+  if (raw === '') return null
+
+  if (/^\d+$/.test(raw)) {
+    return secondsToTimestamp(parseInt(raw, 10))
+  }
+
+  if (/^\d{1,2}:\d{2}(:\d{2})?$/.test(raw)) {
+    return secondsToTimestamp(timestampToSeconds(raw))
+  }
+
+  return raw
+}
+
+/**
  * Process HTML to make timestamps clickable
  * Converts timestamps like "1:23:45" or "15:30" into links to the episode at that time
  * @param {string} html - HTML content with potential timestamps
@@ -177,5 +202,6 @@ module.exports = {
   createOgDescription,
   processTimestamps,
   timestampToSeconds,
-  secondsToTimestamp
+  secondsToTimestamp,
+  formatDuration
 }
