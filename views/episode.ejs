@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Page Title -->
-  <title><%= episode.title %> - <%= podcast.title %></title>
+  <title><%= episode.title %><%= startTimeFormatted ? ' @ ' + startTimeFormatted : '' %> - <%= podcast.title %></title>
 
   <!-- SEO Meta Tags -->
   <meta name="description" content="<%= metaDescription %>">
@@ -18,7 +18,7 @@
   <% } %>
 
   <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="<%= episode.title %>">
+  <meta property="og:title" content="<%= episode.title %><%= startTimeFormatted ? ' @ ' + startTimeFormatted : '' %>">
   <meta property="og:description" content="<%= ogDescription %>">
   <% if (episodeImage) { %>
   <meta property="og:image" content="<%= episodeImage %>">
@@ -32,7 +32,7 @@
 
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="<%= episode.title %>">
+  <meta name="twitter:title" content="<%= episode.title %><%= startTimeFormatted ? ' @ ' + startTimeFormatted : '' %>">
   <meta name="twitter:description" content="<%= ogDescription %>">
   <% if (episodeImage) { %>
   <meta name="twitter:image" content="<%= episodeImage %>">

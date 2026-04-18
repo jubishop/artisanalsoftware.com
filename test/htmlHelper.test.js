@@ -4,7 +4,8 @@ const {
   createMetaDescription,
   createOgDescription,
   processTimestamps,
-  timestampToSeconds
+  timestampToSeconds,
+  secondsToTimestamp
 } = require('../services/htmlHelper')
 
 describe('HTML Helper Service', function() {
@@ -24,6 +25,44 @@ describe('HTML Helper Service', function() {
     it('should handle edge cases', function() {
       expect(timestampToSeconds('0:00')).to.equal(0)
       expect(timestampToSeconds('99:59')).to.equal(5999)
+    })
+  })
+
+  describe('secondsToTimestamp', function() {
+    it('should format seconds under a minute as M:SS', function() {
+      expect(secondsToTimestamp(0)).to.equal('0:00')
+      expect(secondsToTimestamp(5)).to.equal('0:05')
+      expect(secondsToTimestamp(45)).to.equal('0:45')
+    })
+
+    it('should format seconds under an hour as M:SS', function() {
+      expect(secondsToTimestamp(90)).to.equal('1:30')
+      expect(secondsToTimestamp(930)).to.equal('15:30')
+      expect(secondsToTimestamp(3599)).to.equal('59:59')
+    })
+
+    it('should format seconds at or above an hour as H:MM:SS', function() {
+      expect(secondsToTimestamp(3600)).to.equal('1:00:00')
+      expect(secondsToTimestamp(3725)).to.equal('1:02:05')
+      expect(secondsToTimestamp(5025)).to.equal('1:23:45')
+    })
+
+    it('should be the inverse of timestampToSeconds for common values', function() {
+      const cases = ['0:00', '0:45', '1:30', '15:30', '1:02:05', '1:23:45']
+      for (const ts of cases) {
+        expect(secondsToTimestamp(timestampToSeconds(ts))).to.equal(ts)
+      }
+    })
+
+    it('should coerce invalid or negative input to 0:00', function() {
+      expect(secondsToTimestamp(-10)).to.equal('0:00')
+      expect(secondsToTimestamp(null)).to.equal('0:00')
+      expect(secondsToTimestamp(undefined)).to.equal('0:00')
+      expect(secondsToTimestamp('not a number')).to.equal('0:00')
+    })
+
+    it('should truncate fractional seconds', function() {
+      expect(secondsToTimestamp(90.9)).to.equal('1:30')
     })
   })
 

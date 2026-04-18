@@ -170,6 +170,74 @@ describe('Episode Route Integration Tests', function() {
       expect(response.text).to.match(/podhaven:\/\/share\?url=.*startTime%3D90/);
     });
 
+    it('should include formatted timestamp in page title when startTime is provided', async function() {
+      const feedPath = path.join(__dirname, 'fixtures', 'sample-valid-feed.xml');
+      const feedURL = 'file://' + feedPath;
+
+      const response = await request(app)
+        .get('/podhaven/episode')
+        .query({ feedURL, guid: validGuid, startTime: '90' })
+        .expect(200);
+
+      const titleMatch = response.text.match(/<title>([^<]*)<\/title>/);
+      expect(titleMatch, 'expected <title> tag in response').to.not.be.null;
+      expect(titleMatch[1]).to.include('@ 1:30');
+    });
+
+    it('should include formatted timestamp in og:title and twitter:title when startTime is provided', async function() {
+      const feedPath = path.join(__dirname, 'fixtures', 'sample-valid-feed.xml');
+      const feedURL = 'file://' + feedPath;
+
+      const response = await request(app)
+        .get('/podhaven/episode')
+        .query({ feedURL, guid: validGuid, startTime: '3725' })
+        .expect(200);
+
+      expect(response.text).to.match(/property="og:title" content="[^"]*@ 1:02:05"/);
+      expect(response.text).to.match(/name="twitter:title" content="[^"]*@ 1:02:05"/);
+    });
+
+    it('should omit timestamp from titles when startTime is not provided', async function() {
+      const feedPath = path.join(__dirname, 'fixtures', 'sample-valid-feed.xml');
+      const feedURL = 'file://' + feedPath;
+
+      const response = await request(app)
+        .get('/podhaven/episode')
+        .query({ feedURL, guid: validGuid })
+        .expect(200);
+
+      const titleMatch = response.text.match(/<title>([^<]*)<\/title>/);
+      expect(titleMatch[1]).to.not.include('@');
+      expect(response.text).to.not.match(/property="og:title" content="[^"]*@ \d/);
+      expect(response.text).to.not.match(/name="twitter:title" content="[^"]*@ \d/);
+    });
+
+    it('should omit timestamp from titles when startTime is zero', async function() {
+      const feedPath = path.join(__dirname, 'fixtures', 'sample-valid-feed.xml');
+      const feedURL = 'file://' + feedPath;
+
+      const response = await request(app)
+        .get('/podhaven/episode')
+        .query({ feedURL, guid: validGuid, startTime: '0' })
+        .expect(200);
+
+      const titleMatch = response.text.match(/<title>([^<]*)<\/title>/);
+      expect(titleMatch[1]).to.not.include('@');
+    });
+
+    it('should omit timestamp from titles when startTime is invalid', async function() {
+      const feedPath = path.join(__dirname, 'fixtures', 'sample-valid-feed.xml');
+      const feedURL = 'file://' + feedPath;
+
+      const response = await request(app)
+        .get('/podhaven/episode')
+        .query({ feedURL, guid: validGuid, startTime: 'invalid' })
+        .expect(200);
+
+      const titleMatch = response.text.match(/<title>([^<]*)<\/title>/);
+      expect(titleMatch[1]).to.not.include('@');
+    });
+
     it('should ignore invalid startTime parameter', async function() {
       const feedPath = path.join(__dirname, 'fixtures', 'sample-valid-feed.xml');
       const feedURL = 'file://' + feedPath;

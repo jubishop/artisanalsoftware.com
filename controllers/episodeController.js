@@ -1,6 +1,6 @@
 const { findEpisodeByGuid } = require('../services/rssParser')
 const { generateEpisodeLink, generateEpisodeWebUrl, parseTimestamp } = require('../services/urlHelper')
-const { createMetaDescription, createOgDescription, processTimestamps } = require('../services/htmlHelper')
+const { createMetaDescription, createOgDescription, processTimestamps, secondsToTimestamp } = require('../services/htmlHelper')
 
 /**
  * Episode Page Controller
@@ -19,6 +19,7 @@ async function showEpisode(req, res) {
 
     // Parse optional timestamp parameter
     const startTime = parseTimestamp(startTimeParam)
+    const startTimeFormatted = startTime && startTime > 0 ? secondsToTimestamp(startTime) : null
 
     // Fetch episode data
     let episodeData
@@ -77,7 +78,8 @@ async function showEpisode(req, res) {
       feedURL,
       metaDescription,
       ogDescription,
-      startTime
+      startTime,
+      startTimeFormatted
     })
 
   } catch (error) {

@@ -95,6 +95,25 @@ function timestampToSeconds(timestamp) {
 }
 
 /**
+ * Convert total seconds to a human-readable timestamp.
+ * Returns H:MM:SS when >= 1 hour, otherwise M:SS.
+ * @param {number} totalSeconds
+ * @returns {string}
+ */
+function secondsToTimestamp(totalSeconds) {
+  const s = Math.max(0, Math.floor(Number(totalSeconds) || 0))
+  const hours = Math.floor(s / 3600)
+  const minutes = Math.floor((s % 3600) / 60)
+  const seconds = s % 60
+  const pad = (n) => String(n).padStart(2, '0')
+
+  if (hours > 0) {
+    return `${hours}:${pad(minutes)}:${pad(seconds)}`
+  }
+  return `${minutes}:${pad(seconds)}`
+}
+
+/**
  * Process HTML to make timestamps clickable
  * Converts timestamps like "1:23:45" or "15:30" into links to the episode at that time
  * @param {string} html - HTML content with potential timestamps
@@ -157,5 +176,6 @@ module.exports = {
   createMetaDescription,
   createOgDescription,
   processTimestamps,
-  timestampToSeconds
+  timestampToSeconds,
+  secondsToTimestamp
 }
