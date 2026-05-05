@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title><%= pageTitle %></title>
+
+  <meta name="description" content="<%= pageDescription %>">
+  <meta name="author" content="Justin Bishop">
+  <meta name="theme-color" content="#0d7aff">
+
+  <link rel="icon" href="/public/images/podhaven/icon.png" type="image/png">
+  <link rel="apple-touch-icon" href="/public/images/podhaven/icon.png">
+
+  <meta property="og:title" content="<%= pageTitle %>">
+  <meta property="og:description" content="<%= pageDescription %>">
+  <meta property="og:image" content="<%= baseUrl %><%= ogImage %>">
+  <meta property="og:url" content="<%= baseUrl %><%= canonicalPath %>">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Artisanal Software">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<%= pageTitle %>">
+  <meta name="twitter:description" content="<%= pageDescription %>">
+  <meta name="twitter:image" content="<%= baseUrl %><%= ogImage %>">
+
+  <link rel="canonical" href="<%= baseUrl %><%= canonicalPath %>">
+
+  <link rel="stylesheet" href="/public/css/podhavenLanding.css">
+</head>
+<body class="ph-body">
+  <header class="ph-nav">
+    <div class="ph-container ph-nav-inner">
+      <a class="ph-nav-brand" href="/">
+        <span class="ph-nav-brand-mark" aria-hidden="true">A</span>
+        <span class="ph-nav-brand-text">Artisanal Software</span>
+      </a>
+      <nav class="ph-nav-links" aria-label="Site navigation">
+        <a href="#products">Products</a>
+        <a href="#philosophy">Philosophy</a>
+        <a href="#about">About</a>
+        <a href="/podhaven" class="ph-nav-cta">PodHaven</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="ph-hero">
+    <div class="ph-container ph-hero-grid">
+      <div class="ph-hero-copy">
+        <div class="ph-eyebrow">Independent Software Studio</div>
+        <h1 class="ph-hero-title">Software, made by hand.</h1>
+        <p class="ph-hero-sub">Artisanal Software builds quietly excellent tools for people who notice the difference. No tracking. No telemetry. No growth hacks. Just considered software, shipped when it's ready.</p>
+        <div class="ph-cta-row">
+          <a class="ph-cta ph-cta-primary" href="/podhaven">Discover PodHaven</a>
+          <a class="ph-cta ph-cta-ghost" href="https://github.com/jubishop" target="_blank" rel="noopener">GitHub</a>
+          <a class="ph-cta ph-cta-secondary" href="https://discord.gg/cMCJeuVY2f" target="_blank" rel="noopener">Join the Discord</a>
+        </div>
+        <ul class="ph-hero-bullets">
+          <li>One person. Hand-tuned. No committee design.</li>
+          <li>On-device by default — your data stays on your device.</li>
+          <li>Source-available — read the code, audit the claims.</li>
+          <li>No subscriptions, no surveillance, no enshittification.</li>
+        </ul>
+      </div>
+      <figure class="ph-hero-shot">
+        <img src="/public/images/podhaven/episode-detail.png" alt="PodHaven episode detail screen — Artisanal Software's flagship iOS podcast app." width="1320" height="2868" loading="eager">
+      </figure>
+    </div>
+  </section>
+
+  <section class="ph-section ph-section-alt" id="products">
+    <div class="ph-container">
+      <div class="ph-eyebrow">Products</div>
+      <h2 class="ph-section-title">What we make.</h2>
+      <p class="ph-lede">One product today. More to come — but only when each one is worth your time.</p>
+
+      <div class="ph-feature" style="margin-top: 32px;">
+        <div class="ph-feature-copy">
+          <div class="ph-eyebrow">PodHaven · iOS</div>
+          <h2 class="ph-section-title">The podcast app that learns what you actually want to hear.</h2>
+          <p>An on-device recommendation engine that learns from your ratings — no cloud tracking, no black-box algorithm. A player tunable down to the second. A real Up Next queue with drag-to-reorder. Smart cache up to 20 GB. OPML in / out, share extension, widgets.</p>
+          <p>Built on modern Swift, source-available on GitHub, in active development toward an App Store launch.</p>
+          <div class="ph-cta-row">
+            <a class="ph-cta ph-cta-primary" href="/podhaven">Tour PodHaven</a>
+            <a class="ph-cta ph-cta-ghost" href="/podhaven/guides">Read the guides</a>
+            <a class="ph-cta ph-cta-ghost" href="https://github.com/jubishop/podhaven" target="_blank" rel="noopener">View on GitHub</a>
+          </div>
+        </div>
+        <figure class="ph-feature-shot">
+          <img src="/public/images/podhaven/up-next.png" alt="PodHaven Up Next showing a queue of episodes followed by the on-device Recommended section." loading="lazy">
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="ph-section" id="philosophy">
+    <div class="ph-container">
+      <div class="ph-eyebrow">Philosophy</div>
+      <h2 class="ph-section-title">Things we believe.</h2>
+      <p class="ph-lede">Software has gotten worse, on average, every year for the last decade. We don't think that has to be true.</p>
+      <div class="ph-grid">
+        <div class="ph-card">
+          <h3>Privacy is a feature, not a flag.</h3>
+          <p>Telemetry, analytics SDKs, and "anonymous" event streams are designed to leak. We don't collect what we don't need — which is almost everything.</p>
+        </div>
+        <div class="ph-card">
+          <h3>On-device, by default.</h3>
+          <p>Modern phones are absurdly capable. Recommendations, search, ranking — they belong on your device, not behind someone else's API key.</p>
+        </div>
+        <div class="ph-card">
+          <h3>Source-available.</h3>
+          <p>Our code is public. Read it, audit it, fork it, build it yourself. Trust that's grounded in code is the only kind worth having.</p>
+        </div>
+        <div class="ph-card">
+          <h3>No subscriptions for software.</h3>
+          <p>You should be able to buy software, own it, and keep using it. Recurring revenue isn't a substitute for shipping things people want.</p>
+        </div>
+        <div class="ph-card">
+          <h3>Hand-tuned, not template-built.</h3>
+          <p>Every interaction, every animation, every margin gets attention. The "hundred small things" are the actual product — they just don't show up on a feature list.</p>
+        </div>
+        <div class="ph-card">
+          <h3>Ship when it's ready.</h3>
+          <p>No artificial release cadences, no quarterly OKRs forcing half-baked features. We ship when something is good. We don't ship when it isn't.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ph-section ph-section-alt" id="about">
+    <div class="ph-container">
+      <div class="ph-eyebrow">About</div>
+      <h2 class="ph-section-title">A studio of one.</h2>
+      <p class="ph-lede">Artisanal Software is the work of <strong style="color: var(--ph-text);">Justin Bishop</strong> — engineer, long-time podcast nerd, and reluctant subscription-skeptic. The studio is small on purpose: one person, deep focus, no roadmap meetings.</p>
+      <p class="ph-lede">If you'd like to follow along, the Discord is the most active channel. Code lives on GitHub. Ideas, bug reports, and well-argued disagreements are all welcome.</p>
+      <div class="ph-cta-row">
+        <a class="ph-cta ph-cta-secondary" href="https://discord.gg/cMCJeuVY2f" target="_blank" rel="noopener">Join the Discord</a>
+        <a class="ph-cta ph-cta-ghost" href="https://github.com/jubishop" target="_blank" rel="noopener">github.com/jubishop</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="ph-footer">
+    <div class="ph-container ph-footer-inner">
+      <div class="ph-footer-cols">
+        <div class="ph-footer-col">
+          <h4>Products</h4>
+          <a href="/podhaven">PodHaven</a>
+          <a href="/podhaven/guides">PodHaven Guides</a>
+        </div>
+        <div class="ph-footer-col">
+          <h4>Project</h4>
+          <a href="https://github.com/jubishop" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://discord.gg/cMCJeuVY2f" target="_blank" rel="noopener">Discord</a>
+        </div>
+        <div class="ph-footer-col">
+          <h4>Studio</h4>
+          <a href="#philosophy">Philosophy</a>
+          <a href="#about">About</a>
+        </div>
+      </div>
+      <p class="ph-footer-meta">© <%= new Date().getFullYear() %> Justin Bishop. Artisanal Software is an independent studio. Source-available license.</p>
+    </div>
+  </footer>
+</body>
+</html>

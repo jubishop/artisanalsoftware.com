@@ -8,6 +8,7 @@ const config = require('./config')
 const podcastController = require('./controllers/podcastController')
 const episodeController = require('./controllers/episodeController')
 const podhavenLandingController = require('./controllers/podhavenLandingController')
+const siteController = require('./controllers/siteController')
 const { validateFeedUrl, validateGuid } = require('./middleware/validateFeedUrl')
 
 const app = express()
@@ -75,6 +76,9 @@ app.use((req, res, next) => {
   console.log(`[${timestamp}] ${req.method} ${req.path} - Query:`, req.query)
   next()
 })
+
+// Site root (Artisanal Software studio landing)
+app.get('/', siteController.showHome)
 
 // PodHaven marketing landing pages (no validation needed)
 app.get('/podhaven', podhavenLandingController.showLanding)
