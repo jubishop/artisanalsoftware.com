@@ -39,23 +39,31 @@
     <div class="ph-container ph-feature">
       <div class="ph-feature-copy">
         <h2>Home Screen widgets</h2>
-        <p>PodHaven ships <strong>Home Screen widgets</strong> with playback intents — meaning the widgets aren't just dashboards, they're interactive. You can play, pause, skip, and jump to the next track <em>without opening the app</em>.</p>
-        <p>The Now Playing widget shows your current episode's artwork, title, podcast name, publish date, and remaining duration. Below that, four live controls: skip-back by your interval, play / pause, skip-forward by your interval, and next-track.</p>
+        <p>PodHaven ships <strong>Home Screen widgets</strong> with App Intents — meaning the widgets aren't just dashboards, they're interactive. You can play, pause, skip, finish, or start a queued episode <em>without opening the app</em>.</p>
+        <p>The Now Playing widget shows your current episode's artwork, title, podcast name, publish date, and remaining duration. Its controls include skip-back by your interval, play / pause, skip-forward by your interval, and, in the medium widget, mark finished.</p>
+        <p>The Queue widget shows the next few episodes in Up Next. Tap an episode row to open it in PodHaven, or tap its play button to start that episode directly.</p>
         <ol class="ph-steps">
           <li>Long-press any empty area on your Home Screen.</li>
           <li>Tap <strong>Edit</strong> → <strong>Add Widget</strong>.</li>
           <li>Search for <strong>PodHaven</strong>.</li>
           <li>Pick a size and place it.</li>
         </ol>
-        <p>The widget reflects play / pause state in real time. Tap the artwork or title area to launch into the episode in PodHaven; tap a control to act on playback in place.</p>
+        <p>The widget refreshes when playback and queue state change. Tap the artwork or title area to launch into the episode in PodHaven; tap a control to act on playback in place.</p>
       </div>
       <figure class="ph-feature-shot ph-feature-shot-landscape">
-        <img src="/public/images/podhaven/widget-now-playing.png" alt="The PodHaven Now Playing widget on the Home Screen, showing the current episode with artwork, title, podcast, date, duration, and four interactive playback controls." loading="lazy">
+        <img src="/public/images/podhaven/widget-now-playing.png" alt="The PodHaven Now Playing widget on the Home Screen, showing the current episode with artwork, title, podcast, date, duration, and interactive playback controls." loading="lazy">
       </figure>
     </div>
   </section>
 
   <section class="ph-section ph-section-alt">
+    <div class="ph-container">
+      <h2 class="ph-section-title">Lock Screen and Control Center</h2>
+      <p>PodHaven also includes a Lock Screen now-playing widget and Control Center controls for play / pause, skip-forward, and skip-backward. The skip controls use the same intervals you set in <em>Settings → Playback</em>, so your Home Screen, Control Center, lock screen, and in-app player all agree.</p>
+    </div>
+  </section>
+
+  <section class="ph-section">
     <div class="ph-container">
       <h2 class="ph-section-title">New-episode notifications</h2>
       <p class="ph-lede">PodHaven's notifications are <strong>off by default</strong> per podcast — and that's the right default. Turn them on only for the shows you'd want a ping for.</p>
@@ -81,7 +89,7 @@
     </div>
   </section>
 
-  <section class="ph-section">
+  <section class="ph-section ph-section-alt">
     <div class="ph-container">
       <h2 class="ph-section-title">Background refresh</h2>
       <p>Independent of notifications, PodHaven uses iOS's background refresh API to update feeds quietly while the app is in the background. This is what makes new episodes appear ready when you open the app, instead of needing a manual pull-to-refresh.</p>
@@ -89,7 +97,7 @@
     </div>
   </section>
 
-  <section class="ph-section ph-section-alt">
+  <section class="ph-section">
     <div class="ph-container">
       <h2 class="ph-section-title">Lock-screen, CarPlay, AirPods, Watch</h2>
       <p>PodHaven uses iOS's long-form audio session, so the lock-screen, control center, CarPlay UI, AirPods squeeze, and Apple Watch playback controls all reflect the same playhead, the same artwork, and the same chapter info as the in-app player.</p>

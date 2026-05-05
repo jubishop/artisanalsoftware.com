@@ -18,7 +18,7 @@
         <li><strong>Love</strong> — strong positive training signal. Boosts similar episodes hard. Use for episodes you'd recommend to a friend.</li>
         <li><strong>Like</strong> — gentle positive training signal. Use for episodes you enjoyed but wouldn't necessarily flag as standout.</li>
         <li><strong>Dislike</strong> — negative training signal. Pushes similar episodes down in future recommendations. Use for episodes that disappointed.</li>
-        <li><strong>Not Interested</strong> — a <em>view filter</em>, not a training signal. The episode disappears from your recommendations and lists, but the model doesn't learn anything from the rating. Use it to dismiss specific episodes you don't want to see; use <strong>Dislike</strong> if you want the rec engine to actually move away from a topic.</li>
+        <li><strong>Not Interested</strong> — a <em>view filter</em>, not a training signal. The episode leaves the recommendation candidate pool, but the model doesn't learn anything from the rating. Use it to dismiss specific episodes you don't want recommended; use <strong>Dislike</strong> if you want the rec engine to actually move away from a topic.</li>
       </ul>
       <div class="ph-tip">
         <strong>Common mix-up:</strong> "Not Interested" doesn't tell the model to avoid this kind of thing — it just hides this one episode. If the rec engine keeps surfacing a topic you've moved past, you want <strong>Dislike</strong> on a few of those episodes. That's the rating that actually trains.
