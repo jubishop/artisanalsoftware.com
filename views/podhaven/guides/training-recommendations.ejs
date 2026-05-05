@@ -72,11 +72,15 @@
       <p>If the rec engine drifts somewhere you don't want it to go, fix it explicitly. The model responds quickly.</p>
       <ul class="ph-checklist ph-checklist-wide">
         <li><strong>Wrong topic surfacing repeatedly?</strong> <strong>Dislike</strong> two or three of those episodes — that's the rating that trains the model. <em>Not Interested</em> only hides the specific episodes you tap it on; it won't move the engine away from the topic.</li>
-        <li><strong>Show recommended too aggressively?</strong> Adjust its <a class="ph-inline-link" href="/podhaven/guides/per-podcast-settings#freshness">Freshness Cadence</a> to a longer interval (Weekly → Monthly), or rate a few of its episodes as Dislike.</li>
+        <li><strong>Show recommended too aggressively?</strong> <strong>Dislike</strong> a few of its episodes. The base score is what drives whether the show appears at all, and Dislike is the rating that pulls that score down. (Resist the urge to reach for Freshness Cadence here — cadence controls <em>which episodes from the show feel fresh</em>, not <em>how often the show appears</em>.)</li>
         <li><strong>Show neglected unfairly?</strong> Rate three or four episodes as Like / Love. The positive signal lifts the whole show.</li>
-        <li><strong>Old episodes for an evergreen show being skipped?</strong> Set its Freshness Cadence to <strong>Evergreen</strong> in per-podcast settings. Now episode age is no longer a negative.</li>
+        <li><strong>Old episodes for an evergreen show being skipped?</strong> Set its <a class="ph-inline-link" href="/podhaven/guides/per-podcast-settings#freshness">Freshness Cadence</a> to <strong>Evergreen</strong>. The freshness boost stops decaying with age, so a 2018 episode and a 2026 episode compete on the base score alone.</li>
+        <li><strong>News show resurfacing 5-day-old episodes as "fresh"?</strong> Set its Freshness Cadence to <strong>Daily</strong>, so the freshness boost decays within roughly a day and only the very newest episodes get the boost.</li>
         <li><strong>Just want a specific recommendation off your list?</strong> That's exactly what <strong>Not Interested</strong> is for. Hides this episode without retraining anything.</li>
       </ul>
+      <div class="ph-tip">
+        <strong>Mental model for the freshness knob:</strong> the rec engine's score for an episode is a <em>base score</em> from your ratings plus a <em>freshness boost</em> that decays over time. Cadence sets the decay rate. Ratings move the base score. To change whether a show is recommended, change ratings — not cadence.
+      </div>
       <div class="ph-tip">
         <strong>Partial-listens count too.</strong> PodHaven tracks listening coverage as a bitmap — if you bail on an episode three minutes in, that's a soft negative signal even without a rating. So don't worry about "skewing the model" by abandoning a bad episode early.
       </div>

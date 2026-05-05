@@ -69,17 +69,38 @@
 
   <section class="ph-section" id="freshness">
     <div class="ph-container">
-      <h2 class="ph-section-title">Freshness Cadence (the secret recommendation knob)</h2>
-      <p class="ph-lede">This is the per-podcast setting that earns the "guide" page on its own. It controls how aggressively the recommendation engine penalizes older episodes from this show.</p>
+      <h2 class="ph-section-title">Freshness Cadence (time decay, explained)</h2>
+      <p class="ph-lede">This is the per-podcast setting that earns the guide page on its own — and the one most likely to be misunderstood.</p>
+
+      <h3>How the rec engine sees an episode</h3>
+      <p>Every episode in your library gets a base score from the model — derived from your ratings, semantic similarity to episodes you've loved, and so on. Recently-published episodes get an additional <strong>freshness boost</strong> stacked on top of that base score, because for most podcasts a brand-new episode is more interesting than a four-month-old one.</p>
+      <p>That freshness boost isn't permanent. It <strong>decays over time.</strong> The cadence setting controls <em>how fast</em> it decays.</p>
+
+      <h3>What cadence does (and doesn't) do</h3>
       <ul class="ph-checklist ph-checklist-wide">
-        <li><strong>Auto</strong> (default) — PodHaven detects the show's natural cadence from its publish dates and tracks it as new episodes arrive. The displayed line ("Resolved to: Weekly") tells you what it inferred.</li>
-        <li><strong>Daily</strong> — for news-style shows where yesterday's episode is already stale. The freshness boost decays fast.</li>
-        <li><strong>Weekly</strong> — the standard cadence for most podcasts.</li>
-        <li><strong>Monthly</strong> — for less time-sensitive shows that aren't trying to be timely.</li>
-        <li><strong>Evergreen</strong> — for back-catalog or narrative-archive shows where episode age is immaterial. Think <em>Hardcore History</em> or audio-drama series. Old episodes get the same treatment as new ones in recommendations.</li>
+        <li>Cadence sets the <strong>decay rate</strong> — how long an episode keeps its freshness boost before age stops mattering.</li>
+        <li>It does <strong>not</strong> change whether the show gets recommended overall. The base score from your ratings drives that. If you want the show recommended <em>less</em>, that's a Dislike job, not a cadence job.</li>
+        <li>It changes <strong>which episodes</strong> from the show benefit from the freshness boost — recent ones (short cadence) versus everything in the back catalog (long cadence or Evergreen).</li>
       </ul>
+
+      <h3>The choices</h3>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li><strong>Auto</strong> (default) — PodHaven detects the show's natural cadence from its publish dates and tracks it as new episodes arrive. The line under the picker ("Resolved to: Weekly") tells you what it inferred. Auto is right most of the time.</li>
+        <li><strong>Daily</strong> — freshness boost decays within roughly a day. Use for news-style shows where yesterday's episode is already stale and only the latest few should feel "fresh."</li>
+        <li><strong>Weekly</strong> — boost decays over about a week. The standard cadence for most podcasts.</li>
+        <li><strong>Monthly</strong> — boost decays over about a month. Use for shows that aren't time-sensitive and where last month's episode is still relevant today.</li>
+        <li><strong>Evergreen</strong> — episode age is immaterial; the freshness boost doesn't decay (and doesn't really matter, because nothing about the show ages). Use for back-catalog narrative shows like <em>Hardcore History</em> or audio dramas, where a 2018 episode is just as recommendable as a 2026 one.</li>
+      </ul>
+
+      <h3>Concrete examples of when to override Auto</h3>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li><strong>A daily news show keeps surfacing episodes that are 5 days old as "fresh."</strong> Set cadence to <strong>Daily</strong> so the boost decays before the episode gets stale-feeling.</li>
+        <li><strong>An evergreen show keeps getting skipped because all its episodes are old.</strong> Set cadence to <strong>Evergreen</strong> so age is no longer a factor — old episodes can compete on the strength of the base score alone.</li>
+        <li><strong>A monthly show is being skipped a week after publication.</strong> Auto might have miscalibrated to Weekly. Set <strong>Monthly</strong> explicitly so episodes keep their freshness boost longer.</li>
+      </ul>
+
       <div class="ph-tip">
-        <strong>When to override Auto:</strong> if the rec engine is repeatedly surfacing episodes from a show you wish it would hold off on (or repeatedly skipping a show whose old episodes are great), this is the knob. Auto is good but it's pattern-matching against publish dates, not editorial intent.
+        <strong>Common mistake:</strong> reaching for cadence to make a show appear less often. Cadence is about <em>which episodes feel fresh</em>, not <em>how often the show gets recommended</em>. To turn down a show's overall presence in recommendations, rate a few of its episodes as <strong>Dislike</strong> — that's the training signal that actually moves the model.
       </div>
     </div>
   </section>
