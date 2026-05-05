@@ -1,0 +1,158 @@
+<%- include('../partials/head') %>
+<body class="ph-body">
+  <%- include('../partials/nav') %>
+
+  <section class="ph-page-hero">
+    <div class="ph-container">
+      <div class="ph-eyebrow">Guide · Reference</div>
+      <h1 class="ph-page-title">Every Setting Explained</h1>
+      <p class="ph-page-lede">Every toggle, slider, and picker on the Settings page — what it does, what value to start with, and when to change it. The page is organized exactly the way the app is.</p>
+    </div>
+  </section>
+
+  <section class="ph-section">
+    <div class="ph-container">
+      <h2 class="ph-section-title">Importing / Exporting</h2>
+      <h3>OPML</h3>
+      <p><em>Settings → Importing / Exporting → OPML.</em></p>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li><strong>Import.</strong> Pick an OPML file from Files / iCloud / Dropbox to bulk-subscribe. Existing subscriptions are deduped by feed URL — re-importing is harmless.</li>
+        <li><strong>Export.</strong> Generates an OPML of your current subscriptions (with custom titles and tags preserved where possible). Share-sheet it to Mail, Files, or another app.</li>
+      </ul>
+      <div class="ph-tip"><strong>Switching apps?</strong> Export from the app you're leaving, import here, and you're done. PodHaven won't lock you in either direction.</div>
+    </div>
+  </section>
+
+  <section class="ph-section ph-section-alt">
+    <div class="ph-container">
+      <h2 class="ph-section-title">Organization</h2>
+      <h3>Tags</h3>
+      <p><em>Settings → Organization → Tags.</em></p>
+      <p>Custom labels you can attach to podcasts. The Podcasts tab gets one bucket per tag plus an <em>Untagged</em> bucket.</p>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li>Create tags from this screen, or while viewing a podcast.</li>
+        <li>The list shows each tag with its podcast count.</li>
+        <li>Tags are local-only — no syncing, no account.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="ph-section">
+    <div class="ph-container">
+      <h2 class="ph-section-title">Playback</h2>
+
+      <h3>Default Playback Rate</h3>
+      <p>The speed new episodes start at. <strong>0.8× to 2.0× in 0.1× increments.</strong></p>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li>1.0× — natural speed.</li>
+        <li>1.2× – 1.4× — most popular for talky shows.</li>
+        <li>1.6× and up — power-listener territory; verify comprehension first.</li>
+      </ul>
+      <div class="ph-tip">A per-podcast override beats this default. Set it from the per-podcast settings sheet for shows that need a different pace. <a class="ph-inline-link" href="/podhaven/guides/per-podcast-settings#playback-rate">How to →</a></div>
+
+      <h3>Next Track Behavior</h3>
+      <p>Picks what your <strong>Next</strong> button does on the lock screen, in CarPlay, on AirPods, on a Watch, or on a car steering-wheel button.</p>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li><strong>Next Episode</strong> — jump to the next queued episode. The classic behavior.</li>
+        <li><strong>Skip Interval</strong> — fast-forward by your skip-forward interval. Good if you skip ads frequently from the lock screen.</li>
+        <li><strong>Next Chapter</strong> — for episodes with embedded chapters, jump to the next chapter. Falls back to Skip Interval when no chapters exist.</li>
+      </ul>
+
+      <h3>Skip Forward Interval</h3>
+      <p>How far <strong>forward</strong> the skip-forward button jumps, everywhere — app, lock screen, hardware buttons. Choices: 5 / 10 / 15 / 30 / 45 / 60 / 75 / 90 seconds.</p>
+      <p>Default 30s is right for most people. Bump to 45s if you skip ads often.</p>
+
+      <h3>Skip Backward Interval</h3>
+      <p>How far <strong>back</strong> the skip-back button jumps. Same choices: 5 – 90 seconds. <strong>Independent</strong> of skip forward — they're not symmetric on purpose.</p>
+      <p>Default 15s is the common case ("wait, what did they just say?"). Drop to 10s if you find 15s overshooting.</p>
+
+      <h3>Enable Undo Seek</h3>
+      <p>Toggle. When on, dragging the progress bar briefly transforms the skip-back button into an <strong>Undo</strong> button, letting you jump back to your previous position with a single tap.</p>
+      <div class="ph-tip">Recommended on. The interaction is invisible until you need it, and the day you palm-scrub the progress bar mid-commute, you'll be glad it's there.</div>
+    </div>
+  </section>
+
+  <section class="ph-section ph-section-alt">
+    <div class="ph-container">
+      <h2 class="ph-section-title">Appearance</h2>
+
+      <h3>Appearance Mode</h3>
+      <p>Segmented picker: <strong>System / Light / Dark.</strong> System follows iOS. Light and Dark pin the app regardless of system.</p>
+
+      <h3>Shrink Playbar</h3>
+      <p>Toggle. When on, the floating Play Bar shrinks as you scroll down a list, returning the screen to your content. Scroll back up — back it comes.</p>
+      <div class="ph-tip">Keeps lists clean without losing access to playback. Most people want this on.</div>
+
+      <h3>Show Time Remaining</h3>
+      <p>Toggle. For episodes you've started, show <em>time remaining</em> instead of <em>total duration</em> in lists. Helps you gauge whether you'll finish before your stop.</p>
+    </div>
+  </section>
+
+  <section class="ph-section">
+    <div class="ph-container">
+      <h2 class="ph-section-title">Up Next</h2>
+
+      <h3>Show Now Playing</h3>
+      <p>Toggle. When on, the currently-playing episode pins to the top of the Up Next queue. When off, the queue shows only what's <em>next</em>.</p>
+
+      <h3>Always Show Podcast Art</h3>
+      <p>Toggle. When on, every row in Up Next shows the <strong>podcast</strong> artwork instead of episode-specific artwork. Useful when episode art is inconsistent across a show.</p>
+
+      <h3>Always Show Podcast Art for Now Playing</h3>
+      <p>Toggle. Same idea, but specifically for the currently-playing episode — affects the Play Bar, the lock screen, the Now Playing widget, and the top of Up Next.</p>
+
+      <h3>Max Queue Length</h3>
+      <p>Slider, <strong>10 to 100</strong> in steps of 10. The most you'll ever have queued.</p>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li>Adding to the end? PodHaven adds as many as fit, then stops.</li>
+        <li>Adding to the top? Episodes are evicted from the bottom to stay within the cap.</li>
+        <li>This pairs with per-podcast <em>Queue All Episodes → On Top</em> to build a self-rotating playlist.</li>
+      </ul>
+
+      <h3>Recommended Episodes</h3>
+      <p>Slider, <strong>0 to 20</strong>. How many recommendation picks PodHaven shows beneath your queue. Set to 0 (Off) to hide the section entirely.</p>
+      <p>5 is a good starting number — enough to give you options, not so many that the page becomes a wall.</p>
+
+      <h3>Auto-play Top Recommendation</h3>
+      <p>Toggle. When the queue empties at the end of an episode, automatically play the top pick from the recommendation engine.</p>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li><strong>On</strong> — never hits silence; the rec engine keeps you going.</li>
+        <li><strong>Off</strong> — playback stops when the queue runs out; you decide what's next.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="ph-section ph-section-alt">
+    <div class="ph-container">
+      <h2 class="ph-section-title">Storage</h2>
+
+      <h3>Cache Size Limit</h3>
+      <p>Slider, <strong>0.5 GB to 20 GB</strong> in 0.5 GB steps. The total budget for downloaded (cached) episodes.</p>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li>When the cache hits the limit, the <strong>oldest unsaved</strong> downloads are auto-evicted to make room.</li>
+        <li>Episodes marked <strong>Saved</strong> are never auto-deleted, regardless of the cache budget.</li>
+        <li>2 GB is a sensible default. Long-commute listener? 5 GB. Daily-only? 1 GB is plenty.</li>
+      </ul>
+      <div class="ph-tip">Saved episodes accumulate outside this budget. If your storage is tight, audit your saved list periodically. <a class="ph-inline-link" href="/podhaven/guides/offline-storage">Offline strategy guide →</a></div>
+    </div>
+  </section>
+
+  <section class="ph-section">
+    <div class="ph-container">
+      <h2 class="ph-section-title">Feedback &amp; GitHub</h2>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li><strong>Send Feedback.</strong> Composes an in-app feedback form with your app version and environment included automatically.</li>
+        <li><strong>GitHub link</strong> in the toolbar menu (the ⋯ icon, top right). Goes straight to the open-source repository.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="ph-section ph-section-alt">
+    <div class="ph-container">
+      <h2 class="ph-section-title">A note on per-podcast settings</h2>
+      <p>The Settings page covers your <strong>global defaults</strong>. For overrides that apply to one podcast — custom playback rate, auto-queue, cache strategy, freshness cadence, per-podcast notifications — see the per-podcast settings sheet, opened from any podcast's detail page.</p>
+      <p><a class="ph-inline-link" href="/podhaven/guides/per-podcast-settings">Open the Per-Podcast Settings guide →</a></p>
+    </div>
+  </section>
+
+  <%- include('../partials/footer') %>

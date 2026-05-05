@@ -1,0 +1,119 @@
+<%- include('../partials/head') %>
+<body class="ph-body">
+  <%- include('../partials/nav') %>
+
+  <section class="ph-page-hero">
+    <div class="ph-container">
+      <div class="ph-eyebrow">Guide</div>
+      <h1 class="ph-page-title">Per-Podcast Settings</h1>
+      <p class="ph-page-lede">PodHaven gives you a settings sheet <em>per show</em>. It's the most powerful corner of the app, and the easiest one to miss. Here's everything it does, in the order it appears.</p>
+    </div>
+  </section>
+
+  <section class="ph-section">
+    <div class="ph-container ph-feature">
+      <div class="ph-feature-copy">
+        <h2>How to open it</h2>
+        <ol class="ph-steps">
+          <li>Go to <strong>Podcasts</strong>.</li>
+          <li>Tap <strong>Subscribed</strong>, then tap a podcast you've subscribed to.</li>
+          <li>On the podcast detail page, tap the settings icon in the top-right toolbar.</li>
+        </ol>
+        <p>The settings sheet slides up. Every change saves the moment you make it — there's no "Done" button.</p>
+      </div>
+      <figure class="ph-feature-shot">
+        <img src="/public/images/podhaven/podcast-settings.png" alt="The per-podcast settings sheet for WSJ Tech News Briefing showing all five sections: Playback rate slider, Queue All Episodes picker, Cache All Episodes picker, Freshness cadence, and Notify New Episodes toggle." loading="lazy">
+      </figure>
+    </div>
+  </section>
+
+  <section class="ph-section ph-section-alt" id="playback-rate">
+    <div class="ph-container">
+      <h2 class="ph-section-title">Playback Rate (override the global default)</h2>
+      <p class="ph-lede">Most apps make you live with one default speed. PodHaven lets each podcast remember its own.</p>
+      <p>Drag the slider from 0.8× to 2.0× to set a default speed for new episodes <em>from this podcast</em>. The change overrides the global default in <em>Settings → Playback → Default Playback Rate</em>.</p>
+      <p>Tap the small <strong>clear</strong> icon next to the slider to remove the override and fall back to the global rate. The label switches to <em>Playback Rate (Unset)</em> when no override is in place.</p>
+      <div class="ph-tip">
+        <strong>When to use it:</strong> a fast-talker show that's painful at your usual 1.4×, a deeply produced narrative show that deserves its 1.0× pace, or anyone you want to listen to slower for language reasons. Hit those with a per-podcast rate and forget about it.
+      </div>
+    </div>
+  </section>
+
+  <section class="ph-section" id="queue">
+    <div class="ph-container">
+      <h2 class="ph-section-title">Queue All Episodes</h2>
+      <p class="ph-lede">Decide what happens automatically when this podcast publishes a new episode.</p>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li><strong>Never</strong> (default) — new episodes don't touch your queue. Add them by hand when you want.</li>
+        <li><strong>On Bottom</strong> — new episodes automatically land at the end of your queue.</li>
+        <li><strong>On Top</strong> — new episodes jump to the front. Use this for time-sensitive shows like a daily news podcast.</li>
+      </ul>
+      <p>Combine this with the global <em>Max Queue Length</em> in <em>Settings → Up Next</em> and you've effectively built a self-rotating playlist for your favorite shows: new episodes flow in, old ones fall off the bottom.</p>
+    </div>
+  </section>
+
+  <section class="ph-section ph-section-alt" id="cache">
+    <div class="ph-container">
+      <h2 class="ph-section-title">Cache All Episodes</h2>
+      <p class="ph-lede">Decide whether new episodes auto-download — and whether they're protected from the cache eviction policy.</p>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li><strong>Never</strong> (default) — manual downloads only.</li>
+        <li><strong>Cache</strong> — new episodes download automatically. They live in the cache but can be evicted when storage gets tight, oldest first.</li>
+        <li><strong>Save</strong> — new episodes download <em>and</em> get the "Save" mark, exempting them from auto-eviction. They stay on your device until you remove them yourself.</li>
+      </ul>
+      <div class="ph-tip">
+        <strong>Pick "Save" sparingly.</strong> Saved episodes don't count against the cache budget the way regular cached episodes do — they accumulate. Use Save for shows you binge slowly or replay often. Use Cache for shows you listen to once and move on.
+      </div>
+    </div>
+  </section>
+
+  <section class="ph-section" id="freshness">
+    <div class="ph-container">
+      <h2 class="ph-section-title">Freshness Cadence (the secret recommendation knob)</h2>
+      <p class="ph-lede">This is the per-podcast setting that earns the "guide" page on its own. It controls how aggressively the recommendation engine penalizes older episodes from this show.</p>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li><strong>Auto</strong> (default) — PodHaven detects the show's natural cadence from its publish dates and tracks it as new episodes arrive. The displayed line ("Resolved to: Weekly") tells you what it inferred.</li>
+        <li><strong>Daily</strong> — for news-style shows where yesterday's episode is already stale. The freshness boost decays fast.</li>
+        <li><strong>Weekly</strong> — the standard cadence for most podcasts.</li>
+        <li><strong>Monthly</strong> — for less time-sensitive shows that aren't trying to be timely.</li>
+        <li><strong>Evergreen</strong> — for back-catalog or narrative-archive shows where episode age is immaterial. Think <em>Hardcore History</em> or audio-drama series. Old episodes get the same treatment as new ones in recommendations.</li>
+      </ul>
+      <div class="ph-tip">
+        <strong>When to override Auto:</strong> if the rec engine is repeatedly surfacing episodes from a show you wish it would hold off on (or repeatedly skipping a show whose old episodes are great), this is the knob. Auto is good but it's pattern-matching against publish dates, not editorial intent.
+      </div>
+    </div>
+  </section>
+
+  <section class="ph-section ph-section-alt" id="notifications">
+    <div class="ph-container">
+      <h2 class="ph-section-title">Notify New Episodes</h2>
+      <p>Toggle to receive a system notification whenever this podcast publishes a new episode. Notifications fire during background refresh, so they arrive while the app is closed.</p>
+      <p>If you've turned this on but PodHaven hasn't been granted notification permissions, the sheet shows an inline button to fix that — either prompting iOS for permission (when undecided) or jumping you to the system Settings (when previously denied).</p>
+      <p>Per-podcast control means you can mute the daily that already lives at the top of your queue and only ping for the weekly investigative show you'd otherwise miss.</p>
+    </div>
+  </section>
+
+  <section class="ph-section">
+    <div class="ph-container">
+      <h2 class="ph-section-title">A worked example: setting up "The Daily"</h2>
+      <p class="ph-lede">Five settings, one minute, set-and-forget.</p>
+      <ol class="ph-steps">
+        <li><strong>Playback Rate:</strong> 1.4× — the hosts speak deliberately, so you can push past the global default.</li>
+        <li><strong>Queue All Episodes:</strong> <em>On Top</em> — daily news belongs at the top of the queue.</li>
+        <li><strong>Cache All Episodes:</strong> <em>Cache</em> — auto-download, but let old episodes evict naturally.</li>
+        <li><strong>Freshness Cadence:</strong> <em>Daily</em> — the rec engine should treat 3-day-old episodes as cold.</li>
+        <li><strong>Notify New Episodes:</strong> off — the queue auto-fills, no need for a ping.</li>
+      </ol>
+      <p>Now contrast that with <em>Hardcore History</em>:</p>
+      <ol class="ph-steps">
+        <li><strong>Playback Rate:</strong> 1.0× or 1.1× — the production rewards normal speed.</li>
+        <li><strong>Queue All Episodes:</strong> <em>Never</em> — these are 4-hour episodes; you choose when.</li>
+        <li><strong>Cache All Episodes:</strong> <em>Save</em> — never evicted, always there for the road trip.</li>
+        <li><strong>Freshness Cadence:</strong> <em>Evergreen</em> — a 2018 episode is just as recommendable as a 2026 one.</li>
+        <li><strong>Notify New Episodes:</strong> on — they're rare and worth a ping.</li>
+      </ol>
+      <p>Two podcasts, two opposite configurations, both saved per-show. That's the point.</p>
+    </div>
+  </section>
+
+  <%- include('../partials/footer') %>

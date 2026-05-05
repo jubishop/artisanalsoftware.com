@@ -1,0 +1,114 @@
+<%- include('../partials/head') %>
+<body class="ph-body">
+  <%- include('../partials/nav') %>
+
+  <section class="ph-page-hero">
+    <div class="ph-container">
+      <div class="ph-eyebrow">Guide · Tactics</div>
+      <h1 class="ph-page-title">Queue, Gestures &amp; Multi-Select</h1>
+      <p class="ph-page-lede">The muscle-memory layer. Drag, swipe, long-press, multi-select — everything PodHaven hides under your fingertips.</p>
+    </div>
+  </section>
+
+  <section class="ph-section">
+    <div class="ph-container">
+      <h2 class="ph-section-title">Adding to the queue</h2>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li><strong>From an episode list:</strong> long-press the episode → <em>Add to Top</em> or <em>Add to Bottom</em>.</li>
+        <li><strong>From the episode detail page:</strong> use the toolbar / context-menu actions.</li>
+        <li><strong>Automatically per podcast:</strong> open the per-podcast settings sheet → <em>Queue All Episodes</em> → <strong>On Top</strong> or <strong>On Bottom</strong>. New episodes auto-queue forever after. <a class="ph-inline-link" href="/podhaven/guides/per-podcast-settings#queue">How to →</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="ph-section ph-section-alt">
+    <div class="ph-container">
+      <h2 class="ph-section-title">Reordering Up Next</h2>
+      <ol class="ph-steps">
+        <li>Open the Up Next tab.</li>
+        <li>Long-press an episode and start dragging.</li>
+        <li>Drop where you want it.</li>
+      </ol>
+      <p>The total queue duration at the top updates as you reorder, so you can tune your commute by minutes.</p>
+    </div>
+  </section>
+
+  <section class="ph-section">
+    <div class="ph-container">
+      <h2 class="ph-section-title">Swipe shortcuts</h2>
+      <p class="ph-lede">From any episode list — Up Next, Episodes, podcast detail — swipe a row for fast actions.</p>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li><strong>Swipe left</strong> for the destructive / completing actions: delete, mark finished, remove from queue.</li>
+        <li><strong>Swipe right</strong> for the nurturing actions: save, add to queue, download.</li>
+      </ul>
+      <div class="ph-tip">Swipe is faster than tap-then-act for routine cleanup. If you find yourself opening rows just to delete them, switch to swiping.</div>
+    </div>
+  </section>
+
+  <section class="ph-section ph-section-alt">
+    <div class="ph-container">
+      <h2 class="ph-section-title">Long-press context menus</h2>
+      <p class="ph-lede">Hold any episode (or podcast) for ~half a second to bring up a rich context menu.</p>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li>The four ratings: <strong>Love / Like / Dislike / Not Interested</strong>.</li>
+        <li>Queue actions: <em>Add to Top</em>, <em>Add to Bottom</em>, <em>Remove from Queue</em>.</li>
+        <li>Storage actions: <em>Download</em>, <em>Save</em>, <em>Delete</em>.</li>
+        <li>Episode actions: <em>Mark Finished</em>, <em>Mark Unfinished</em>.</li>
+        <li>Sharing.</li>
+      </ul>
+      <p>The context menu is the densest action surface in the app. When in doubt, long-press.</p>
+    </div>
+  </section>
+
+  <section class="ph-section">
+    <div class="ph-container">
+      <h2 class="ph-section-title">Multi-select &amp; batch actions</h2>
+      <ol class="ph-steps">
+        <li>On any list, tap the <strong>edit / pencil icon</strong> in the toolbar.</li>
+        <li>The list switches to selection mode — each row gets a circle on the left.</li>
+        <li>Tap rows to select them. The toolbar at the bottom shows action buttons.</li>
+        <li>Run an action across the whole selection: <em>Download</em>, <em>Save</em>, <em>Delete</em>, <em>Mark Finished</em>, <em>Add to Queue</em>, or rate them all the same way.</li>
+        <li>Tap <strong>Done</strong> to exit selection mode.</li>
+      </ol>
+      <div class="ph-tip">Most useful for: cleaning up an Episodes tab after a binge, downloading a backlog before a flight, or rating a string of episodes you've already heard.</div>
+    </div>
+  </section>
+
+  <section class="ph-section ph-section-alt">
+    <div class="ph-container">
+      <h2 class="ph-section-title">Sorting and filtering</h2>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li><strong>Sort menu</strong> in any list header: by date added, publish date, title, duration, more.</li>
+        <li><strong>Filter episodes</strong> search bar at the top of podcast detail pages — type to narrow the episode list by keyword.</li>
+        <li><strong>Saved sort preferences</strong> per list. Set Up Next to sort by date added, Episodes to sort by publish date — they remember.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="ph-section">
+    <div class="ph-container">
+      <h2 class="ph-section-title">Episode states, at a glance</h2>
+      <p class="ph-lede">Every row in a list shows status icons that tell you what's going on without opening the row.</p>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li><strong>Rating icon</strong> next to the title — filled if rated.</li>
+        <li><strong>Download status</strong> — pending, in-flight, cached, saved, all distinguishable.</li>
+        <li><strong>Listened coverage</strong> — partial-listen episodes are visually distinct from unstarted ones.</li>
+        <li><strong>Currently playing</strong> — pause icon shown next to the row when it's the active episode.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="ph-section ph-section-alt">
+    <div class="ph-container">
+      <h2 class="ph-section-title">Tap targets you might miss</h2>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li><strong>Album art on the inline Play Bar</strong> — opens the episode detail for the on-deck episode.</li>
+        <li><strong>Chevron-up on the inline Play Bar</strong> — expands the full-screen Play Bar sheet.</li>
+        <li><strong>Podcast name link</strong> on the episode detail page — jumps to that podcast's library page.</li>
+        <li><strong>Show Details</strong> link on a podcast detail page — full description, links, contact.</li>
+        <li><strong>Tag chips</strong> in the Podcasts tab — drill into a tag's bucket.</li>
+      </ul>
+    </div>
+  </section>
+
+  <%- include('../partials/footer') %>

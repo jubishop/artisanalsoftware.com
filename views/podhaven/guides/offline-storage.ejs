@@ -1,0 +1,119 @@
+<%- include('../partials/head') %>
+<body class="ph-body">
+  <%- include('../partials/nav') %>
+
+  <section class="ph-page-hero">
+    <div class="ph-container">
+      <div class="ph-eyebrow">Guide · Strategy</div>
+      <h1 class="ph-page-title">Offline &amp; Storage Strategy</h1>
+      <p class="ph-page-lede">Cache vs Save, the budget that auto-evicts, and how to make a podcast download itself forever. The whole offline story in one place.</p>
+    </div>
+  </section>
+
+  <section class="ph-section">
+    <div class="ph-container">
+      <h2 class="ph-section-title">The mental model</h2>
+      <p class="ph-lede">PodHaven splits offline storage into two states. Get these right and the rest is automatic.</p>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li><strong>Cache.</strong> Episodes you've downloaded for offline play. They count against your <em>Cache Size Limit</em>. When the cache fills, the oldest cached episodes are auto-evicted to make room. Casual.</li>
+        <li><strong>Save.</strong> A "do not delete" mark. Saved episodes are immune to auto-eviction. Use sparingly — for episodes you binge slowly, replay often, or want to keep forever.</li>
+      </ul>
+      <p>An episode is in one of three states for offline purposes:</p>
+      <ol class="ph-steps">
+        <li><strong>Not cached</strong> — only available with internet.</li>
+        <li><strong>Cached</strong> — playable offline, eligible for eviction.</li>
+        <li><strong>Saved</strong> — playable offline, never evicted.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="ph-section ph-section-alt">
+    <div class="ph-container">
+      <h2 class="ph-section-title">Picking a Cache Size Limit</h2>
+      <p>Found in <em>Settings → Storage → Cache Size Limit</em>. Range: <strong>0.5 GB – 20 GB.</strong></p>
+      <p>Rule of thumb:</p>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li><strong>0.5 – 1 GB</strong> — daily-only listener; cache is small but always fresh.</li>
+        <li><strong>2 GB</strong> — sensible default for most people. Holds ~2 days of typical listening.</li>
+        <li><strong>5 GB</strong> — long-commute listener; survives a multi-day trip without internet.</li>
+        <li><strong>10 GB+</strong> — heavy traveler; you cache aggressively and want a deep buffer.</li>
+      </ul>
+      <div class="ph-tip">
+        <strong>Storage tight?</strong> Drop the limit. The cache will shrink itself the next time it needs to. No need to delete anything by hand — though you can if you want.
+      </div>
+    </div>
+  </section>
+
+  <section class="ph-section">
+    <div class="ph-container">
+      <h2 class="ph-section-title">Auto-download per podcast</h2>
+      <p class="ph-lede">For shows you always want ready, set the download policy per podcast and forget about it.</p>
+      <ol class="ph-steps">
+        <li>Open the podcast detail page.</li>
+        <li>Tap the settings icon in the top toolbar.</li>
+        <li>Under <strong>Storage</strong>, pick:
+          <ul class="ph-checklist" style="margin-top: 10px;">
+            <li><strong>Never</strong> (default) — manual downloads only.</li>
+            <li><strong>Cache</strong> — new episodes download automatically. Subject to cache eviction.</li>
+            <li><strong>Save</strong> — new episodes download <em>and</em> get the Save mark; never evicted.</li>
+          </ul>
+        </li>
+      </ol>
+      <p><a class="ph-inline-link" href="/podhaven/guides/per-podcast-settings#cache">Per-podcast cache settings →</a></p>
+    </div>
+  </section>
+
+  <section class="ph-section ph-section-alt">
+    <div class="ph-container">
+      <h2 class="ph-section-title">When to use Cache, when to use Save</h2>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li><strong>Cache</strong> the daily news show. You want today's, you don't need yesterday's.</li>
+        <li><strong>Cache</strong> the weekly interview show you generally listen to once.</li>
+        <li><strong>Save</strong> the long-form narrative show you binge slowly across weeks.</li>
+        <li><strong>Save</strong> the episode you replay every now and then.</li>
+        <li><strong>Save</strong> the rare deep episode that you don't want to lose track of.</li>
+      </ul>
+      <div class="ph-tip">
+        <strong>Save is permanent until you remove it.</strong> Saved episodes aren't bound by the Cache Size Limit, so they accumulate. Audit your saves once in a while if your phone storage gets tight.
+      </div>
+    </div>
+  </section>
+
+  <section class="ph-section">
+    <div class="ph-container">
+      <h2 class="ph-section-title">Manual downloads</h2>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li><strong>Single episode:</strong> tap the download button on the episode detail page, or use the long-press context menu.</li>
+        <li><strong>Batch download:</strong> tap the edit/pencil icon on any list, select episodes, hit <em>Download</em> in the bottom toolbar.</li>
+        <li><strong>Status indicators</strong> on every list row tell you what's pending, in-flight, cached, and saved at a glance.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="ph-section ph-section-alt">
+    <div class="ph-container">
+      <h2 class="ph-section-title">Background refresh and notifications</h2>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li><strong>Background feed refresh</strong> picks up new episodes while the app is closed, on iOS's schedule (you don't need to do anything).</li>
+        <li>If a podcast has <strong>Cache All Episodes</strong> set to Cache or Save, the auto-download fires during background refresh too. Episodes are usually ready by the time you open the app.</li>
+        <li><strong>New-episode notifications</strong> are per-podcast. Toggle them in the per-podcast settings sheet — only get pings for shows you'd otherwise miss.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="ph-section">
+    <div class="ph-container">
+      <h2 class="ph-section-title">A worked example</h2>
+      <p class="ph-lede">Five subscriptions, optimized.</p>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li><strong>The Daily</strong> — Cache. Daily news; today's matters, yesterday's doesn't.</li>
+        <li><strong>Up First</strong> — Cache, Queue On Top. New episode auto-queues at the top, gets auto-downloaded for offline.</li>
+        <li><strong>The Joe Rogan Experience</strong> — Never. Long episodes; download manually only when you decide to listen.</li>
+        <li><strong>Hardcore History</strong> — Save. 4-hour episodes you binge slowly; never let them get evicted mid-listen.</li>
+        <li><strong>An interview podcast you binge slowly</strong> — Save. Old episodes get rediscovered weeks later.</li>
+      </ul>
+      <p>Set this up once, in five minutes, and the offline story runs itself.</p>
+    </div>
+  </section>
+
+  <%- include('../partials/footer') %>

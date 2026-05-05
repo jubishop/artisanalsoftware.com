@@ -1,0 +1,205 @@
+<%- include('partials/head') %>
+<body class="ph-body">
+  <%- include('partials/nav') %>
+
+  <section class="ph-hero">
+    <div class="ph-container ph-hero-grid">
+      <div class="ph-hero-copy">
+        <div class="ph-eyebrow">PodHaven for iOS</div>
+        <h1 class="ph-hero-title">The podcast app that learns what you actually want to hear.</h1>
+        <p class="ph-hero-sub">PodHaven pairs a thoughtful, customizable player with on-device recommendations that get smarter every time you tap a heart. No cloud tracking. No black-box algorithm. Just your taste, on your device.</p>
+        <div class="ph-cta-row">
+          <span class="ph-cta ph-cta-primary ph-cta-disabled" aria-disabled="true">App Store — coming soon</span>
+          <a class="ph-cta ph-cta-secondary" href="https://discord.gg/cMCJeuVY2f" target="_blank" rel="noopener">Join the Discord</a>
+          <a class="ph-cta ph-cta-ghost" href="https://github.com/jubishop/podhaven" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        <ul class="ph-hero-bullets">
+          <li>On-device recommendation engine that learns from your ratings</li>
+          <li>Player tunable down to the second — skip intervals, undo seek, chapters, AirPlay</li>
+          <li>Drag-to-reorder Up Next queue with auto-played top recommendation</li>
+          <li>OPML import / export, custom tags, share extension, widgets</li>
+        </ul>
+      </div>
+      <figure class="ph-hero-shot">
+        <img src="/public/images/podhaven/episode-detail.png" alt="PodHaven episode detail page showing rating, downloaded, and currently playing indicators." width="1320" height="2868" loading="eager">
+      </figure>
+    </div>
+  </section>
+
+  <section class="ph-section">
+    <div class="ph-container">
+      <h2 class="ph-section-title ph-section-title-center">Six features. One playlist.</h2>
+      <p class="ph-lede ph-lede-center">Tap any tile to dive in.</p>
+      <div class="ph-feature-grid">
+        <a class="ph-feature-tile" href="/podhaven/recommendations">
+          <div class="ph-feature-tile-eyebrow">Recommendations</div>
+          <h3>Recommendations that finally get it.</h3>
+          <p>Four-way ratings train an on-device model. The picks under your queue come with a reason and a confidence score.</p>
+          <span class="ph-feature-tile-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="ph-feature-tile" href="/podhaven/player">
+          <div class="ph-feature-tile-eyebrow">Player</div>
+          <h3>A player built for serious listeners.</h3>
+          <p>Skip intervals 5–90 seconds. Speed 0.8×–2.0×. Chapter navigation. Undo Seek. AirPlay. Lock-screen behavior of your choice.</p>
+          <span class="ph-feature-tile-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="ph-feature-tile" href="/podhaven/queue">
+          <div class="ph-feature-tile-eyebrow">Queue</div>
+          <h3>Your queue, exactly your way.</h3>
+          <p>Drag to reorder. Cap the length. Multi-select to download or rate a dozen at once. Auto-play the top recommendation when the queue empties.</p>
+          <span class="ph-feature-tile-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="ph-feature-tile" href="/podhaven/library">
+          <div class="ph-feature-tile-eyebrow">Library</div>
+          <h3>Discover everything. Subscribe to anything.</h3>
+          <p>iTunes search, Apple's trending charts across 18 genres, manual RSS, OPML in / out, and a share extension that subscribes from Safari.</p>
+          <span class="ph-feature-tile-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="ph-feature-tile" href="/podhaven/offline">
+          <div class="ph-feature-tile-eyebrow">Offline</div>
+          <h3>Listen anywhere. Even nowhere.</h3>
+          <p>Smart cache from 0.5 GB to 20 GB. Save important episodes so they're never evicted. Auto-download new episodes per podcast.</p>
+          <span class="ph-feature-tile-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="ph-feature-tile" href="/podhaven/customization">
+          <div class="ph-feature-tile-eyebrow">Customization</div>
+          <h3>Tuned to you, all the way down.</h3>
+          <p>Light / Dark / System. Time-remaining vs total. Shrink-on-scroll. Pick what your lock-screen Next button does. Tags. Widgets. Notifications.</p>
+          <span class="ph-feature-tile-arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="ph-section ph-section-alt">
+    <div class="ph-container ph-feature">
+      <div class="ph-feature-copy">
+        <div class="ph-eyebrow">The headliner</div>
+        <h2 class="ph-section-title">Recommendations that respect you.</h2>
+        <p class="ph-lede">Every podcast app claims smart recommendations. PodHaven actually delivers — by listening only to you.</p>
+        <p>Tap <strong>Love</strong>, <strong>Like</strong>, <strong>Dislike</strong>, or <strong>Not Interested</strong> on any episode. PodHaven builds a semantic profile of what you enjoy, entirely on your phone, and surfaces matching episodes right beneath your queue. When the queue runs dry, it can auto-play the top recommendation so the music never stops.</p>
+        <p><a class="ph-inline-link" href="/podhaven/recommendations">Read the full story →</a></p>
+      </div>
+      <figure class="ph-feature-shot">
+        <img src="/public/images/podhaven/up-next.png" alt="Up Next showing a queue of episodes followed by the on-device Recommended section." loading="lazy">
+      </figure>
+    </div>
+  </section>
+
+  <section class="ph-section">
+    <div class="ph-container ph-feature ph-feature-flip">
+      <div class="ph-feature-copy">
+        <div class="ph-eyebrow">Discover</div>
+        <h2 class="ph-section-title">Eighteen genres. One pull-to-refresh away.</h2>
+        <p class="ph-lede">Apple's curated charts in eighteen genres, the entire iTunes search index, and any RSS feed you can paste — all in the same tab.</p>
+        <p>Switch between grid and list views. Tap any podcast to see its full episode list with descriptions rendered the way the publisher wrote them.</p>
+        <p><a class="ph-inline-link" href="/podhaven/library">Tour the library →</a></p>
+      </div>
+      <figure class="ph-feature-shot">
+        <img src="/public/images/podhaven/search-trending.png" alt="Search tab with Top Podcasts category chips and a grid of trending podcast covers." loading="lazy">
+      </figure>
+    </div>
+  </section>
+
+  <section class="ph-section ph-section-alt">
+    <div class="ph-container ph-feature">
+      <div class="ph-feature-copy">
+        <div class="ph-eyebrow">Tuned to you</div>
+        <h2 class="ph-section-title">Settings that exist because someone wanted them.</h2>
+        <p class="ph-lede">Skip intervals, lock-screen Next behavior, shrink-on-scroll Play Bar, time-remaining vs total duration, custom tags — every toggle is a feature you'd notice missing.</p>
+        <p><a class="ph-inline-link" href="/podhaven/customization">See every knob →</a></p>
+      </div>
+      <figure class="ph-feature-shot">
+        <img src="/public/images/podhaven/settings-playback.png" alt="Settings showing playback rate, next-track behavior, skip intervals, undo seek, appearance mode, shrink playbar, time remaining." loading="lazy">
+      </figure>
+    </div>
+  </section>
+
+  <section class="ph-section ph-section-alt" id="guides">
+    <div class="ph-container">
+      <div class="ph-eyebrow">Guides</div>
+      <h2 class="ph-section-title">Practical guides for the parts that reward five minutes.</h2>
+      <p class="ph-lede">PodHaven has a dense settings page, a per-podcast settings sheet most users miss, and a recommendation engine that gets sharper the more you train it. These guides walk you through the corners worth knowing.</p>
+      <div class="ph-feature-grid">
+        <a class="ph-feature-tile" href="/podhaven/guides/getting-started">
+          <div class="ph-feature-tile-eyebrow">Start here</div>
+          <h3>Getting Started</h3>
+          <p>Five-minute first-launch checklist: import OPML, set your skip intervals, train the rec engine.</p>
+          <span class="ph-feature-tile-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="ph-feature-tile" href="/podhaven/guides/per-podcast-settings">
+          <div class="ph-feature-tile-eyebrow">Power feature</div>
+          <h3>Per-Podcast Settings</h3>
+          <p>Custom playback rate, auto-queue, cache strategy, freshness cadence — for each show you subscribe to.</p>
+          <span class="ph-feature-tile-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="ph-feature-tile" href="/podhaven/guides/training-recommendations">
+          <div class="ph-feature-tile-eyebrow">Tactics</div>
+          <h3>Train the Rec Engine</h3>
+          <p>How to rate strategically, when to use Not Interested, and how to course-correct when the picks drift.</p>
+          <span class="ph-feature-tile-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="ph-feature-tile" href="/podhaven/guides">
+          <div class="ph-feature-tile-eyebrow">Index</div>
+          <h3>All Guides</h3>
+          <p>Settings reference, queue tactics, offline strategy, sharing &amp; widgets — the full help section.</p>
+          <span class="ph-feature-tile-arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="ph-section ph-section-grid">
+    <div class="ph-container">
+      <h2 class="ph-section-title ph-section-title-center">And a hundred small things.</h2>
+      <p class="ph-lede ph-lede-center">The kind of details that don't fit on a feature list, but you'd notice the moment they were missing.</p>
+      <div class="ph-grid">
+        <div class="ph-card">
+          <h3>Smart partial-listen tracking</h3>
+          <p>PodHaven remembers exactly which chunks of an episode you've heard — not just a single playhead — so half-listened episodes feed recommendations honestly.</p>
+        </div>
+        <div class="ph-card">
+          <h3>Swipe &amp; long-press everything</h3>
+          <p>Swipe an episode to delete, save, or mark finished. Long-press anything to open a rich context menu with rating, queue, and download actions.</p>
+        </div>
+        <div class="ph-card">
+          <h3>Playback position sync</h3>
+          <p>Pause on your phone, resume on CarPlay, finish on AirPods. The playhead follows you everywhere.</p>
+        </div>
+        <div class="ph-card">
+          <h3>Rich notifications</h3>
+          <p>New-episode pushes carry artwork attachments and deep links straight back to the episode.</p>
+        </div>
+        <div class="ph-card">
+          <h3>Beautiful HTML descriptions</h3>
+          <p>Show notes render as the publisher wrote them — links, formatting, and clickable timestamps included.</p>
+        </div>
+        <div class="ph-card">
+          <h3>Privacy first</h3>
+          <p>The recommendation engine runs on-device. Listening history stays on your phone. No analytics SDKs riding along.</p>
+        </div>
+        <div class="ph-card">
+          <h3>Built on modern Swift</h3>
+          <p>SwiftUI, Swift 6 concurrency, Swift Testing, GRDB. A codebase that's a pleasure to live in — and you can read it on GitHub.</p>
+        </div>
+        <div class="ph-card">
+          <h3>Dynamic Type &amp; dark mode</h3>
+          <p>Full accessibility text scaling and a dark mode that's actually dark. Designed for late-night episodes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ph-section ph-cta-section">
+    <div class="ph-container ph-cta-block">
+      <h2 class="ph-section-title ph-section-title-center">Get notified when PodHaven launches.</h2>
+      <p class="ph-lede ph-lede-center">An App Store listing is on the way. The community Discord and GitHub repository are open today.</p>
+      <div class="ph-cta-row ph-cta-row-center">
+        <span class="ph-cta ph-cta-primary ph-cta-disabled" aria-disabled="true">App Store — coming soon</span>
+        <a class="ph-cta ph-cta-secondary" href="https://discord.gg/cMCJeuVY2f" target="_blank" rel="noopener">Join the Discord</a>
+        <a class="ph-cta ph-cta-ghost" href="https://github.com/jubishop/podhaven" target="_blank" rel="noopener">github.com/jubishop/podhaven</a>
+      </div>
+    </div>
+  </section>
+
+  <%- include('partials/footer') %>

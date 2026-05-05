@@ -1,0 +1,93 @@
+<%- include('partials/head') %>
+<body class="ph-body">
+  <%- include('partials/nav') %>
+
+  <section class="ph-page-hero">
+    <div class="ph-container">
+      <div class="ph-eyebrow">Feature deep-dive</div>
+      <h1 class="ph-page-title">Recommendations that respect you.</h1>
+      <p class="ph-page-lede">Four-way ratings train an on-device model. The picks under your queue come with a reason. The model never leaves your phone.</p>
+    </div>
+  </section>
+
+  <section class="ph-section">
+    <div class="ph-container ph-feature">
+      <div class="ph-feature-copy">
+        <h2>The four-button rating system.</h2>
+        <p>Most apps give you one knob: a star or a heart. PodHaven gives you four signals, because "didn't like it" and "actively don't want to hear that podcast again" are different things.</p>
+        <ul class="ph-checklist">
+          <li><strong>Love</strong> — strongly boost similar episodes</li>
+          <li><strong>Like</strong> — gently boost similar episodes</li>
+          <li><strong>Dislike</strong> — push similar episodes down</li>
+          <li><strong>Not Interested</strong> — hides this episode from your recommendations and lists. It's a <em>view</em> filter, not a training signal — it doesn't push the model in any direction</li>
+        </ul>
+        <p>Rate from the episode detail page, the long-press context menu on any list, or the expanded Play Bar — wherever you are when the verdict hits.</p>
+      </div>
+      <figure class="ph-feature-shot">
+        <img src="/public/images/podhaven/episode-rating.png" alt="Long-press context menu showing the four rating options: Love, Like, Dislike, and Not Interested." loading="lazy">
+      </figure>
+    </div>
+  </section>
+
+  <section class="ph-section ph-section-alt">
+    <div class="ph-container ph-feature ph-feature-flip">
+      <div class="ph-feature-copy">
+        <h2>An on-device semantic model.</h2>
+        <p>PodHaven pulls embeddings from each episode's title, show notes, and metadata, and learns what your ratings mean in that semantic space. The math runs on your device. The model never travels to a server. The data never gets sold.</p>
+        <p>That privacy isn't just principled — it's a feature. Recommendations stay tuned to <em>your</em> taste, not to whatever is trending in your demographic cohort.</p>
+      </div>
+      <figure class="ph-feature-shot">
+        <img src="/public/images/podhaven/episodes-list.png" alt="Episodes list with rated episode visible." loading="lazy">
+      </figure>
+    </div>
+  </section>
+
+  <section class="ph-section">
+    <div class="ph-container">
+      <h2 class="ph-section-title">Reasons-why you can trust.</h2>
+      <p class="ph-lede">Every recommendation comes with the reason it surfaced. No black box.</p>
+      <div class="ph-grid">
+        <div class="ph-card">
+          <h3>Similarity match</h3>
+          <p>"Because you loved <em>X</em>." The episode looks semantically close to one you rated up.</p>
+        </div>
+        <div class="ph-card">
+          <h3>Show fit</h3>
+          <p>"Because you've been into <em>The Daily</em>." A podcast you've engaged with positively.</p>
+        </div>
+        <div class="ph-card">
+          <h3>Freshness</h3>
+          <p>Boost for new episodes — calibrated to each show's natural cadence (daily / weekly / monthly / evergreen).</p>
+        </div>
+        <div class="ph-card">
+          <h3>Confidence score</h3>
+          <p>Each recommendation has a numeric score on its detail page so you can tell a high-confidence pick from a long shot.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ph-section ph-section-alt">
+    <div class="ph-container">
+      <h2 class="ph-section-title">Tunable, not just-trust-us.</h2>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li><strong>Show 0–20 recommendations</strong>, or turn them off entirely. Found in <em>Settings → Up Next</em>.</li>
+        <li><strong>Auto-play the top recommendation</strong> when your queue empties, so you never hit silence.</li>
+        <li><strong>Per-podcast freshness cadence</strong> — tell PodHaven a show is daily, weekly, monthly, or evergreen, so the rec engine knows whether episode age is a strong negative signal or no signal at all. <a class="ph-inline-link" href="/podhaven/guides/per-podcast-settings#freshness">Per-podcast settings guide →</a></li>
+        <li><strong>Partial-listen feedback.</strong> If you bail on an episode 3 minutes in, that's a signal. PodHaven tracks listening coverage as a bitmap and feeds it back into the model.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="ph-section ph-cta-section">
+    <div class="ph-container ph-cta-block">
+      <h2 class="ph-section-title ph-section-title-center">Train it on your taste.</h2>
+      <p class="ph-lede ph-lede-center">Rate ten or fifteen episodes and the queue starts knowing what to play next.</p>
+      <div class="ph-cta-row ph-cta-row-center">
+        <span class="ph-cta ph-cta-primary ph-cta-disabled" aria-disabled="true">App Store — coming soon</span>
+        <a class="ph-cta ph-cta-secondary" href="https://discord.gg/cMCJeuVY2f" target="_blank" rel="noopener">Join the Discord</a>
+      </div>
+    </div>
+  </section>
+
+  <%- include('partials/footer') %>

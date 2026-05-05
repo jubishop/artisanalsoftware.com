@@ -1,0 +1,72 @@
+<%- include('partials/head') %>
+<body class="ph-body">
+  <%- include('partials/nav') %>
+
+  <section class="ph-page-hero">
+    <div class="ph-container">
+      <div class="ph-eyebrow">Feature deep-dive</div>
+      <h1 class="ph-page-title">Listen anywhere. Even nowhere.</h1>
+      <p class="ph-page-lede">A smart cache from 0.5 GB to 20 GB. Save important episodes so they're never evicted. Auto-download new episodes per podcast.</p>
+    </div>
+  </section>
+
+  <section class="ph-section">
+    <div class="ph-container ph-feature">
+      <div class="ph-feature-copy">
+        <h2>One-tap downloads. Honest about storage.</h2>
+        <p>Download an episode from its detail page, the long-press context menu, or in batches from any list. Status indicators on every row tell you what's pending, what's in-flight, what's cached, and what's saved.</p>
+        <p>The icon column on the right side of the episode-detail view says it all: a green arrow when an episode is cached and ready to play offline.</p>
+      </div>
+      <figure class="ph-feature-shot">
+        <img src="/public/images/podhaven/episode-detail.png" alt="Episode detail with the green download indicator showing the episode is cached." loading="lazy">
+      </figure>
+    </div>
+  </section>
+
+  <section class="ph-section ph-section-alt">
+    <div class="ph-container">
+      <h2 class="ph-section-title">A cache that minds its own size.</h2>
+      <p class="ph-lede">Set a budget anywhere from <strong>0.5 GB to 20 GB</strong> in <em>Settings → Storage → Cache Size Limit</em>. PodHaven keeps your downloads under that line by quietly evicting the oldest unsaved episodes. Star anything you want to keep forever — saved episodes are immune to cleanup.</p>
+      <div class="ph-grid">
+        <div class="ph-card">
+          <h3>Cache</h3>
+          <p>Episodes you've downloaded for offline play. Eligible for auto-eviction when the cache is full.</p>
+        </div>
+        <div class="ph-card">
+          <h3>Save</h3>
+          <p>A "do not delete" mark. Save your favorites, the long ones for road trips, the ones you keep coming back to.</p>
+        </div>
+        <div class="ph-card">
+          <h3>Auto-eviction</h3>
+          <p>Oldest unsaved episodes go first. You'll never wake up to a "storage full" notification mid-podcast.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ph-section">
+    <div class="ph-container ph-feature ph-feature-flip">
+      <div class="ph-feature-copy">
+        <h2>Auto-download per podcast.</h2>
+        <p>For shows you always want ready, set <em>Cache All Episodes → Cache</em> (or <em>Save</em>) in the per-podcast settings sheet. New episodes download themselves the moment they hit the feed.</p>
+        <p>Pair it with <em>Cache → Save</em> on a podcast you binge slowly — every new episode is automatically pinned, never evicted.</p>
+        <p><a class="ph-inline-link" href="/podhaven/guides/per-podcast-settings#cache">Open the per-podcast settings guide →</a></p>
+      </div>
+      <figure class="ph-feature-shot">
+        <img src="/public/images/podhaven/podcast-settings.png" alt="The per-podcast settings sheet showing the Storage section with Cache All Episodes options: Never / Cache / Save." loading="lazy">
+      </figure>
+    </div>
+  </section>
+
+  <section class="ph-section ph-section-alt">
+    <div class="ph-container">
+      <h2 class="ph-section-title">Background refresh and notifications.</h2>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li><strong>Background feed refresh</strong> picks up new episodes while the app is in the background, on iOS's schedule.</li>
+        <li><strong>New-episode notifications</strong>, fully per-podcast configurable, with rich artwork attachments and deep links straight to the episode.</li>
+        <li><strong>Per-podcast notifications</strong> let you mute the talky daily show and get a ping for the weekly investigative one.</li>
+      </ul>
+    </div>
+  </section>
+
+  <%- include('partials/footer') %>

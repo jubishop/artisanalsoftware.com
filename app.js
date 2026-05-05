@@ -7,6 +7,7 @@ const rateLimit = require('express-rate-limit')
 const config = require('./config')
 const podcastController = require('./controllers/podcastController')
 const episodeController = require('./controllers/episodeController')
+const podhavenLandingController = require('./controllers/podhavenLandingController')
 const { validateFeedUrl, validateGuid } = require('./middleware/validateFeedUrl')
 
 const app = express()
@@ -23,19 +24,24 @@ process.on('uncaughtException', (error) => {
 })
 
 // Security headers (helmet)
+const cspDirectives = {
+  defaultSrc: ["'self'"],
+  styleSrc: ["'self'", "'unsafe-inline'"],
+  imgSrc: ["'self'", "https:", "data:"],
+  mediaSrc: ["'self'", "https:"],
+  fontSrc: ["'self'"],
+  scriptSrc: ["'self'"],
+  frameAncestors: ["'none'"]
+}
+if (!config.isProduction) {
+  // Disable HTTPS upgrade in development so http://localhost works for local viewing.
+  cspDirectives.upgradeInsecureRequests = null
+}
 app.use(helmet({
-  contentSecurityPolicy: {
-    directives: {
-      defaultSrc: ["'self'"],
-      styleSrc: ["'self'", "'unsafe-inline'"],
-      imgSrc: ["'self'", "https:", "data:"],
-      mediaSrc: ["'self'", "https:"],
-      fontSrc: ["'self'"],
-      scriptSrc: ["'self'"],
-      frameAncestors: ["'none'"]
-    }
-  },
-  crossOriginEmbedderPolicy: false // Allow embedding podcast images from external sources
+  contentSecurityPolicy: { directives: cspDirectives },
+  crossOriginEmbedderPolicy: false, // Allow embedding podcast images from external sources
+  // Skip HSTS in dev so http://localhost works without Safari forcing HTTPS upgrade.
+  strictTransportSecurity: config.isProduction ? undefined : false
 }))
 
 // Compression middleware
@@ -70,7 +76,24 @@ app.use((req, res, next) => {
   next()
 })
 
-// Routes with validation middleware
+// PodHaven marketing landing pages (no validation needed)
+app.get('/podhaven', podhavenLandingController.showLanding)
+app.get('/podhaven/recommendations', podhavenLandingController.showRecommendations)
+app.get('/podhaven/player', podhavenLandingController.showPlayer)
+app.get('/podhaven/queue', podhavenLandingController.showQueue)
+app.get('/podhaven/library', podhavenLandingController.showLibrary)
+app.get('/podhaven/offline', podhavenLandingController.showOffline)
+app.get('/podhaven/customization', podhavenLandingController.showCustomization)
+app.get('/podhaven/guides', podhavenLandingController.showGuidesIndex)
+app.get('/podhaven/guides/getting-started', podhavenLandingController.showGettingStarted)
+app.get('/podhaven/guides/settings', podhavenLandingController.showSettingsGuide)
+app.get('/podhaven/guides/per-podcast-settings', podhavenLandingController.showPerPodcastSettings)
+app.get('/podhaven/guides/training-recommendations', podhavenLandingController.showTrainingRecommendations)
+app.get('/podhaven/guides/listening-tactics', podhavenLandingController.showListeningTactics)
+app.get('/podhaven/guides/offline-storage', podhavenLandingController.showOfflineStorageGuide)
+app.get('/podhaven/guides/sharing-and-widgets', podhavenLandingController.showSharingAndWidgets)
+
+// Routes with validation middleware (RSS-driven deep-link target pages)
 app.get('/podhaven/podcast', validateFeedUrl, podcastController.showPodcast)
 app.get('/podhaven/episode', validateFeedUrl, validateGuid, episodeController.showEpisode)
 

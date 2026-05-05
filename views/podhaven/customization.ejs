@@ -1,0 +1,99 @@
+<%- include('partials/head') %>
+<body class="ph-body">
+  <%- include('partials/nav') %>
+
+  <section class="ph-page-hero">
+    <div class="ph-container">
+      <div class="ph-eyebrow">Feature deep-dive</div>
+      <h1 class="ph-page-title">Tuned to you, all the way down.</h1>
+      <p class="ph-page-lede">PodHaven's settings page is the thoughtful kind: every toggle exists because someone (probably you) wanted it.</p>
+    </div>
+  </section>
+
+  <section class="ph-section">
+    <div class="ph-container ph-feature">
+      <div class="ph-feature-copy">
+        <h2>Appearance: light, dark, or system.</h2>
+        <p>The app respects iOS's appearance setting by default, or you can pin it to <strong>Light</strong> or <strong>Dark</strong> regardless of the system. The dark mode is actually dark — designed for late-night listening on your phone in bed.</p>
+        <p>Full Dynamic Type support means PodHaven scales beautifully from extra-small to extra-large accessibility text sizes.</p>
+      </div>
+      <figure class="ph-feature-shot">
+        <img src="/public/images/podhaven/settings-playback.png" alt="Settings showing Appearance Mode segmented (System / Light / Dark), Shrink Playbar toggle, Show Time Remaining toggle." loading="lazy">
+      </figure>
+    </div>
+  </section>
+
+  <section class="ph-section ph-section-alt">
+    <div class="ph-container">
+      <h2 class="ph-section-title">A settings page made of choices, not noise.</h2>
+      <div class="ph-grid">
+        <div class="ph-card">
+          <h3>Default Playback Rate</h3>
+          <p>0.8× to 2.0× in 0.1× increments. Sets the speed for new episodes; per-podcast overrides also available.</p>
+        </div>
+        <div class="ph-card">
+          <h3>Next Track Behavior</h3>
+          <p>Pick what your lock-screen / car / AirPods <em>Next</em> button does: jump to the next episode, skip by your interval, or move to the next chapter (when available).</p>
+        </div>
+        <div class="ph-card">
+          <h3>Skip Forward / Backward</h3>
+          <p>Independent intervals (5–90 seconds) used everywhere — in-app, lock screen, hardware buttons.</p>
+        </div>
+        <div class="ph-card">
+          <h3>Enable Undo Seek</h3>
+          <p>When toggled on, dragging the progress bar briefly swaps the skip-back button for an Undo button.</p>
+        </div>
+        <div class="ph-card">
+          <h3>Shrink Playbar</h3>
+          <p>The Play Bar shrinks as you scroll down lists, returning the screen to your content. Scrolls back up — back it comes.</p>
+        </div>
+        <div class="ph-card">
+          <h3>Show Time Remaining</h3>
+          <p>Episode lists can show total duration or, for episodes you've started, time remaining. Helps you gauge whether you'll finish before your stop.</p>
+        </div>
+        <div class="ph-card">
+          <h3>Cache Size Limit</h3>
+          <p>0.5 GB – 20 GB. Auto-eviction when full, except saved episodes. <a class="ph-inline-link" href="/podhaven/offline">Offline guide →</a></p>
+        </div>
+        <div class="ph-card">
+          <h3>Up Next options</h3>
+          <p>Max queue length 10–100. Auto-play top recommendation. Show or hide the now-playing pin. Always-show podcast art vs. episode art.</p>
+        </div>
+        <div class="ph-card">
+          <h3>Recommended Episodes</h3>
+          <p>0–20 picks shown beneath your queue, or off entirely. Tune the rec engine to your visual taste, too. <a class="ph-inline-link" href="/podhaven/recommendations">Recs deep-dive →</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ph-section">
+    <div class="ph-container ph-feature ph-feature-flip">
+      <div class="ph-feature-copy">
+        <h2>Tags, OPML, and the tools to keep your library tidy.</h2>
+        <p>The <em>Organization</em> section in Settings is where the meta-tools live. Manage your custom tags. Import or export OPML. Send feedback. Read the GitHub link.</p>
+      </div>
+      <figure class="ph-feature-shot">
+        <img src="/public/images/podhaven/settings.png" alt="Top of Settings showing Importing/Exporting (OPML), Organization (Tags), and Playback sections." loading="lazy">
+      </figure>
+    </div>
+  </section>
+
+  <section class="ph-section ph-section-alt">
+    <div class="ph-container ph-feature">
+      <div class="ph-feature-copy">
+        <h2>Widgets and notifications.</h2>
+        <p>The Home Screen widget isn't just a status display — it's interactive. Skip-back, play / pause, skip-forward, and next-track are all wired to playback intents, so you can drive the player without ever opening the app.</p>
+        <ul class="ph-checklist ph-checklist-wide">
+          <li><strong>Now Playing widget</strong> with album art, episode title, podcast, publish date, duration, and four live playback controls.</li>
+          <li><strong>Per-podcast notifications</strong> for new episodes, with rich artwork attachments and deep links straight to the episode.</li>
+          <li><strong>Background refresh</strong> keeps everything fresh on iOS's own schedule.</li>
+        </ul>
+      </div>
+      <figure class="ph-feature-shot ph-feature-shot-landscape">
+        <img src="/public/images/podhaven/widget-now-playing.png" alt="The PodHaven Now Playing widget on the Home Screen, showing TNB Tech Minute on WSJ Tech News Briefing with publish date, duration, and four playback control buttons: skip-15, play, skip-30, and next track." loading="lazy">
+      </figure>
+    </div>
+  </section>
+
+  <%- include('partials/footer') %>

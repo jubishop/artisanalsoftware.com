@@ -1,0 +1,94 @@
+<%- include('../partials/head') %>
+<body class="ph-body">
+  <%- include('../partials/nav') %>
+
+  <section class="ph-page-hero">
+    <div class="ph-container">
+      <div class="ph-eyebrow">Guide · Tactics</div>
+      <h1 class="ph-page-title">Train the Recommendation Engine</h1>
+      <p class="ph-page-lede">PodHaven's rec engine is a model that learns from <em>your</em> ratings. The more deliberate the input, the sharper the output. Here's how to feed it well.</p>
+    </div>
+  </section>
+
+  <section class="ph-section">
+    <div class="ph-container">
+      <h2 class="ph-section-title">The four buttons, what they actually mean</h2>
+      <p class="ph-lede">Three of them train the model. The fourth doesn't.</p>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li><strong>Love</strong> — strong positive training signal. Boosts similar episodes hard. Use for episodes you'd recommend to a friend.</li>
+        <li><strong>Like</strong> — gentle positive training signal. Use for episodes you enjoyed but wouldn't necessarily flag as standout.</li>
+        <li><strong>Dislike</strong> — negative training signal. Pushes similar episodes down in future recommendations. Use for episodes that disappointed.</li>
+        <li><strong>Not Interested</strong> — a <em>view filter</em>, not a training signal. The episode disappears from your recommendations and lists, but the model doesn't learn anything from the rating. Use it to dismiss specific episodes you don't want to see; use <strong>Dislike</strong> if you want the rec engine to actually move away from a topic.</li>
+      </ul>
+      <div class="ph-tip">
+        <strong>Common mix-up:</strong> "Not Interested" doesn't tell the model to avoid this kind of thing — it just hides this one episode. If the rec engine keeps surfacing a topic you've moved past, you want <strong>Dislike</strong> on a few of those episodes. That's the rating that actually trains.
+      </div>
+    </div>
+  </section>
+
+  <section class="ph-section ph-section-alt">
+    <div class="ph-container">
+      <h2 class="ph-section-title">Where to rate from</h2>
+      <p class="ph-lede">Three places, all equivalent — pick the one that fits your hands at the moment.</p>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li><strong>Episode detail page.</strong> Tap the rating icon in the top toolbar. Gives you the full menu.</li>
+        <li><strong>Long-press context menu.</strong> Long-press any episode in any list (Up Next, Episodes, podcast detail, recommendations) for a context menu with all four ratings inline.</li>
+        <li><strong>Expanded Play Bar.</strong> While listening, tap the chevron-up to expand the Play Bar sheet. Rating is right there.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="ph-section">
+    <div class="ph-container">
+      <h2 class="ph-section-title">A 10-minute training routine</h2>
+      <p class="ph-lede">If you're brand-new to the rec engine, this is the fastest path to useful recommendations.</p>
+      <ol class="ph-steps">
+        <li>Open a podcast you know well. Scan the episode list.</li>
+        <li>Find five episodes you remember loving — long-press, tap <strong>Love</strong>.</li>
+        <li>Find three episodes that disappointed you — long-press, tap <strong>Dislike</strong>. (These are the negative training signals that actually shape recommendations.)</li>
+        <li>Repeat across 2–3 podcasts. Total: ~15 ratings.</li>
+        <li>Open Up Next. Scroll past your queue to the <strong>Recommended</strong> section. The picks should already feel like they know you.</li>
+      </ol>
+      <p>From there, just rate as you listen. Two or three ratings a day is plenty. Use <strong>Not Interested</strong> as a clean-up tool when you want a specific recommendation off your list — just remember it doesn't teach the model anything.</p>
+    </div>
+  </section>
+
+  <section class="ph-section ph-section-alt">
+    <div class="ph-container">
+      <h2 class="ph-section-title">Reading the reasons-why</h2>
+      <p>Every recommendation comes with the reason it surfaced. On the episode detail page, look just below the title for the <em>Recommended because…</em> line.</p>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li><strong>"Similar to <em>X</em>."</strong> The episode looks semantically close to one you rated up. The named episode is the strongest match.</li>
+        <li><strong>"From a podcast you enjoy."</strong> The show itself has accumulated positive ratings.</li>
+        <li><strong>"Recently published."</strong> A freshness boost — calibrated to the show's natural cadence.</li>
+        <li><strong>Confidence score.</strong> A numeric value on the episode detail page tells you how strongly this rec lands. Use it to triage: high-confidence picks are safe bets; low-confidence ones are experiments.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="ph-section">
+    <div class="ph-container">
+      <h2 class="ph-section-title">Course-correcting</h2>
+      <p>If the rec engine drifts somewhere you don't want it to go, fix it explicitly. The model responds quickly.</p>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li><strong>Wrong topic surfacing repeatedly?</strong> <strong>Dislike</strong> two or three of those episodes — that's the rating that trains the model. <em>Not Interested</em> only hides the specific episodes you tap it on; it won't move the engine away from the topic.</li>
+        <li><strong>Show recommended too aggressively?</strong> Adjust its <a class="ph-inline-link" href="/podhaven/guides/per-podcast-settings#freshness">Freshness Cadence</a> to a longer interval (Weekly → Monthly), or rate a few of its episodes as Dislike.</li>
+        <li><strong>Show neglected unfairly?</strong> Rate three or four episodes as Like / Love. The positive signal lifts the whole show.</li>
+        <li><strong>Old episodes for an evergreen show being skipped?</strong> Set its Freshness Cadence to <strong>Evergreen</strong> in per-podcast settings. Now episode age is no longer a negative.</li>
+        <li><strong>Just want a specific recommendation off your list?</strong> That's exactly what <strong>Not Interested</strong> is for. Hides this episode without retraining anything.</li>
+      </ul>
+      <div class="ph-tip">
+        <strong>Partial-listens count too.</strong> PodHaven tracks listening coverage as a bitmap — if you bail on an episode three minutes in, that's a soft negative signal even without a rating. So don't worry about "skewing the model" by abandoning a bad episode early.
+      </div>
+    </div>
+  </section>
+
+  <section class="ph-section ph-section-alt">
+    <div class="ph-container">
+      <h2 class="ph-section-title">A note on privacy</h2>
+      <p>Everything described here happens on your phone. The model lives on your device. Your ratings, your listening history, the embedding math — none of it leaves PodHaven. There's no server-side profile being built about you, no cohort the engine is comparing you to.</p>
+      <p>That's why "train it on your taste" is the operating instruction, not a marketing line.</p>
+    </div>
+  </section>
+
+  <%- include('../partials/footer') %>
