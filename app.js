@@ -13,6 +13,11 @@ const { validateFeedUrl, validateGuid } = require('./middleware/validateFeedUrl'
 
 const app = express()
 
+// Behind Cloudflare → Railway proxy. Trust the forwarded chain so req.ip
+// reflects the real client IP instead of the proxy's IP (otherwise the
+// rate limiter treats all traffic as coming from a single address).
+app.set('trust proxy', true)
+
 // Handle unhandled promise rejections
 process.on('unhandledRejection', (reason, promise) => {
   console.error('[ERROR] Unhandled Rejection at:', promise, 'reason:', reason)
@@ -48,13 +53,15 @@ app.use(helmet({
 // Compression middleware
 app.use(compression())
 
-// Rate limiting
+// Rate limiting. Prefer Cloudflare's CF-Connecting-IP (always the true client)
+// and fall back to req.ip, which is now correct thanks to `trust proxy`.
 const limiter = rateLimit({
   windowMs: config.rateLimitWindowMs,
   max: config.rateLimitMaxRequests,
   message: 'Too many requests from this IP, please try again later.',
   standardHeaders: true,
-  legacyHeaders: false
+  legacyHeaders: false,
+  keyGenerator: (req) => req.headers['cf-connecting-ip'] || req.ip
 })
 app.use(limiter)
 
