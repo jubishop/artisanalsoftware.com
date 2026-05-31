@@ -207,20 +207,9 @@ The server handles errors gracefully:
 
 ## Deployment
 
-The application is hosted on **Railway** with DNS managed by **Cloudflare**.
+Hosted on **Railway** with DNS in **Cloudflare**. Pushes to `main` auto-deploy.
 
-- Auto-deploys from `main` branch on GitHub
-- Domain: `artisanalsoftware.com` (and `www.artisanalsoftware.com`)
-
-**View logs:**
-```bash
-railway logs
-```
-
-**Manual deploy:**
-```bash
-railway up
-```
+For CLI setup, env vars, domains, and troubleshooting, see [AGENTS.md — Railway](AGENTS.md#railway).
 
 ## Browser Support
 
