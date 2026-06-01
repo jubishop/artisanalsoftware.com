@@ -11,14 +11,23 @@
   </section>
 
   <section class="ph-section">
-    <div class="ph-container">
-      <h2 class="ph-section-title">Sharing podcasts and episodes</h2>
-      <ul class="ph-checklist ph-checklist-wide">
-        <li><strong>Share an episode.</strong> Open the episode detail page, tap the share icon. Picks the standard iOS share sheet — Messages, Mail, Notes, anywhere.</li>
-        <li><strong>Share a podcast.</strong> Same idea from a podcast detail page.</li>
-        <li><strong>What gets shared</strong> is a clean web URL hosted at <em>artisanalsoftware.com/podhaven/podcast?…</em> or <em>/episode?…</em>. The page renders the podcast or episode for any browser, with a one-tap "Open in PodHaven" button for recipients who have the app.</li>
-      </ul>
-      <div class="ph-tip">Recipients without PodHaven still see the show — they just won't have the deep-link button. The page is human-readable HTML with the description, audio player, and a link to the publisher.</div>
+    <div class="ph-container ph-feature">
+      <div class="ph-feature-copy">
+        <h2 class="ph-section-title">Sharing podcasts and episodes</h2>
+        <ul class="ph-checklist ph-checklist-wide">
+          <li><strong>Share an episode.</strong> Open the episode detail page, tap the share icon. Picks the standard iOS share sheet — Messages, Mail, Notes, anywhere.</li>
+          <li><strong>Share a podcast.</strong> Same idea from a podcast detail page — artwork, description, tags, and a link to every episode.</li>
+          <li><strong>What gets shared</strong> is a clean web URL hosted at <em>artisanalsoftware.com/podhaven/podcast?…</em> or <em>/episode?…</em>. The page renders the podcast or episode for any browser, with a one-tap "Open in PodHaven" button for recipients who have the app.</li>
+        </ul>
+        <div class="ph-tip">Recipients without PodHaven still see the show — they just won't have the deep-link button. The page is human-readable HTML with the description, audio player, and a link to the publisher.</div>
+      </div>
+      <figure class="ph-feature-shot">
+        <div class="ph-phone">
+          <div class="ph-phone-screen">
+            <img src="/public/images/podhaven/podcast-detail.png" alt="A podcast detail page showing the show artwork, title, episode count, custom tags, a Visit Website link, and the description." loading="lazy">
+          </div>
+        </div>
+      </figure>
     </div>
   </section>
 
@@ -40,7 +49,7 @@
       <div class="ph-feature-copy">
         <h2>Home Screen widgets</h2>
         <p>PodHaven ships <strong>Home Screen widgets</strong> with App Intents — meaning the widgets aren't just dashboards, they're interactive. You can play, pause, skip, finish, or start a queued episode <em>without opening the app</em>.</p>
-        <p>The Now Playing widget shows your current episode's artwork, title, podcast name, publish date, and remaining duration. Its controls include skip-back by your interval, play / pause, skip-forward by your interval, and, in the medium widget, mark finished.</p>
+        <p>The Now Playing widget shows your current episode's artwork, title, podcast name, publish date, and total duration. Its controls include skip-back by your interval, play / pause, skip-forward by your interval, and, in the medium widget, mark finished.</p>
         <p>The Queue widget shows the next few episodes in Up Next. Tap an episode row to open it in PodHaven, or tap its play button to start that episode directly.</p>
         <ol class="ph-steps">
           <li>Long-press any empty area on your Home Screen.</li>
@@ -50,16 +59,29 @@
         </ol>
         <p>The widget refreshes when playback and queue state change. Tap the artwork or title area to launch into the episode in PodHaven; tap a control to act on playback in place.</p>
       </div>
-      <figure class="ph-feature-shot ph-feature-shot-landscape">
-        <img src="/public/images/podhaven/widget-now-playing.png" alt="The PodHaven Now Playing widget on the Home Screen, showing the current episode with artwork, title, podcast, date, duration, and interactive playback controls." loading="lazy">
+      <figure class="ph-feature-shot">
+        <div class="ph-phone">
+          <div class="ph-phone-screen">
+            <img src="/public/images/podhaven/widget-queue.png" alt="The Home Screen with the PodHaven Now Playing widget above the large Queue widget, which lists the next Up Next episodes with play buttons." loading="lazy">
+          </div>
+        </div>
       </figure>
     </div>
   </section>
 
   <section class="ph-section ph-section-alt">
-    <div class="ph-container">
-      <h2 class="ph-section-title">Lock Screen and Control Center</h2>
-      <p>PodHaven also includes a Lock Screen now-playing widget and Control Center controls for play / pause, skip-forward, and skip-backward. The skip controls use the same intervals you set in <em>Settings → Playback</em>, so your Home Screen, Control Center, lock screen, and in-app player all agree.</p>
+    <div class="ph-container ph-feature ph-feature-flip">
+      <div class="ph-feature-copy">
+        <h2 class="ph-section-title">Lock Screen and Control Center</h2>
+        <p>PodHaven also ships Lock Screen now-playing widgets — both the circular and rectangular accessory sizes — plus Control Center controls for play / pause, skip-forward, and skip-backward that you can add to Control Center or your Lock Screen control slots. The skip controls use the same intervals you set in <em>Settings → Playback</em>, so your Home Screen, Control Center, lock screen, and in-app player all agree.</p>
+      </div>
+      <figure class="ph-feature-shot">
+        <div class="ph-phone">
+          <div class="ph-phone-screen">
+            <img src="/public/images/podhaven/lock-screen-widgets.png" alt="The Lock Screen showing PodHaven's now-playing widget with the current episode title, podcast, and a play control." loading="lazy">
+          </div>
+        </div>
+      </figure>
     </div>
   </section>
 
@@ -100,7 +122,7 @@
   <section class="ph-section">
     <div class="ph-container">
       <h2 class="ph-section-title">Lock-screen, CarPlay, AirPods, Watch</h2>
-      <p>PodHaven uses iOS's long-form audio session, so the lock-screen, control center, CarPlay UI, AirPods squeeze, and Apple Watch playback controls all reflect the same playhead, the same artwork, and the same chapter info as the in-app player.</p>
+      <p>PodHaven uses iOS's long-form audio session and the system Now Playing info, so the lock screen, Control Center, CarPlay, AirPods squeeze, and Apple Watch playback controls all reflect the same playhead and the same artwork as the in-app player.</p>
       <p>Pause on your phone, resume on CarPlay, finish on AirPods. The position is synced through the system, so there's no "wait a sec, where was I?" beat.</p>
       <p>What your <strong>Next</strong> button does on those surfaces is configurable in <em>Settings → Playback → Next Track Behavior</em>: jump to the next episode, skip by your interval, or move to the next chapter (when chapters exist).</p>
     </div>

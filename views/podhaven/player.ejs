@@ -18,7 +18,11 @@
         <p>Optional: the bar can <strong>shrink as you scroll down</strong> a list, returning the screen real estate to the content. Re-opens with a scroll up.</p>
       </div>
       <figure class="ph-feature-shot">
-        <img src="/public/images/podhaven/playbar-expanded.png" alt="The expanded Play Bar sheet over Up Next, showing artwork, scrubber, skip-back / pause / skip-forward, playback speed, and chapter controls." loading="lazy">
+        <div class="ph-phone">
+          <div class="ph-phone-screen">
+            <img src="/public/images/podhaven/playbar-expanded.png" alt="The expanded Play Bar sheet over Up Next, showing artwork, scrubber, skip-back / pause / skip-forward, playback speed, and chapter controls." loading="lazy">
+          </div>
+        </div>
       </figure>
     </div>
   </section>
@@ -52,7 +56,11 @@
         <p>It's the kind of small affordance you'll forget you turned on, until the day you accidentally palm the screen on a bumpy commute.</p>
       </div>
       <figure class="ph-feature-shot">
-        <img src="/public/images/podhaven/settings-playback.png" alt="Settings showing Default Playback Rate, Next Track Behavior, Skip Forward 30s, Skip Backward 15s, and Enable Undo Seek toggle." loading="lazy">
+        <div class="ph-phone">
+          <div class="ph-phone-screen">
+            <img src="/public/images/podhaven/settings-playback.png" alt="Settings showing Default Playback Rate, Next Track Behavior, Skip Forward 30s, Skip Backward 15s, and Enable Undo Seek toggle." loading="lazy">
+          </div>
+        </div>
       </figure>
     </div>
   </section>
@@ -65,6 +73,7 @@
         <li><strong>Chapter navigation.</strong> Episodes with embedded chapters get prev/next chapter buttons in the expanded Play Bar.</li>
         <li><strong>Lock-screen Next behavior</strong> is configurable: jump to the next queued episode, skip by your interval, or move to the next chapter (when one exists). Pick the one your hands expect.</li>
         <li><strong>System audio output.</strong> Because PodHaven uses iOS long-form audio, playback works with the same AirPlay, Bluetooth, CarPlay, and route controls you use for other audio apps.</li>
+        <li><strong>Command Center scrubbing</strong> is on by default — drag the progress bar right from the lock screen, Control Center, or CarPlay. Prone to bumping it? Turn it off in Settings and the skip buttons and progress display stay put.</li>
         <li><strong>Per-podcast playback rate override.</strong> The fast-talker show can run at 1.0× while everything else stays at 1.4×. Set it from the per-podcast settings sheet. <a class="ph-inline-link" href="/podhaven/guides/per-podcast-settings#playback-rate">How to →</a></li>
       </ul>
     </div>
@@ -73,7 +82,7 @@
   <section class="ph-section">
     <div class="ph-container">
       <h2 class="ph-section-title">Lock-screen, CarPlay, and Watch in sync.</h2>
-      <p class="ph-lede">PodHaven uses iOS's long-form audio session, so the lock-screen, control center, CarPlay UI, AirPods squeeze, and Apple Watch playback controls all reflect the same playhead, the same artwork, and the same chapter info.</p>
+      <p class="ph-lede">PodHaven uses iOS's long-form audio session and the system Now Playing info, so the lock screen, Control Center, CarPlay, AirPods squeeze, and Apple Watch playback controls all reflect the same playhead and the same artwork.</p>
       <p>Pause on your phone, resume on CarPlay, finish on AirPods. The position is synced through the system, so there's no "wait a sec, where was I?" beat.</p>
     </div>
   </section>

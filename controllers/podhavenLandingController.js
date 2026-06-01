@@ -16,7 +16,7 @@ const pages = {
     activePage: 'recommendations',
     canonicalPath: '/podhaven/recommendations',
     pageTitle: 'PodHaven Recommendations — On-device, four-way ratings, reasons-why',
-    pageDescription: 'Four-way ratings train an on-device recommendation engine. Picks come with a reason and a confidence score. Nothing leaves your phone.',
+    pageDescription: 'Four-way ratings train an on-device recommendation engine. Picks come with a reason and a Recommendation score. Nothing leaves your phone.',
     ogImage: '/public/images/podhaven/episode-detail.png'
   },
   player: {
@@ -40,7 +40,7 @@ const pages = {
     activePage: 'library',
     canonicalPath: '/podhaven/library',
     pageTitle: 'PodHaven Library — iTunes search, OPML, share extension, custom tags',
-    pageDescription: 'iTunes search, Apple trending charts across 18 genres, manual RSS, OPML import / export, a share extension that subscribes from Safari, and custom tags.',
+    pageDescription: 'iTunes search, Apple Top Podcasts and seventeen genre charts, manual RSS, OPML import / export, a share extension that subscribes from Safari, and custom tags.',
     ogImage: '/public/images/podhaven/search-trending.png'
   },
   offline: {
@@ -96,7 +96,7 @@ const pages = {
     activePage: 'guides',
     canonicalPath: '/podhaven/guides/training-recommendations',
     pageTitle: 'PodHaven Guide — Train the Recommendation Engine',
-    pageDescription: 'How to rate strategically, when to use Not Interested, what the confidence score means, and how to course-correct.',
+    pageDescription: 'How to rate strategically, when to use Not Interested, what the Recommendation score means, and how to course-correct.',
     ogImage: '/public/images/podhaven/episode-detail.png'
   },
   listeningTactics: {
@@ -121,7 +121,7 @@ const pages = {
     canonicalPath: '/podhaven/guides/sharing-and-widgets',
     pageTitle: 'PodHaven Guide — Sharing, Widgets &amp; Notifications',
     pageDescription: 'Deep links, the share extension, Home Screen widgets with playback intents, and per-podcast notifications.',
-    ogImage: '/public/images/podhaven/podcast-detail.png'
+    ogImage: '/public/images/podhaven/podcast-episodes.png'
   }
 }
 

@@ -67,8 +67,11 @@
       <p>Default 15s is the common case ("wait, what did they just say?"). Drop to 10s if you find 15s overshooting.</p>
 
       <h3>Enable Undo Seek</h3>
-      <p>Toggle. When on, dragging the progress bar briefly transforms the skip-back button into an <strong>Undo</strong> button, letting you jump back to your previous position with a single tap.</p>
-      <div class="ph-tip">Recommended on. The interaction is invisible until you need it, and the day you palm-scrub the progress bar mid-commute, you'll be glad it's there.</div>
+      <p>Toggle, <strong>on by default.</strong> When on, dragging the progress bar briefly transforms the skip-back button into an <strong>Undo</strong> button, letting you jump back to your previous position with a single tap.</p>
+      <div class="ph-tip">Leave it on. The interaction is invisible until you need it, and the day you palm-scrub the progress bar mid-commute, you'll be glad it's there.</div>
+
+      <h3>Command Center Scrubbing</h3>
+      <p>Toggle, <strong>on by default.</strong> When on, you can drag the progress bar to seek from the lock screen, Control Center, and CarPlay. Turn it off to stop accidentally moving your position on those surfaces — the skip buttons and the progress display stay available either way.</p>
     </div>
   </section>
 
@@ -90,13 +93,34 @@
 
   <section class="ph-section">
     <div class="ph-container">
+      <h2 class="ph-section-title">Recommendations</h2>
+
+      <h3>Recommendation Diversity</h3>
+      <p>Segmented picker: <strong>Focused / Exploratory.</strong> Controls how much shared structure the engine strips out of podcast embeddings before scoring.</p>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li><strong>Focused</strong> — keeps recommendations close to the podcasts you've already rated.</li>
+        <li><strong>Exploratory</strong> (default) — additionally removes the components that encode a show's <em>format</em> (daily news vs. long-form narrative) rather than its topic, so picks can cross into shows you haven't engaged with yet.</li>
+      </ul>
+
+      <h3>Podcast Affinity</h3>
+      <p>Slider, <strong>0% to 50%</strong> (default 10%). How much weight a candidate's podcast affinity — how positively you've rated other episodes from the same show — gets versus the episode's own content similarity. The similarity term always takes the rest.</p>
+      <ul class="ph-checklist ph-checklist-wide">
+        <li><strong>Lower</strong> — favors pure content similarity; discovery leans on the episode itself.</li>
+        <li><strong>Higher</strong> — favors shows you've already engaged with.</li>
+      </ul>
+      <div class="ph-tip">These two knobs are global and take effect immediately — there's no rebuild to wait for. If recommendations feel too "samey," nudge Diversity to Exploratory and Podcast Affinity down. <a class="ph-inline-link" href="/podhaven/recommendations">Recs deep-dive →</a></div>
+    </div>
+  </section>
+
+  <section class="ph-section ph-section-alt">
+    <div class="ph-container">
       <h2 class="ph-section-title">Up Next</h2>
 
       <h3>Show Now Playing</h3>
       <p>Toggle. When on, the currently-playing episode pins to the top of the Up Next queue. When off, the queue shows only what's <em>next</em>.</p>
 
-      <h3>Always Show Podcast Art</h3>
-      <p>Toggle. When on, every row in Up Next shows the <strong>podcast</strong> artwork instead of episode-specific artwork. Useful when episode art is inconsistent across a show.</p>
+      <h3>Always Show Podcast Art in Queue</h3>
+      <p>Toggle, on by default. When on, every row in Up Next shows the <strong>podcast</strong> artwork instead of episode-specific artwork. Useful when episode art is inconsistent across a show.</p>
 
       <h3>Always Show Podcast Art for Now Playing</h3>
       <p>Toggle. Same idea, but specifically for the currently-playing episode — affects the Play Bar, the lock screen, the Now Playing widget, and the top of Up Next.</p>
@@ -122,7 +146,7 @@
     </div>
   </section>
 
-  <section class="ph-section ph-section-alt">
+  <section class="ph-section">
     <div class="ph-container">
       <h2 class="ph-section-title">Storage</h2>
 
@@ -137,7 +161,7 @@
     </div>
   </section>
 
-  <section class="ph-section">
+  <section class="ph-section ph-section-alt">
     <div class="ph-container">
       <h2 class="ph-section-title">Feedback &amp; GitHub</h2>
       <ul class="ph-checklist ph-checklist-wide">
@@ -147,7 +171,7 @@
     </div>
   </section>
 
-  <section class="ph-section ph-section-alt">
+  <section class="ph-section">
     <div class="ph-container">
       <h2 class="ph-section-title">A note on per-podcast settings</h2>
       <p>The Settings page covers your <strong>global defaults</strong>. For overrides that apply to one podcast — custom playback rate, auto-queue, cache strategy, freshness cadence, per-podcast notifications — see the per-podcast settings sheet, opened from any podcast's detail page.</p>

@@ -24,7 +24,11 @@
         <p>Rate from the episode detail page, the long-press context menu on any list, or the expanded Play Bar — wherever you are when the verdict hits.</p>
       </div>
       <figure class="ph-feature-shot">
-        <img src="/public/images/podhaven/episode-rating.png" alt="Long-press context menu showing the four rating options: Love, Like, Dislike, and Not Interested." loading="lazy">
+        <div class="ph-phone">
+          <div class="ph-phone-screen">
+            <img src="/public/images/podhaven/episode-rating.png" alt="Long-press context menu showing the four rating options: Love, Like, Dislike, and Not Interested." loading="lazy">
+          </div>
+        </div>
       </figure>
     </div>
   </section>
@@ -33,11 +37,15 @@
     <div class="ph-container ph-feature ph-feature-flip">
       <div class="ph-feature-copy">
         <h2>An on-device semantic model.</h2>
-        <p>PodHaven pulls embeddings from each episode's title, show notes, and metadata, and learns what your ratings mean in that semantic space. The math runs on your device. The model never travels to a server. The data never gets sold.</p>
-        <p>That privacy isn't just principled — it's a feature. Recommendations stay tuned to <em>your</em> taste, not to whatever is trending in your demographic cohort.</p>
+        <p>Using Apple's on-device NaturalLanguage embeddings, PodHaven turns each episode's title, show notes, and metadata into a vector, then learns what your ratings mean in that semantic space. The math runs on your device. The model never travels to a server. The data never gets sold.</p>
+        <p>That privacy isn't just principled — it's a feature. Recommendations stay tuned to <em>your</em> taste, not to whatever is trending in your demographic cohort — and every pick shows its work, with a Recommendation score and the reasons it surfaced.</p>
       </div>
       <figure class="ph-feature-shot">
-        <img src="/public/images/podhaven/episodes-list.png" alt="Episodes list with rated episode visible." loading="lazy">
+        <div class="ph-phone">
+          <div class="ph-phone-screen">
+            <img src="/public/images/podhaven/recommended-episode-detail.png" alt="A recommended episode's detail page showing a Recommendation score of 58% and the reason chips Similar to others, Preferred podcast, and Fresh." loading="lazy">
+          </div>
+        </div>
       </figure>
     </div>
   </section>
@@ -45,37 +53,48 @@
   <section class="ph-section">
     <div class="ph-container">
       <h2 class="ph-section-title">Reasons-why you can trust.</h2>
-      <p class="ph-lede">Every recommendation comes with the reason it surfaced. No black box.</p>
+      <p class="ph-lede">Open any recommended episode and its detail page shows a <strong>Recommendation score</strong> (as a percentage) and the tags that explain why it surfaced. No black box.</p>
       <div class="ph-grid">
         <div class="ph-card">
-          <h3>Similarity match</h3>
-          <p>"Because you loved <em>X</em>." The episode looks semantically close to one you rated up.</p>
+          <h3>Similar to others</h3>
+          <p>The episode sits close, in semantic space, to the ones you've rated up.</p>
         </div>
         <div class="ph-card">
-          <h3>Show fit</h3>
-          <p>"Because you've been into <em>The Daily</em>." A podcast you've engaged with positively.</p>
+          <h3>Preferred podcast</h3>
+          <p>You've rated other episodes from this show positively, so the whole show carries weight.</p>
         </div>
         <div class="ph-card">
-          <h3>Freshness</h3>
-          <p>Boost for new episodes — calibrated to each show's natural cadence (daily / weekly / monthly / evergreen).</p>
+          <h3>Fresh</h3>
+          <p>A recency boost, calibrated to each show's natural cadence (daily / weekly / monthly / evergreen).</p>
         </div>
         <div class="ph-card">
-          <h3>Confidence score</h3>
-          <p>Each recommendation has a numeric score on its detail page so you can tell a high-confidence pick from a long shot.</p>
+          <h3>Recommendation score</h3>
+          <p>One number at the top of the episode, shown as a percentage. The strongest pick reads near 100%, so you can tell a sure thing from a long shot.</p>
         </div>
       </div>
     </div>
   </section>
 
   <section class="ph-section ph-section-alt">
-    <div class="ph-container">
-      <h2 class="ph-section-title">Tunable, not just-trust-us.</h2>
-      <ul class="ph-checklist ph-checklist-wide">
-        <li><strong>Show 0–20 recommendations</strong>, or turn them off entirely. Found in <em>Settings → Up Next</em>.</li>
-        <li><strong>Auto-play the top recommendation</strong> when your queue empties, so you never hit silence.</li>
-        <li><strong>Per-podcast freshness cadence</strong> — set how fast the freshness boost decays for each show. Daily for news (boost gone within a day), Weekly / Monthly for typical shows, Evergreen for back-catalog content where age is irrelevant. <a class="ph-inline-link" href="/podhaven/guides/per-podcast-settings#freshness">Per-podcast settings guide →</a></li>
-        <li><strong>Partial-listen feedback.</strong> If you bail on an episode 3 minutes in, that's a signal. PodHaven tracks listening coverage as a bitmap and feeds it back into the model.</li>
-      </ul>
+    <div class="ph-container ph-feature">
+      <div class="ph-feature-copy">
+        <h2 class="ph-section-title">Tunable, not just-trust-us.</h2>
+        <ul class="ph-checklist ph-checklist-wide">
+          <li><strong>Recommendation Diversity</strong> — in <em>Settings → Recommendations</em>, choose <em>Focused</em> to keep picks close to shows you've already rated, or <em>Exploratory</em> (the default) to strip out the structure that encodes a show's <em>format</em> and open up topical discovery across shows you haven't tried.</li>
+          <li><strong>Podcast Affinity</strong> — a 0–50% dial (default 10%) for how much a show's track record counts versus an episode's own content similarity. Lower leans pure content; higher leans toward shows you already enjoy.</li>
+          <li><strong>Show 0–20 recommendations</strong>, or turn them off entirely. Found in <em>Settings → Up Next</em>.</li>
+          <li><strong>Auto-play the top recommendation</strong> when your queue empties, so you never hit silence.</li>
+          <li><strong>Per-podcast freshness cadence</strong> — set how fast the freshness boost decays for each show. Daily for news (boost gone within a day), Weekly / Monthly for typical shows, Evergreen for back-catalog content where age is irrelevant. <a class="ph-inline-link" href="/podhaven/guides/per-podcast-settings#freshness">Per-podcast settings guide →</a></li>
+          <li><strong>Partial-listen feedback.</strong> If you bail on an episode 3 minutes in, that's a signal. PodHaven tracks listening coverage as a bitmap and feeds it back into the model.</li>
+        </ul>
+      </div>
+      <figure class="ph-feature-shot">
+        <div class="ph-phone">
+          <div class="ph-phone-screen">
+            <img src="/public/images/podhaven/settings-recommendations.png" alt="Settings → Recommendations showing the Recommendation Diversity control (Focused / Exploratory) and the Podcast Affinity slider." loading="lazy">
+          </div>
+        </div>
+      </figure>
     </div>
   </section>
 
