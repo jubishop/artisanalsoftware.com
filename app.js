@@ -1,5 +1,7 @@
 const express = require('express')
 const path = require('path')
+const fs = require('fs')
+const crypto = require('crypto')
 const helmet = require('helmet')
 const compression = require('compression')
 const rateLimit = require('express-rate-limit')
@@ -12,6 +14,29 @@ const siteController = require('./controllers/siteController')
 const { validateFeedUrl, validateGuid } = require('./middleware/validateFeedUrl')
 
 const app = express()
+
+// Content-hash cache-busting for static assets. Templates call assetUrl() to
+// append ?v=<hash> to a /public path, so any content change yields a new URL.
+// Without this, returning visitors keep a stale cached CSS (the files are
+// served with a multi-hour cache-control) and pair it with freshly deployed
+// HTML — exactly what breaks the layout after a redesign. Hashes are computed
+// once per asset and memoized for the life of the process.
+const assetUrlCache = new Map()
+function assetUrl(publicPath) {
+  if (!assetUrlCache.has(publicPath)) {
+    let versioned = publicPath
+    try {
+      const abs = path.join(__dirname, publicPath.replace(/^\//, ''))
+      const hash = crypto.createHash('md5').update(fs.readFileSync(abs)).digest('hex').slice(0, 8)
+      versioned = `${publicPath}?v=${hash}`
+    } catch {
+      // Missing/unreadable asset → fall back to the unversioned path.
+    }
+    assetUrlCache.set(publicPath, versioned)
+  }
+  return assetUrlCache.get(publicPath)
+}
+app.locals.assetUrl = assetUrl
 
 // Behind Cloudflare → Railway proxy. Trust the forwarded chain so req.ip
 // reflects the real client IP instead of the proxy's IP (otherwise the
