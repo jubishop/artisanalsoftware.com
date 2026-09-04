@@ -1,62 +1,18 @@
 <%- include('../partials/head') %>
 <body class="ph-body">
-  <%- include('../partials/nav') %>
-
-  <section class="ph-page-hero">
-    <div class="ph-container">
-      <div class="ph-eyebrow">PodHaven Guides</div>
-      <h1 class="ph-page-title">Make PodHaven yours.</h1>
-      <p class="ph-page-lede">Practical guides for the parts of PodHaven that reward five minutes of attention. Set the app up once, then never think about it again.</p>
-    </div>
+<%- include('../partials/nav') %>
+<main id="main" class="ph-container">
+  <header class="ph-page-header">
+    <p class="ph-eyebrow">The PodHaven guide</p>
+    <h1>Find your way.<br>Make it your own.</h1>
+    <p class="ph-lead">A little guidance for your next listen. Get more from on-device recommendations, build useful Smart Lists and filters, and tune the settings to fit your life.</p>
+  </header>
+  <a class="ph-guide-start" href="/podhaven/guides/getting-started"><div><span class="ph-eyebrow">New here? Start with this.</span><h2>Your first good listen.</h2><p>Add your shows, set your pace, and meet the parts that make PodHaven personal.</p></div><span aria-hidden="true">↗</span></a>
+  <section class="ph-guide-grid" aria-label="Guides by topic">
+    <% for (const [key, guide] of Object.entries(guides)) { if (key === 'getting-started') continue; %>
+      <a href="/podhaven/guides/<%= key %>" class="ph-guide-card"><span class="ph-eyebrow"><%= guide.label %></span><h2><%= guide.title %></h2><p><%= guide.description %></p><span class="ph-card-arrow" aria-hidden="true">↗</span></a>
+    <% } %>
   </section>
-
-  <section class="ph-section">
-    <div class="ph-container">
-      <div class="ph-feature-grid">
-        <a class="ph-feature-tile" href="/podhaven/guides/getting-started">
-          <div class="ph-feature-tile-eyebrow">Start here</div>
-          <h3>Getting Started</h3>
-          <p>The five-minute first-launch checklist: import OPML, set your skip intervals, pick your defaults, opt-in to notifications.</p>
-          <span class="ph-feature-tile-arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="ph-feature-tile" href="/podhaven/guides/settings">
-          <div class="ph-feature-tile-eyebrow">Reference</div>
-          <h3>Every Setting Explained</h3>
-          <p>Walk-through of every toggle, slider, and picker on the Settings page — what it controls, when to change it.</p>
-          <span class="ph-feature-tile-arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="ph-feature-tile" href="/podhaven/guides/per-podcast-settings">
-          <div class="ph-feature-tile-eyebrow">Power feature</div>
-          <h3>Per-Podcast Settings</h3>
-          <p>Each podcast gets its own settings sheet: playback rate override, auto-queue, cache strategy, freshness cadence, notifications.</p>
-          <span class="ph-feature-tile-arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="ph-feature-tile" href="/podhaven/guides/training-recommendations">
-          <div class="ph-feature-tile-eyebrow">Tactics</div>
-          <h3>Train the Recommendation Engine</h3>
-          <p>How to rate strategically, when to use Not Interested, what the Recommendation score means, and how to course-correct.</p>
-          <span class="ph-feature-tile-arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="ph-feature-tile" href="/podhaven/guides/listening-tactics">
-          <div class="ph-feature-tile-eyebrow">Tactics</div>
-          <h3>Queue, Gestures &amp; Multi-Select</h3>
-          <p>Drag-to-reorder, swipe shortcuts, long-press context menus, edit mode, sorting — the muscle-memory layer.</p>
-          <span class="ph-feature-tile-arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="ph-feature-tile" href="/podhaven/guides/offline-storage">
-          <div class="ph-feature-tile-eyebrow">Strategy</div>
-          <h3>Offline &amp; Storage Strategy</h3>
-          <p>Cache vs Save mental model. Picking a cache budget. Auto-download per podcast. Why your storage stays sane.</p>
-          <span class="ph-feature-tile-arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="ph-feature-tile" href="/podhaven/guides/sharing-and-widgets">
-          <div class="ph-feature-tile-eyebrow">Extras</div>
-          <h3>Sharing, Widgets &amp; Notifications</h3>
-          <p>The share extension, deep links, Home Screen widgets with playback intents, and per-podcast new-episode pings.</p>
-          <span class="ph-feature-tile-arrow" aria-hidden="true">→</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <%- include('../partials/footer') %>
+  <section class="ph-guide-bottom"><p class="ph-eyebrow">A useful place to return to</p><h2>Looking for one particular control?</h2><p>The settings reference covers the everyday options, and the per-podcast guide explains how to give each show its own routine.</p><div class="ph-actions"><a class="ph-button" href="/podhaven/guides/settings">Settings reference</a><a class="ph-text-link" href="/podhaven/guides/per-podcast-settings">Per-podcast settings <span aria-hidden="true">↗</span></a></div></section>
+</main>
+<%- include('../partials/footer') %>

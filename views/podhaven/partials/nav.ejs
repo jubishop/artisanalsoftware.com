@@ -1,17 +1,15 @@
+<a class="ph-skip" href="#main">Skip to content</a>
 <header class="ph-nav">
   <div class="ph-container ph-nav-inner">
-    <a class="ph-nav-brand" href="/podhaven">
-      <img class="ph-nav-brand-mark" src="/public/images/podhaven/app-icon.png" alt="" width="28" height="28">
-      <span class="ph-nav-brand-text">PodHaven</span>
+    <a class="ph-brand" href="/podhaven" aria-label="PodHaven home">
+      <img src="<%= assetUrl('/public/images/podhaven/app-icon.png') %>" alt="" width="36" height="36">
+      <span>PodHaven<span class="ph-brand-note">by Artisanal Software</span></span>
     </a>
-    <nav class="ph-nav-links" aria-label="PodHaven pages">
-      <a href="/podhaven/recommendations" class="<%= activePage === 'recommendations' ? 'is-active' : '' %>">Recommendations</a>
-      <a href="/podhaven/player" class="<%= activePage === 'player' ? 'is-active' : '' %>">Player</a>
-      <a href="/podhaven/queue" class="<%= activePage === 'queue' ? 'is-active' : '' %>">Queue</a>
-      <a href="/podhaven/library" class="<%= activePage === 'library' ? 'is-active' : '' %>">Library</a>
-      <a href="/podhaven/offline" class="<%= activePage === 'offline' ? 'is-active' : '' %>">Offline</a>
-      <a href="/podhaven/customization" class="<%= activePage === 'customization' ? 'is-active' : '' %>">Customization</a>
-      <a href="/podhaven/guides" class="ph-nav-cta <%= activePage === 'guides' ? 'is-active' : '' %>">Guides</a>
+    <nav aria-label="Main navigation" class="ph-nav-links">
+      <a href="/podhaven/recommendations" <%- activePage === 'recommendations' ? 'aria-current="page"' : '' %>>Recommendations</a>
+      <a href="/podhaven/smart-lists" <%- activePage === 'smart-lists' ? 'aria-current="page"' : '' %>>Smart Lists</a>
+      <a href="/podhaven/customization" <%- activePage === 'customization' ? 'aria-current="page"' : '' %>>Customization</a>
+      <a href="/podhaven/guides" class="ph-nav-guide" <%- activePage === 'guides' ? 'aria-current="page"' : '' %>>The guide <span aria-hidden="true">↗</span></a>
     </nav>
   </div>
 </header>

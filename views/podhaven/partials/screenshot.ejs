@@ -1,0 +1,16 @@
+<% const shot = screenshots[id]; %>
+<figure class="ph-shot <%= typeof compact !== 'undefined' && compact ? 'ph-shot-compact' : '' %>" data-screenshot="<%= id %>">
+  <% if (shot.src) { %>
+    <a class="ph-shot-image" href="<%= assetUrl(shot.src) %>" aria-label="View full-size screenshot: <%= shot.title %>">
+      <img src="<%= assetUrl(shot.src) %>" alt="<%= shot.alt %>" width="1206" height="2622" loading="<%= typeof eager !== 'undefined' && eager ? 'eager' : 'lazy' %>" decoding="async">
+    </a>
+  <% } else { %>
+    <div class="ph-shot-placeholder">
+      <span class="ph-shot-placeholder-mark" aria-hidden="true">◌</span>
+      <span class="ph-eyebrow">A closer look</span>
+      <strong><%= shot.title %></strong>
+      <span>App screenshot to be added</span>
+    </div>
+  <% } %>
+  <figcaption><%= shot.title %></figcaption>
+</figure>

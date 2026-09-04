@@ -1,0 +1,33 @@
+<%- include('partials/head') %>
+<body class="ph-body">
+<%- include('partials/nav') %>
+<main id="main">
+  <div class="ph-container">
+    <nav class="ph-breadcrumb" aria-label="Breadcrumb"><a href="/podhaven">PodHaven</a><span aria-hidden="true">/</span><% if (activePage === 'guides') { %><a href="/podhaven/guides">Guides</a><span aria-hidden="true">/</span><% } %><span aria-current="page"><%= page.label %></span></nav>
+    <header class="ph-page-header">
+      <p class="ph-eyebrow"><%= activePage === 'guides' ? 'The PodHaven guide' : 'Meet your next podcast app' %> / <%= page.label %></p>
+      <h1><%= page.title %></h1>
+      <p class="ph-lead"><%= page.intro %></p>
+      <% if (page.guide) { %><a class="ph-text-link" href="/podhaven/guides/<%= page.guide %>">Open the practical guide <span aria-hidden="true">↗</span></a><% } %>
+    </header>
+    <div class="ph-detail-layout">
+      <aside class="ph-toc">
+        <nav aria-label="On this page"><p class="ph-eyebrow">On this page</p><ol><% for (const section of page.sections) { %><li><a href="#<%= section.id %>"><%= section.title %></a></li><% } %></ol></nav>
+        <a href="/podhaven/guides" class="ph-text-link">Browse all guides <span aria-hidden="true">↗</span></a>
+      </aside>
+      <div class="ph-article">
+        <% for (const section of page.sections) { %>
+          <section class="ph-article-section" id="<%= section.id %>" aria-labelledby="heading-<%= section.id %>">
+            <h2 id="heading-<%= section.id %>"><%= section.title %></h2>
+            <div class="ph-prose"><%- section.body %></div>
+            <% if (section.screenshots.length) { %>
+              <div class="ph-gallery ph-gallery-<%= section.screenshots.length %>"><% for (const id of section.screenshots) { %><%- include('partials/screenshot', { id }) %><% } %></div>
+            <% } %>
+          </section>
+        <% } %>
+        <div class="ph-article-end"><span class="ph-eyebrow">Keep exploring</span><h2>There’s more to make your own.</h2><div class="ph-actions"><a class="ph-button" href="/podhaven/guides">Browse the guides <span aria-hidden="true">↗</span></a><a class="ph-text-link" href="/podhaven#features">See every feature</a></div></div>
+      </div>
+    </div>
+  </div>
+</main>
+<%- include('partials/footer') %>

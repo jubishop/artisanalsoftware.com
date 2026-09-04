@@ -1,39 +1,15 @@
 <footer class="ph-footer">
-  <div class="ph-container ph-footer-inner">
-    <div class="ph-footer-cta">
-      <span class="ph-pill ph-pill-soon">App Store — coming soon</span>
-      <a class="ph-pill ph-pill-discord" href="https://discord.gg/cMCJeuVY2f" target="_blank" rel="noopener">Join the Discord</a>
-      <a class="ph-pill ph-pill-github" href="https://github.com/jubishop/podhaven" target="_blank" rel="noopener">GitHub</a>
+  <div class="ph-container">
+    <div class="ph-footer-top">
+      <div><a class="ph-brand" href="/podhaven">PodHaven</a><p>A little more room for a good listen.</p></div>
+      <div class="ph-actions"><span class="ph-status">App Store · coming soon</span><a href="https://discord.gg/cMCJeuVY2f" class="ph-button">Join the Discord <span aria-hidden="true">↗</span></a></div>
     </div>
-    <div class="ph-footer-cols">
-      <div class="ph-footer-col">
-        <h4>Features</h4>
-        <a href="/podhaven/recommendations">Recommendations</a>
-        <a href="/podhaven/player">Player</a>
-        <a href="/podhaven/queue">Queue</a>
-        <a href="/podhaven/library">Library</a>
-        <a href="/podhaven/offline">Offline</a>
-        <a href="/podhaven/customization">Customization</a>
-      </div>
-      <div class="ph-footer-col">
-        <h4>Guides</h4>
-        <a href="/podhaven/guides">All Guides</a>
-        <a href="/podhaven/guides/getting-started">Getting Started</a>
-        <a href="/podhaven/guides/settings">Every Setting Explained</a>
-        <a href="/podhaven/guides/per-podcast-settings">Per-Podcast Settings</a>
-        <a href="/podhaven/guides/training-recommendations">Train the Rec Engine</a>
-        <a href="/podhaven/guides/listening-tactics">Queue &amp; Gestures</a>
-        <a href="/podhaven/guides/offline-storage">Offline &amp; Storage</a>
-        <a href="/podhaven/guides/sharing-and-widgets">Sharing &amp; Widgets</a>
-      </div>
-      <div class="ph-footer-col">
-        <h4>Project</h4>
-        <a href="https://github.com/jubishop/podhaven" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://discord.gg/cMCJeuVY2f" target="_blank" rel="noopener">Discord</a>
-        <a href="https://artisanalsoftware.com">Artisanal Software</a>
-      </div>
+    <div class="ph-footer-columns">
+      <nav aria-label="All features"><h2>Explore the app</h2><% for (const [key, feature] of Object.entries(features)) { %><a href="/podhaven/<%= key %>"><%= feature.label %></a><% } %></nav>
+      <nav aria-label="All guides"><h2>The listening guide</h2><a href="/podhaven/guides">All guides</a><% for (const [key, guide] of Object.entries(guides)) { %><a href="/podhaven/guides/<%= key %>"><%= guide.label %></a><% } %></nav>
+      <nav aria-label="Project links"><h2>Made with care</h2><a href="https://artisanalsoftware.com">Artisanal Software</a><a href="https://github.com/jubishop/podhaven">Source on GitHub</a><a href="https://discord.gg/cMCJeuVY2f">Community on Discord</a><p>Questions or a problem?<br>Use Send Feedback in the app.</p></nav>
     </div>
-    <p class="ph-footer-meta">PodHaven is a project of <a href="https://artisanalsoftware.com">Artisanal Software</a>. © <%= new Date().getFullYear() %> Justin Bishop. Source-available license.</p>
+    <p class="ph-colophon">© <%= new Date().getFullYear() %> Justin Bishop · Source-available software · Made for people who love podcasts.</p>
   </div>
 </footer>
 </body>

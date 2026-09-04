@@ -14,6 +14,26 @@ A Node.js Express server that renders server-side HTML pages for podcast content
 
 ## Quick Start
 
+### PodHaven website content
+
+The `/podhaven` website includes eight feature pages and nine guides. Feature
+copy is in `content/podhaven-features.js`; guide copy is in
+`content/podhaven-guides.js`. They share the `views/podhaven/detail.ejs` template.
+Existing feature and guide URLs remain supported.
+
+Screenshot captions, alt text, and capture instructions live in
+`content/podhaven-screenshots.js`. New captures go in
+`public/images/podhaven/screenshots/<id>.png`. Restart the server after adding
+captures or changing content modules. Existing screenshots serve as fallbacks;
+missing captures use labeled placeholders without broken image requests.
+
+- [Feature accounting and source evidence](spec/podhaven-feature-audit.md)
+- [Screenshot inventory and capture instructions](spec/podhaven-screenshots.md)
+
+PodHaven uses `public/css/podhaven.css`. The studio homepage retains its separate
+`public/css/podhavenLanding.css` styles. Both are server-rendered without client-side
+JavaScript.
+
 ### Installation
 
 ```bash
