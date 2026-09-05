@@ -6,10 +6,10 @@ const guides = require('../content/podhaven-guides')
 const screenshotInventory = require('../content/podhaven-screenshots')
 
 const screenshots = Object.fromEntries(screenshotInventory.map(shot => {
-  const replacement = `/public/images/podhaven/screenshots/${shot.id}.png`
-  const src = fs.existsSync(path.join(__dirname, '..', replacement))
-    ? replacement
-    : shot.current ? `/public/images/podhaven/${shot.current}` : null
+  const replacement = ['png', 'jpeg', 'jpg']
+    .map(extension => `/public/images/podhaven/screenshots/${shot.id}.${extension}`)
+    .find(candidate => fs.existsSync(path.join(__dirname, '..', candidate)))
+  const src = replacement || (shot.current ? `/public/images/podhaven/${shot.current}` : null)
   return [shot.id, { ...shot, src }]
 }))
 

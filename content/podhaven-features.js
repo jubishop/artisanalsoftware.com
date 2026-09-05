@@ -43,12 +43,12 @@ module.exports = {
       {
         id: 'filters', title: 'Get specific about what belongs.',
         body: `<ul><li><strong>Episode and podcast text:</strong> include or exclude a phrase in titles, descriptions, or either.</li><li><strong>Transcription:</strong> match a phrase in stored transcript text.</li><li><strong>Listening and queue state:</strong> started, unstarted, finished, unfinished, queued, unqueued, or previously queued.</li><li><strong>Storage and ratings:</strong> cached, uncached, saved, loved, liked, disliked, not interested, rated, or unrated.</li><li><strong>Transcript availability:</strong> transcribed or not transcribed.</li><li><strong>Tags:</strong> a particular tag, no particular tag, any tag, or no tags.</li><li><strong>Time:</strong> a duration range, published within a number of days, or older than a number of days.</li></ul><p>Sort a list by publication date, date added, duration, recently finished, recently queued, or Recommendation. Each list remembers its sort choice and can use podcast artwork throughout.</p>`,
-        screenshots: ['transcript-filter']
+        screenshots: []
       },
       {
         id: 'tags', title: 'Tag a whole show. Or just one great episode.',
         body: `<p>Create custom tags with your own names and icons in <strong>Settings → Organization → Tags</strong>. Apply them to podcasts, individual episodes, or a selection of items.</p><p>A Smart List’s tag condition matches tags on either the episode or its podcast. Tag a show “History” once, then tag a particular episode “Revisit” when it deserves another listen.</p><p>The tag manager shows usage counts and supports renaming, changing icons, and deleting tags. You can also filter your Podcasts library by tag and find untagged shows.</p>`,
-        screenshots: ['episode-tags', 'tag-manager']
+        screenshots: ['podcast-tags', 'tag-manager']
       }
     ]
   },
@@ -71,8 +71,8 @@ module.exports = {
       },
       {
         id: 'widgets', title: 'Keep the next listen in reach.',
-        body: `<p>Choose <strong>Now Playing</strong>, <strong>Up Next</strong>, or the combined <strong>Now Playing &amp; Up Next</strong> Home Screen widget. Use the available playback actions and episode links without first navigating through the library.</p><p>Add the PodHaven Now Playing widget to your Lock Screen. In Control Center, add dedicated <strong>Play/Pause</strong>, <strong>Skip Backward</strong>, and <strong>Skip Forward</strong> controls.</p>`,
-        screenshots: ['widgets', 'lock-screen', 'control-center']
+        body: `<p>Choose <strong>Now Playing</strong>, <strong>Up Next</strong>, or the combined <strong>Now Playing &amp; Up Next</strong> Home Screen widget. Use the available playback actions and episode links without first navigating through the library.</p><p>Control playback from the Lock Screen with system Now Playing. You can also add PodHaven’s own Now Playing widget. In Control Center, add dedicated <strong>Play/Pause</strong>, <strong>Skip Backward</strong>, and <strong>Skip Forward</strong> controls.</p>`,
+        screenshots: ['widgets', 'lock-screen']
       },
       {
         id: 'notifications', title: 'Hear about the shows that matter.',
@@ -95,7 +95,7 @@ module.exports = {
       },
       {
         id: 'pace', title: 'Find your pace. Find your place.',
-        body: `<p>Set playback speed from <strong>0.8× to 2.0×</strong>, in 0.1× steps. Choose a global default, override it for a podcast, or adjust an individual episode.</p><p>Forward and backward skip intervals are independent: <strong>5, 10, 15, 30, 45, 60, 75, or 90 seconds</strong>. Set a short rewind to hear a sentence again and a longer forward skip when you need it.</p><p><strong>Undo Seek</strong> lets you return after moving the progress bar. The player also offers a return to your furthest played position after you go back. Embedded chapters add previous and next chapter controls when available.</p><p>Episode descriptions retain the publisher’s formatting and links. Recognized timestamps in show notes let you jump to the referenced moment.</p>`,
+        body: `<p>Set playback speed from <strong>0.8× to 2.0×</strong>, in 0.1× steps. Choose a global default, override it for a podcast, or adjust an individual episode.</p><p>Forward and backward skip intervals are independent: <strong>5, 10, 15, 30, 45, 60, 75, or 90 seconds</strong>. Set a short rewind to hear a sentence again and a longer forward skip when you need it.</p><p><strong>Undo Seek</strong> lets you return after moving the progress bar. The player also offers a return to your furthest played position after you go back. Timestamps in the episode description provide chapter markers and previous and next chapter controls.</p><p>Episode descriptions retain the publisher’s formatting and links. Recognized timestamps in show notes let you jump to the referenced moment.</p>`,
         screenshots: ['chapter-player']
       },
       {
@@ -149,7 +149,7 @@ module.exports = {
       {
         id: 'opml', title: 'Bring your subscriptions. Take them with you.',
         body: `<p><strong>OPML</strong> is a file format for a list of podcast feeds. If your previous app exports OPML, import that file in <strong>Settings → Importing / Exporting → OPML</strong>.</p><p>Review the import’s waiting, downloading, finished, and failed items. Export your subscriptions from the same screen whenever you need a portable copy.</p><p>Share a podcast or episode with a link. Friends can open its web page without PodHaven, and use <strong>Open in PodHaven</strong> if they have the app. While an episode is playing, choose to share from the beginning or from the current playback time.</p>`,
-        screenshots: ['opml', 'timed-share']
+        screenshots: ['timed-share']
       }
     ]
   },
@@ -192,17 +192,17 @@ module.exports = {
       {
         id: 'sources', title: 'Use the show’s transcript. Or create your own.',
         body: `<p>PodHaven can import supported timed transcripts supplied through a podcast’s feed. When you request a transcript, it tries a suitable publisher version before processing the audio on device.</p><p>On supported devices, Apple’s speech recognition creates transcripts locally from downloaded audio. The current on-device transcription language is <strong>English (US)</strong>. The speech model and episode audio may need to download first.</p><p>If you want a local version of a publisher transcript, choose <strong>Replace with On-Device Transcription</strong>. The publisher text remains readable while the replacement is in progress and is replaced only after the new transcript succeeds.</p>`,
-        screenshots: ['publisher-transcript']
+        screenshots: []
       },
       {
         id: 'queue', title: 'A queue for the reading ahead.',
         body: `<p>Request transcription from episode details, the player, context menus, or a batch of selected episodes. In <strong>Settings → Transcription → Transcription Queue</strong>, see the active episode and the waiting list.</p><p>Drag waiting episodes into order, move them to the top or bottom, remove them, or use <strong>Transcribe Now</strong> to give one priority. Pause and resume without losing saved progress. Use <strong>Discard Progress</strong> when you want a fresh start.</p><p>Choose a queue limit from 10–100 episodes. Transcription can continue in the background when iOS permits it. Saved checkpoints let interrupted work resume; keeping PodHaven open lets foreground processing continue.</p>`,
-        screenshots: ['transcription-queue', 'transcript-paused']
+        screenshots: []
       },
       {
         id: 'automatic', title: 'Give your regular shows a reading routine.',
         body: `<p>Enable <strong>Transcribe New Episodes</strong> in a podcast’s settings to queue episodes discovered during later refreshes. It does not transcribe the existing back catalog or the episodes imported when you first subscribe.</p><p>Automatic requests share the transcription queue’s limit. Enable this for selected shows so the queue has room; requests rejected because the queue is full are not automatically retried.</p><p>Use <a href="/podhaven/smart-lists">Smart Lists</a> to collect transcribed episodes or find an exact phrase in stored transcript text. This filtering works across transcripts already in your library.</p>`,
-        screenshots: ['transcript-filter']
+        screenshots: []
       }
     ]
   }

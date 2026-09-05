@@ -7,7 +7,7 @@ module.exports = {
       {
         id: 'shows', title: '1. Bring in a few shows.',
         body: `<p>Open <strong>Search</strong>, enter a show name or browse a chart, and open a result to subscribe. Use manual feed entry if you already have an RSS URL.</p><p>Moving from another app that exports OPML? Open <strong>Settings → Importing / Exporting → OPML → Import OPML</strong>, choose your file, and review the import results. OPML transfers a subscription list; it is not a full backup of listening progress, ratings, or downloads.</p>`,
-        screenshots: ['discovery', 'opml']
+        screenshots: ['discovery']
       },
       {
         id: 'play', title: '2. Pick an episode and make yourself comfortable.',
@@ -44,7 +44,7 @@ module.exports = {
       {
         id: 'tune', title: 'Adjust how familiar the picks feel.',
         body: `<p>Open <strong>Settings → Recommendations</strong>.</p><ul><li><strong>Focused:</strong> keeps recommendations closer to shows you have already rated.</li><li><strong>Exploratory:</strong> the default; helps surface related topics across different podcast formats.</li><li><strong>Podcast Affinity:</strong> increase it to give a show’s rating history more weight, or lower it to favor episode content. The range is 0–50%.</li></ul><p>Open a podcast’s settings to adjust <strong>Freshness</strong>. Auto detects its publishing cadence. Hourly, Twice Daily, Daily, Twice Weekly, Weekly, and Monthly apply progressively slower age penalties. Evergreen removes the age penalty.</p><p>Freshness changes how age affects a score. Use ratings and affinity to change how much the engine favors a show or subject.</p>`,
-        screenshots: ['recommendation-settings', 'podcast-settings']
+        screenshots: ['recommendation-settings', 'podcast-settings-lower']
       },
       {
         id: 'find', title: 'Use recommendations across the app.',
@@ -71,12 +71,12 @@ module.exports = {
       {
         id: 'tags', title: 'Organize at the show or episode level.',
         body: `<p>Create a tag in <strong>Settings → Organization → Tags</strong>, choose its name and icon, then apply it from a podcast or episode’s tag menu. Selection mode lets you tag several items together.</p><p>A Smart List tag condition matches either an episode’s own tag or a tag on its podcast. Use a show-level tag for a broad subject and episode tags for specific follow-ups.</p><p>The tag manager supports editing and removal. Deleting a tag also removes filter conditions that refer to it, which can broaden the affected Smart Lists. Review the deletion message before confirming.</p>`,
-        screenshots: ['episode-tags', 'tag-manager']
+        screenshots: ['podcast-tags', 'tag-manager']
       },
       {
         id: 'transcripts', title: 'Find a phrase in what was said.',
         body: `<p>Add <strong>Episode Transcription → contains</strong>, then enter a phrase such as “climate change.” Text conditions match words together as a phrase. They are not general topic or semantic searches.</p><p>The filter uses transcripts already stored in your library. It does not start transcription. Use <strong>State → Transcribed</strong> with an exclusion condition if you want only transcripts that do not contain a phrase; otherwise episodes without transcripts can also meet that exclusion.</p><p>For ordinary episode and podcast text, choose Title, Description, or Title or Description. These use phrase matching too.</p>`,
-        screenshots: ['transcript-filter']
+        screenshots: []
       },
       {
         id: 'presentation', title: 'Choose how each list feels.',
@@ -98,7 +98,7 @@ module.exports = {
       {
         id: 'transcription', title: 'Transcription.',
         body: `<dl><dt>Transcription Queue</dt><dd>See active work and reorder, prioritize, or remove waiting episodes.</dd><dt>Max Queue Length</dt><dd>10–100 episodes including active work. Lowering the limit keeps existing requests.</dd></dl><p>These controls appear on supported devices. Per-show automatic transcription is in Podcast Settings. <a href="/podhaven/guides/transcripts">Read the transcription guide</a>.</p>`,
-        screenshots: ['transcription-queue']
+        screenshots: []
       },
       {
         id: 'gestures', title: 'Gestures.',
@@ -145,12 +145,12 @@ module.exports = {
       {
         id: 'storage', title: 'Downloads and transcripts.',
         body: `<dl><dt>Cache All Episodes → Never</dt><dd>Download audio manually.</dd><dt>Cache All Episodes → Cache</dt><dd>Download new episodes, with normal automatic cache cleanup.</dd><dt>Cache All Episodes → Save</dt><dd>Download new episodes and protect them from automatic cleanup.</dd><dt>Transcribe New Episodes</dt><dd>On supported devices, automatically queue episodes discovered during later refreshes for transcription.</dd></dl><p>Automatic transcription does not backfill existing episodes or the initial subscription import. A full transcription queue can reject new automatic work without retrying it. Enable the option for a manageable set of shows.</p>`,
-        screenshots: ['transcription-queue']
+        screenshots: []
       },
       {
         id: 'freshness', title: 'Freshness and notifications.',
         body: `<p><strong>Freshness → Auto</strong> infers the publishing cadence and shows the resolved choice. Manual choices are Hourly, Twice Daily, Daily, Twice Weekly, Weekly, Monthly, and Evergreen.</p><p>Faster cadences reduce the recommendation scores of older episodes sooner. Evergreen removes the age penalty. It does not make a show more interesting to the model; ratings and Podcast Affinity control that part.</p><p><strong>Notify New Episodes</strong> enables alerts for this show. If notification access is missing or denied, use the permission or system-settings action shown beneath it. Discovery and delivery depend on feed refresh and iOS background scheduling.</p>`,
-        screenshots: []
+        screenshots: ['podcast-settings-lower']
       }
     ]
   },
@@ -220,8 +220,8 @@ module.exports = {
       },
       {
         id: 'lock', title: 'Add Lock Screen and Control Center access.',
-        body: `<p>While customizing the Lock Screen, add PodHaven’s <strong>Now Playing</strong> widget. It provides a compact view of the current episode.</p><p>In Control Center’s control gallery, add PodHaven <strong>Play/Pause</strong>, <strong>Skip Backward</strong>, and <strong>Skip Forward</strong>. Skip controls use your configured intervals.</p><p>System Now Playing also works with compatible external controls. See <a href="/podhaven/guides/listening-tactics#remote">remote control settings</a> for Next Track, scrubbing, and Like/Dislike behavior.</p>`,
-        screenshots: ['lock-screen', 'control-center']
+        body: `<p>Use the Lock Screen’s system Now Playing controls to pause, skip, and change output. While customizing the Lock Screen, you can also add PodHaven’s <strong>Now Playing</strong> widget: choose compact play/pause controls or a rectangular widget with episode details.</p><p>In Control Center’s control gallery, add PodHaven <strong>Play/Pause</strong>, <strong>Skip Backward</strong>, and <strong>Skip Forward</strong>. Skip controls use your configured intervals.</p><p>System Now Playing also works with compatible external controls. See <a href="/podhaven/guides/listening-tactics#remote">remote control settings</a> for Next Track, scrubbing, and Like/Dislike behavior.</p>`,
+        screenshots: ['lock-screen']
       },
       {
         id: 'alerts', title: 'Choose which shows can notify you.',
@@ -248,22 +248,22 @@ module.exports = {
       {
         id: 'queue', title: 'Put important work first.',
         body: `<p>Open <strong>Settings → Transcription → Transcription Queue</strong>. The active episode appears above the waiting list with its progress.</p><ul><li>Drag waiting episodes to reorder them, or use Move to Top / Bottom.</li><li>Use <strong>Transcribe Now</strong> to prioritize an episode. Interrupted work returns to the queue.</li><li>Select several waiting episodes to move or remove them together.</li><li>Choose the maximum queue length in Settings. The range is 10–100 episodes, including active work.</li></ul><p>Lowering the limit preserves existing work. New requests can be added after the queue drains below the limit.</p>`,
-        screenshots: ['transcription-queue']
+        screenshots: []
       },
       {
         id: 'resume', title: 'Pause, resume, or start over.',
         body: `<p><strong>Pause</strong> stops scheduling an episode and preserves saved progress. Removing an episode from the transcription queue also retains its checkpoint. Request it again to resume.</p><p><strong>Discard Progress</strong> deletes partial local work after confirmation. The next on-device attempt starts again. If you are replacing a publisher transcript, that publisher copy remains available.</p><p>If an attempt fails, use <strong>Retry</strong> in episode details. iOS controls background runtime, so processing may stop when the app is not active. Checkpoints survive interruptions and allow later work to continue. Open PodHaven to let foreground processing proceed.</p>`,
-        screenshots: ['transcript-paused']
+        screenshots: []
       },
       {
         id: 'publisher', title: 'Understand the transcript source.',
         body: `<p><strong>Podcast feed</strong> means the text came from a timed transcript published by the show. <strong>On device</strong> means PodHaven created it from audio locally.</p><p>On a compatible device, use <strong>Replace with On-Device Transcription</strong> if you prefer to generate your own copy. You can continue reading the publisher version while the replacement runs. Only a successful local result replaces it.</p><p>Supported publisher transcripts for newly discovered episodes can arrive during feed refresh. Subscribing does not download every historical transcript. Request an older episode’s transcript when you need it.</p>`,
-        screenshots: ['publisher-transcript']
+        screenshots: []
       },
       {
         id: 'automatic', title: 'Automate selected shows and find phrases.',
         body: `<p>In Podcast Settings, enable <strong>Transcribe New Episodes</strong> for shows you regularly read. This applies to episodes discovered during later refreshes, not existing episodes or the initial subscription import.</p><p>Automatic work shares your queue limit. If it fills, rejected automatic requests are not retried automatically; queue those episodes manually when space is available.</p><p>To collect matching transcripts, create a Smart List with <strong>Episode Transcription → contains</strong> and a phrase. Add <strong>State → Transcribed</strong> if you want to limit a list explicitly to stored transcripts. <a href="/podhaven/guides/smart-lists#transcripts">See the transcript list recipe</a>.</p>`,
-        screenshots: ['transcript-filter']
+        screenshots: []
       }
     ]
   }

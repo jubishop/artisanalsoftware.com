@@ -41,7 +41,7 @@ Source paths are relative to `jubishop/podhaven`. Website paths are the draft ro
 | Share extension, OPML sharing, podcast and episode links, timed episode sharing, web episode player | `PodHavenShare/`, `PodHaven/Share/`, `ShareEpisodeButton.swift`; existing website RSS routes | Library; sharing guide; RSS routes retained |
 | Play Bar, episode artwork link, expansion, shrink on scroll | `PodHaven/Views/PlayBar/` | Player; customization; listening/settings guides |
 | Global, per-show, per-episode playback speed; independent skip intervals | `SettingsView.swift`, `PodcastSettingsView.swift`, Play Bar | Player; listening, per-podcast, and settings guides |
-| Undo Seek, furthest position, embedded chapters, show-note timestamp links | `PlayBarSheet.swift`, `Models/PlayBarViewModel.swift`, `PodHaven/Views/Components/HTMLContent.swift` | Player; listening guide |
+| Undo Seek, furthest position, chapters parsed from description timestamps, show-note timestamp links | `PlayBarSheet.swift`, `Models/PlayBarViewModel.swift`, `PodHaven/Views/Components/HTMLContent.swift` | Player; listening guide |
 | AirPlay/Bluetooth and system Now Playing controls; configurable Next Track and scrubbing | `PodHaven/Play/`, `SettingsView.swift` | Player; listening/settings guides |
 | Remote Like / Dislike actions for ratings, saving, or tags | `PodHaven/Views/Settings/Components/CommandCenterFeedbackMenu.swift` | Player; customization; listening/settings guides |
 | Up Next top/bottom insertion, reorder, max queue, duration, optional Now Playing | `PodHaven/Views/UpNext/`, `PodHaven/Database/Queue.swift`, `SettingsView.swift` | Queue; listening/settings guides |
@@ -83,15 +83,17 @@ The existing “App Store coming soon” status is retained. This audit does not
 - Static editorial content lives in `content/podhaven-features.js` and `content/podhaven-guides.js`; shared EJS renders the pages, navigation, contents links, and screenshot galleries.
 - The site remains server-rendered with no client-side JavaScript.
 - The PodHaven redesign uses `public/css/podhaven.css`. The studio homepage keeps its existing stylesheet and layout; only its PodHaven summary/privacy claims changed.
-- See [the screenshot inventory](podhaven-screenshots.md) for the 29 named capture slots: 19 new and 10 replacements. These are asset requests, not fabricated app screens.
+- See [the screenshot inventory](podhaven-screenshots.md) for the complete set of 24 original captures: 13 new and 10 replacements, plus the supplementary lower podcast-settings capture. These use real app screenshots supplied by the user. Control Center, OPML import, transcription queue and pause controls, publisher transcripts, and transcript filters remain covered in the copy without dedicated screenshots.
 
 ## Validation
 
 - The four new routes and homepage links were tested failing before implementation, then passing.
 - Route checks cover all 19 PodHaven pages, one H1 per page, canonical URLs, local navigation and fragment targets, available image files, image alt attributes, and absence of client-side scripts.
 - The existing test suite still covers RSS rendering, metadata, input validation, and deep links.
-- Browser verification covers desktop and narrow layouts, guide navigation, screenshot links, keyboard access, and console errors. The screenshot inventory is intentionally incomplete until the user supplies captures.
+- Browser verification covers desktop and narrow layouts, guide navigation, screenshot links, keyboard access, and console errors. The screenshot inventory is complete; every gallery uses a supplied capture and no missing-capture spaces remain.
 
 Browser readback: 76 page/width checks passed (all 19 pages at 320, 390, 768, and 1440 CSS pixels) with JavaScript disabled, no horizontal overflow, and no browser errors. Keyboard focus and the Skip to content link were verified. Standard full-suite attempts hit intermittent five-second timeouts in unchanged RSS episode tests on a heavily loaded host; all 103 tests passed in a temporary copy with 60-second test timeouts to verify assertions without changing repository test budgets. The pre-existing rate-limiter IPv6 configuration warning remains outside this website change.
 
 Final homepage callout verification passed at 320, 390, 600, 768, and 1440 CSS pixels, including its placement after the primary feature sections. Desktop and phone screenshots were inspected. The final pre-commit test run passed 98 tests; five existing RSS/metadata tests timed out at their five-second limit and then all passed in a focused rerun with a 60-second limit. No repository test limits were changed.
+
+The completed screenshot integration passed the full `npm test` suite: 103 tests at the standard timeouts. All 19 feature and guide routes passed browser checks at 390 and 1440 CSS pixels with JavaScript disabled. All 24 original PNGs loaded at 1206 × 2622 with no screenshot placeholders, broken images, horizontal overflow, or browser errors.

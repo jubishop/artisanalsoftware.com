@@ -23,9 +23,10 @@ Existing feature and guide URLs remain supported.
 
 Screenshot captions, alt text, and capture instructions live in
 `content/podhaven-screenshots.js`. New captures go in
-`public/images/podhaven/screenshots/<id>.png`. Restart the server after adding
-captures or changing content modules. Existing screenshots serve as fallbacks;
-missing captures use labeled placeholders without broken image requests.
+`public/images/podhaven/screenshots/<id>.png` (`.jpeg` and `.jpg` also work; PNG takes priority). Restart the server after adding
+captures or changing content modules. All 24 screenshot slots use supplied
+full-resolution originals. Features without screenshots remain covered in the
+page text and guides.
 
 - [Feature accounting and source evidence](spec/podhaven-feature-audit.md)
 - [Screenshot inventory and capture instructions](spec/podhaven-screenshots.md)

@@ -36,6 +36,7 @@ describe('PodHaven feature site', function () {
       expect(response.text.match(/<h1\b/g), path).to.have.length(1)
       expect(response.text, path).to.include('id="main"')
       expect(response.text, path).not.to.match(/<script\b/i)
+      expect(response.text, path).not.to.include('App screenshot to be added')
       expect(response.text, path).to.include(`rel="canonical" href="https://artisanalsoftware.com${path}"`)
     }
     const assets = new Set()
