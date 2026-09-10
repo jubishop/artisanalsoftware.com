@@ -4,6 +4,7 @@ const config = require('../config')
 const features = require('../content/podhaven-features')
 const guides = require('../content/podhaven-guides')
 const screenshotInventory = require('../content/podhaven-screenshots')
+const privacy = require('../content/podhaven-privacy')
 
 const screenshots = Object.fromEntries(screenshotInventory.map(shot => {
   const replacement = ['png', 'jpeg', 'jpg']
@@ -37,6 +38,7 @@ function guide(key) {
 }
 
 module.exports = {
+  showPrivacy: (req, res) => render(res, 'podhaven/detail', privacy, '/podhaven/privacy', 'privacy'),
   showLanding: (req, res) => render(res, 'podhaven/landing', {
     label: 'Podcasts, at your pace',
     description: 'Meet PodHaven: recommendations powered entirely on your device, Smart Lists and flexible filters, and extensive settings to make listening your own.'

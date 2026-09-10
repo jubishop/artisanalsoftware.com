@@ -114,6 +114,7 @@ app.get('/', siteController.showHome)
 
 // PodHaven marketing landing pages (no validation needed)
 app.get('/podhaven', podhavenLandingController.showLanding)
+app.get('/podhaven/privacy', podhavenLandingController.showPrivacy)
 app.get('/podhaven/recommendations', podhavenLandingController.showRecommendations)
 app.get('/podhaven/transcripts', podhavenLandingController.showTranscripts)
 app.get('/podhaven/smart-lists', podhavenLandingController.showSmartLists)

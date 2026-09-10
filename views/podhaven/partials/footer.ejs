@@ -2,12 +2,12 @@
   <div class="ph-container">
     <div class="ph-footer-top">
       <div><a class="ph-brand" href="/podhaven">PodHaven</a><p>A little more room for a good listen.</p></div>
-      <div class="ph-actions"><span class="ph-status">App Store · coming soon</span><a href="https://discord.gg/cMCJeuVY2f" class="ph-button">Join the Discord <span aria-hidden="true">↗</span></a></div>
+      <div class="ph-actions"><a href="https://apps.apple.com/us/app/podhaven/id6744904018" class="ph-button">Download on the App Store <span aria-hidden="true">↗</span></a><a href="https://discord.gg/cMCJeuVY2f" class="ph-button">Join the Discord <span aria-hidden="true">↗</span></a></div>
     </div>
     <div class="ph-footer-columns">
       <nav aria-label="All features"><h2>Explore the app</h2><% for (const [key, feature] of Object.entries(features)) { %><a href="/podhaven/<%= key %>"><%= feature.label %></a><% } %></nav>
       <nav aria-label="All guides"><h2>The listening guide</h2><a href="/podhaven/guides">All guides</a><% for (const [key, guide] of Object.entries(guides)) { %><a href="/podhaven/guides/<%= key %>"><%= guide.label %></a><% } %></nav>
-      <nav aria-label="Project links"><h2>Made with care</h2><a href="https://artisanalsoftware.com">Artisanal Software</a><a href="https://github.com/jubishop/podhaven">Source on GitHub</a><a href="https://discord.gg/cMCJeuVY2f">Community on Discord</a><p>Questions or a problem?<br>Use Send Feedback in the app.</p></nav>
+      <nav aria-label="Project links"><h2>Made with care</h2><a href="https://artisanalsoftware.com">Artisanal Software</a><a href="/podhaven/privacy">Privacy Policy</a><a href="https://github.com/jubishop/podhaven">Source on GitHub</a><a href="https://discord.gg/cMCJeuVY2f">Community on Discord</a><p>Questions or a problem?<br>Use Send Feedback in the app.</p></nav>
     </div>
     <p class="ph-colophon">© <%= new Date().getFullYear() %> Justin Bishop · Source-available software · Made for people who love podcasts.</p>
   </div>

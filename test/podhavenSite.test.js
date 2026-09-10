@@ -20,7 +20,7 @@ describe('PodHaven feature site', function () {
 
   it('keeps every feature and guide reachable with valid local links and images', async function () {
     const paths = [
-      '/podhaven', '/podhaven/recommendations', '/podhaven/transcripts',
+      '/podhaven', '/podhaven/privacy', '/podhaven/recommendations', '/podhaven/transcripts',
       '/podhaven/smart-lists', '/podhaven/player', '/podhaven/queue',
       '/podhaven/library', '/podhaven/offline', '/podhaven/customization',
       '/podhaven/guides', '/podhaven/guides/getting-started',
