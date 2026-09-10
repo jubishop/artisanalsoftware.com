@@ -11,6 +11,7 @@ const podcastController = require('./controllers/podcastController')
 const episodeController = require('./controllers/episodeController')
 const podhavenLandingController = require('./controllers/podhavenLandingController')
 const siteController = require('./controllers/siteController')
+const universalLinkController = require('./controllers/universalLinkController')
 const { validateFeedUrl, validateGuid } = require('./middleware/validateFeedUrl')
 
 const app = express()
@@ -77,6 +78,11 @@ app.use(helmet({
 
 // Compression middleware
 app.use(compression())
+
+// Apple must be able to fetch this JSON directly on both associated hostnames.
+// Keep association and store fallback requests outside the RSS rate limiter.
+app.get('/.well-known/apple-app-site-association', universalLinkController.showAssociation)
+app.get(['/podhaven/open/podcast', '/podhaven/open/episode'], universalLinkController.openApp)
 
 // Rate limiting. Prefer Cloudflare's CF-Connecting-IP (always the true client)
 // and fall back to req.ip, which is now correct thanks to `trust proxy`.

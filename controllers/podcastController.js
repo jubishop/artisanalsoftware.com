@@ -32,13 +32,13 @@ async function showPodcast(req, res) {
     }
 
     // Generate PodHaven links
-    const podcastShareLink = generatePodcastLink(feedURL)
+    const podcastShareLink = generatePodcastLink(feedURL, req.hostname)
     const podcastWebUrl = generatePodcastWebUrl(feedURL)
 
     // Generate episode links
     const episodesWithLinks = podcastData.episodes.map(episode => ({
       ...episode,
-      shareLink: generateEpisodeLink(feedURL, episode.guid),
+      shareLink: generateEpisodeLink(feedURL, episode.guid, undefined, req.hostname),
       webUrl: `/podhaven/episode?feedURL=${encodeURIComponent(feedURL)}&guid=${encodeURIComponent(episode.guid)}`
     }))
 

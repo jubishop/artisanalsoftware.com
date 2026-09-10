@@ -46,7 +46,7 @@ async function showEpisode(req, res) {
     }
 
     // Generate links (include timestamp if provided)
-    const episodeShareLink = generateEpisodeLink(feedURL, guid, startTime)
+    const episodeShareLink = generateEpisodeLink(feedURL, guid, startTime, req.hostname)
     const episodeWebUrl = generateEpisodeWebUrl(feedURL, guid, startTime)
     const podcastPageUrl = `/podhaven/podcast?feedURL=${encodeURIComponent(feedURL)}`
 

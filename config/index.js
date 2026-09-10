@@ -14,6 +14,10 @@ module.exports = {
   // Base URL for generating links (must be set in production)
   baseUrl: process.env.BASE_URL || 'https://artisanalsoftware.com',
 
+  // Enable after the app build with Associated Domains reaches the App Store.
+  universalLinksEnabled: process.env.PODHAVEN_UNIVERSAL_LINKS_ENABLED === 'true',
+  appStoreUrl: 'https://apps.apple.com/us/app/podhaven/id6744904018',
+
   // RSS feed fetching
   rssTimeout: parseInt(process.env.RSS_TIMEOUT) || 10000,
 
