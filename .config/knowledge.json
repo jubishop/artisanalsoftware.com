@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "collections": {
+    "memory": {
+      "path": "memory",
+      "pattern": "**/*.md",
+      "ignore": [
+        "archive/**",
+        "pr_reviews/**"
+      ],
+      "context": {
+        "/": "Artisanal Software operational lessons and external context, including asset caching and domain history. Read the source before applying a result."
+      }
+    },
+    "docs": {
+      "path": "docs",
+      "pattern": "**/*.md",
+      "ignore": [
+        "archive/**"
+      ],
+      "context": {
+        "/": "Artisanal Software architecture, PodHaven content evidence, Railway operations, and development workflow. Check dated claims against current source."
+      }
+    }
+  },
+  "checks": {
+    "exclude": [
+      "memory/pr_reviews/**"
+    ]
+  }
+}

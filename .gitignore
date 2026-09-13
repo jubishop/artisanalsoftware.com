@@ -46,3 +46,14 @@ coverage/
 
 # Optional eslint cache
 .eslintcache
+
+# Project knowledge and worktree state
+.cache/
+.config/qmd/
+.env
+.env.*
+!.env.example
+.envrc.local
+__pycache__/
+*.py[cod]
+worktrees/

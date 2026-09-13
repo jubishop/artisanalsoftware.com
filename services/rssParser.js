@@ -51,8 +51,8 @@ async function fetchFeedWithTimeout(feedURL, redirectCount = 0) {
     if (config.isProduction) {
       throw new Error('File URLs are not supported in production')
     }
-    const filePath = url.pathname
-    return await fs.readFile(filePath, 'utf-8')
+    // Let Node decode file URLs, including escaped worktree paths.
+    return await fs.readFile(url, 'utf-8')
   }
 
   return new Promise((resolve, reject) => {

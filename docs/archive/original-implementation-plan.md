@@ -1,5 +1,12 @@
+---
+status: archived
+---
 
 # Implementation Plan
+
+Historical material from the initial RSS server. Preserved as evidence; it
+does not describe current implementation or outstanding work. See the
+[current architecture](../architecture.md) and use GitHub Issues for new work.
 
 - [ ] 1. Set up project structure and dependencies
   - Initialize Node.js project with package.json

@@ -1,68 +1,80 @@
-## Project Memory
+# Artisanal Software instructions
 
-Project-specific memory lives in `memory/`.
-Use `memory/README.md` as the canonical index, with one linked Markdown file per memory in `memory/`.
-When asked to save, recall, or update a memory, read and write those files directly. Check memory before guessing about prior project-specific decisions or environment details.
+This is a Node 24 Express/EJS site hosted on Railway behind Cloudflare.
+Keep server-side rendering only: no client-side JavaScript. Preserve public
+PodHaven URLs, the trusted RSS HTML model, and versioned static asset URLs.
+Read [architecture](docs/architecture.md), [deployment](docs/deployment.md),
+and the [content guide](docs/podhaven-content.md) for affected work.
 
-## 🎯 Project Overview
+Keep durable guidance and non-derivable context in [memory](memory/README.md).
+Keep designs, decisions, and research in [docs](docs/README.md). Use
+[GitHub Issues](https://github.com/jubishop/artisanalsoftware.com/issues) for
+work items and implementation progress.
 
-**What**: Node.js Express server that renders podcast information from RSS feeds with PodHaven iOS app integration.
-**Purpose**: Display podcast/episode pages server-side with deep links to the PodHaven mobile app.
-**Key Constraint**: Server-side rendering only - NO client-side JavaScript.
+Before non-trivial work or writing memory, search the relevant knowledge.
+Use `bin/knowledge search "term"` for known terms and
+`bin/knowledge query "question" --no-rerank` for broader questions.
+Read focused results with `bin/knowledge get <path> -l 80`.
+Use direct reads for known files or when search is unavailable or stale.
+Markdown source files are authoritative. Update existing pages when possible.
 
-## 🏗️ Infrastructure
+Prefer fewer third-party dependencies. Use standard libraries, platform APIs,
+or a focused implementation owned by the project when they meet its needs at
+a reasonable maintenance cost. Add a dependency when its concrete benefits
+justify it; initial implementation convenience alone is not enough. Apply
+the [dependency policy](docs/development-workflow.md#third-party-dependencies)
+through ordinary technical judgment, without a separate approval step.
 
-- **Hosting**: Railway (Node.js web service)
-- **Domain**: `artisanalsoftware.com` — registered and DNS managed in **Cloudflare**
-- **GitHub**: `jubishop/artisanalsoftware.com` — pushes to `main` auto-deploy to Railway
+Regression fixes and functional changes require automated tests for the
+changed behavior. Use red-green test-driven development (TDD) whenever
+practical: prove a focused test fails before implementation and passes after.
+If testing first is not practical, explain why and how the behavior was
+verified. Follow the [testing workflow](docs/development-workflow.md#test-driven-development).
 
-### Railway
+Test user-visible outcomes, public interfaces, and interactions with external
+systems. Put fakes at external-system boundaries so real project logic runs.
+Do not test private helpers or internal structure, expose private functionality,
+or add production APIs only for tests. Tests should allow internal refactoring
+that preserves behavior.
 
-| | |
-|---|---|
-| Project | `artisanal` |
-| Service | `artisanalsoftware` |
-| Environment | `production` |
-| Start command | `npm start` → `node app.js` |
-| Node version | 24.x (`package.json` `engines`) |
+Prepare unrelated test prerequisites through isolated fixtures or existing
+public interfaces. Use the least costly test level that proves the required
+behavior, retaining complete journeys and interaction-specific coverage.
+Measure before adding parallel execution and preserve test independence.
+See [test cost and coverage](docs/development-workflow.md#test-cost-and-coverage).
 
-**Custom domains** (configured in Railway): `artisanalsoftware.com`, `www.artisanalsoftware.com`
+Keep files focused on one coherent responsibility. Use approximately 1,000
+lines as a review threshold for hand-written source, tests, and styles, not
+a hard cap. Prefer cohesive extraction; do not compress formatting or create
+arbitrary fragments to meet a count. Larger files are acceptable when splitting
+would reduce clarity. See [file organization](docs/development-workflow.md#file-organization).
 
-**Traffic path**: Client → Cloudflare (DNS/proxy) → Railway. The app sets `trust proxy` so rate limiting sees real client IPs.
+Scope project source discovery and mutable validation output to the active
+checkout. Exclude nested worktrees and temporary copies; include required
+generated inputs deliberately. `.gitignore` does not control every tool's
+discovery. Follow [checkout isolation](docs/development-workflow.md#validation-checkout-isolation).
 
-**Deploys**
-- Normal workflow: merge/push to `main` — Railway deploys automatically via GitHub integration
-- Manual deploy from repo root: `railway up`
-- View logs: `railway logs`
+Declare supported runtime and toolchain versions and keep development, CI,
+and deployment compatible with that policy. Application commands should reject
+unsupported versions before work starts. Prefer maintained releases and
+coordinate upgrades. See [runtime and toolchain versions](docs/development-workflow.md#runtime-and-toolchain-versions).
 
-**CLI setup** (one-time per machine)
-```bash
-brew install railway   # or: npm i -g @railway/cli
-railway login
-cd /path/to/artisanalsoftware.com
-railway link           # select project artisanal → service artisanalsoftware
-```
+Run `bin/setup` after cloning. Choose checks for the changed files: use
+`bin/check --documents-only` for Markdown edits and `bin/check` for foundation
+checks only. Keep application tools out of both modes; run relevant application
+checks explicitly for code edits, such as `npm test -- --grep "episode"`.
+Run `bin/check --full` locally after setup, test/build infrastructure changes,
+or when focused checks leave material uncertainty. Require successful full
+validation before merge or release. An enforced full CI gate can supply that
+result for ordinary code changes; otherwise run the full check locally before
+delivery. Do not run checks for discussion or read-only work. Batch edits
+before checking; reuse passing results while relevant inputs are unchanged.
+See [the workflow](docs/development-workflow.md#checks-and-project-extensions).
+Use `bin/doctor` to inspect local setup and `bin/qmd-index` to refresh search
+after uncommitted knowledge edits when current search results are needed.
+Hooks refresh search after Git events.
 
-**Environment variables** (Railway dashboard or `railway variables`)
-- `NODE_ENV=production` — set explicitly
-- `PORT` — injected by Railway; do not hardcode
-- `BASE_URL` — optional; defaults to `https://artisanalsoftware.com`
-- `RSS_TIMEOUT` — optional; defaults to `10000` (ms)
-
-Railway also injects its own `RAILWAY_*` vars; leave those alone.
-
-**DNS (Cloudflare)**
-- Domain registration and DNS live in Cloudflare (see `memory/reference_domain_management.md`)
-- Custom domains are attached in the Railway service settings; Railway provides the DNS targets (CNAME or A records) to add in Cloudflare
-- Use the Railway dashboard **Settings → Domains** as the source of truth for current DNS values
-
-**Troubleshooting**
-- 502s or cold-start issues: check `railway logs` (migrated from Render for this reason — see `memory/project_render_502_investigation.md`)
-- After env var changes: redeploy from dashboard or `railway up`
-- Dashboard: https://railway.com (project **artisanal**)
-
-## 🔑 Key Architectural Decisions
-
-### 1. **Trusted RSS Content Model**
-- RSS feed content from `<content:encoded>` is rendered as HTML (unescaped `<%-` in EJS)
-- Plain text descriptions from `<description>` are escaped normally
+Read the relevant memory or docs index for its format and maintenance rules.
+Keep accepted decisions separate from proposals. Preserve existing project
+instructions, setup commands, hooks, and unrelated changes when adapting this
+foundation. Keep secrets and generated caches out of Git.

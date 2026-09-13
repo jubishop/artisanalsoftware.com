@@ -1,8 +1,14 @@
 ---
-name: Render 502 investigation and Railway migration (2026-03-23 to 2026-03-26)
-description: Render Starter plan was spinning down causing 502s — migrated to Railway to fix, completed 2026-03-26
+name: render-502-investigation
+description: Historical context for the completed Railway migration.
 type: project
+status: resolved
 ---
+
+# Render 502 investigation and Railway migration
+
+This is a historical record. Deployment, test counts, tooling paths, and
+follow-up notes below describe that work, not the current state.
 
 ## Resolved: migrated from Render to Railway (2026-03-26)
 

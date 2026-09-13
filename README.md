@@ -1,283 +1,60 @@
-# Podcast Server
+# Artisanal Software
 
-A Node.js Express server that renders server-side HTML pages for podcast content from RSS feeds, with integrated PodHaven iOS app deep links.
+The Artisanal Software studio website and PodHaven companion site. Express
+renders marketing pages, app guides, and podcast or episode pages from RSS
+feeds. EJS and CSS provide the interface without client-side JavaScript.
 
-## Features
+## Start locally
 
-- 📻 Display podcast information from any RSS feed
-- 🎧 Individual episode pages with audio players
-- 📱 Mobile-first responsive design
-- 🔗 PodHaven iOS app deep link integration
-- 🎨 Rich social media metadata (Open Graph, Twitter Cards)
-- ⚡ Server-side rendering (no client-side JavaScript)
-- 🧪 Comprehensive test coverage (45 tests)
+Use Node 24.x (see `package.json` and `.nvmrc`), npm, Git, Python 3.9+, and
+ShellCheck. QMD search and direnv are optional.
 
-## Quick Start
-
-### PodHaven website content
-
-The `/podhaven` website includes eight feature pages and nine guides. Feature
-copy is in `content/podhaven-features.js`; guide copy is in
-`content/podhaven-guides.js`. They share the `views/podhaven/detail.ejs` template.
-Existing feature and guide URLs remain supported.
-
-Screenshot captions, alt text, and capture instructions live in
-`content/podhaven-screenshots.js`. New captures go in
-`public/images/podhaven/screenshots/<id>.png` (`.jpeg` and `.jpg` also work; PNG takes priority). Restart the server after adding
-captures or changing content modules. All 24 screenshot slots use supplied
-full-resolution originals. Features without screenshots remain covered in the
-page text and guides.
-
-- [Feature accounting and source evidence](spec/podhaven-feature-audit.md)
-- [Screenshot inventory and capture instructions](spec/podhaven-screenshots.md)
-
-PodHaven uses `public/css/podhaven.css`. The studio homepage retains its separate
-`public/css/podhavenLanding.css` styles. Both are server-rendered without client-side
-JavaScript.
-
-### Installation
-
-```bash
-npm install
-```
-
-### Run the Server
-
-```bash
+```sh
+npm ci
+bin/setup
+bin/doctor
 npm start
 ```
 
-The server will start on `http://localhost:3000`
+Open `http://localhost:3000`. Use `/podhaven` for the app website,
+`/podhaven/podcast?feedURL=<RSS_FEED_URL>` for a podcast, or
+`/podhaven/episode?feedURL=<RSS_FEED_URL>&guid=<EPISODE_GUID>` for an episode.
 
-### Run Tests
+`npm ci` enforces the declared Node version. `npm start` and `npm test` also
+check it before running. Select Node 24 with your version manager first.
+The app reads process environment variables, not `.env` automatically. See
+[configuration and deployment](docs/deployment.md).
 
-```bash
-npm test
-```
+## Checks
 
-## Usage
+| Command | Scope |
+| --- | --- |
+| `bin/check --documents-only` | Markdown metadata, indexes, and local links. |
+| `bin/check` | Foundation syntax, shell lint, docs, and whitespace. |
+| `npm test` | Mocha application tests with local fixtures. |
+| `bin/check --full` | All foundation behavior tests, then the application suite. |
 
-### View a Podcast
+Full checks run in [GitHub Actions](.github/workflows/check.yml). Require a
+successful full check before merge or release. See the
+[development workflow](docs/development-workflow.md) for setup, focused tests,
+check selection, hooks, and isolated worktrees.
 
-```
-GET /podhaven/podcast?feedURL=<RSS_FEED_URL>
-```
+## Project knowledge
 
-Example:
-```
-http://localhost:3000/podhaven/podcast?feedURL=https://feeds.example.com/podcast.xml
-```
+- [Documentation](docs/README.md): architecture, content, operations, and decisions.
+- [Memory](memory/README.md): durable lessons and historical context.
+- [GitHub Issues](https://github.com/jubishop/artisanalsoftware.com/issues): work items and progress.
+- [Agent instructions](AGENTS.md): project constraints and working conventions.
 
-### View an Episode
+Use `git knowledge search "term"` after setup, or read the Markdown directly.
+Run `bin/qmd-index` after editing knowledge files when fresh search results
+are needed. Archives stay available as source files and are excluded from
+search. The former `spec/` material is now in `docs/` and `docs/archive/`.
 
-```
-GET /podhaven/episode?feedURL=<RSS_FEED_URL>&guid=<EPISODE_GUID>
-```
+## Hosting and license
 
-Example:
-```
-http://localhost:3000/podhaven/episode?feedURL=https://feeds.example.com/podcast.xml&guid=episode-123
-```
+Railway hosts the app; Cloudflare manages the domain and DNS. Pushes to `main`
+auto-deploy. Follow [the deployment runbook](docs/deployment.md).
 
-## Environment Variables
-
-### Universal Links rollout
-
-Both `artisanalsoftware.com` and `www.artisanalsoftware.com` serve Apple's
-association file at `/.well-known/apple-app-site-association`. It associates
-only the production PodHaven app (`34TKMKM889.com.artisanalsoftware.PodHaven`)
-with podcast and episode links. Marketing pages stay in the browser.
-
-The app must include both hosts in its Associated Domains entitlement and
-handle the HTTPS URLs through its share service. SwiftUI delivers these URLs
-through the existing `onOpenURL` handler.
-
-Deploy the website setup before distributing the compatible app build. Keep
-`PODHAVEN_UNIVERSAL_LINKS_ENABLED` unset until that build is available in the
-App Store. Then set it to `true` in Railway and redeploy. This switches the
-page buttons from `podhaven://` to `/podhaven/open/podcast` and
-`/podhaven/open/episode` on the other associated hostname. Using the other
-hostname allows Safari to open the app from either website hostname.
-
-If iOS does not open the app, these endpoints redirect to PodHaven's App Store
-page. The normal `/podhaven/podcast` and `/podhaven/episode` URLs still render
-web content when the app does not open. Browser preferences, unsupported
-browsers, and older app builds can also cause the web fallback.
-
-Before activating the buttons, verify both association URLs return JSON with
-HTTP 200 and no redirect, and test a compatible installed build on a physical
-device: tap links from Notes and from both website hosts, check podcast,
-episode, and timestamp navigation, and check the App Store fallback on a device
-without PodHaven. Apple's association cache can delay changes after deployment.
-
-Set `PODHAVEN_UNIVERSAL_LINKS_ENABLED=false` and redeploy to restore the old
-buttons. The association file and fallback endpoints remain available.
-
-See [Apple's Universal Links troubleshooting guide](https://developer.apple.com/documentation/technotes/tn3155-debugging-universal-links).
-
-Create a `.env` file in the root directory (optional):
-
-```env
-PORT=3000                  # Server port (default: 3000)
-RSS_TIMEOUT=10000         # RSS feed fetch timeout in ms (default: 10000)
-NODE_ENV=production       # Environment mode (development/production)
-```
-
-## Project Structure
-
-```
-artisanalsoftware.com/
-├── app.js                    # Express application entry point
-├── controllers/              # Route controllers
-│   ├── podcastController.js  # Podcast page logic
-│   └── episodeController.js  # Episode page logic
-├── services/                 # Business logic
-│   ├── rssParser.js         # RSS feed parsing
-│   └── urlHelper.js         # URL generation utilities
-├── views/                    # EJS templates
-│   ├── podcast.ejs          # Podcast page template
-│   ├── episode.ejs          # Episode page template
-│   └── error.ejs            # Error page template
-├── public/                   # Static assets
-│   └── css/
-│       └── styles.css       # Responsive styles
-├── test/                     # Test files
-│   ├── fixtures/            # Sample RSS feeds
-│   ├── rssParser.test.js
-│   ├── urlHelper.test.js
-│   ├── podcastRoute.test.js
-│   ├── episodeRoute.test.js
-│   └── seoMetadata.test.js
-└── spec/                     # Documentation
-    ├── requirements.md
-    ├── design.md
-    └── tasks.md
-```
-
-## API Endpoints
-
-### GET /podhaven/podcast
-
-Displays podcast information with episode list.
-
-**Query Parameters:**
-- `feedURL` (required): URL of the podcast RSS feed
-
-**Response:**
-- `200 OK`: HTML page with podcast information
-- `400 Bad Request`: Missing or invalid feedURL
-- `500 Internal Server Error`: RSS feed fetch/parse error
-
-### GET /podhaven/episode
-
-Displays individual episode details.
-
-**Query Parameters:**
-- `feedURL` (required): URL of the podcast RSS feed
-- `guid` (required): Episode GUID from the RSS feed
-
-**Response:**
-- `200 OK`: HTML page with episode details
-- `400 Bad Request`: Missing feedURL or guid
-- `404 Not Found`: Episode GUID not found in feed
-- `500 Internal Server Error`: RSS feed fetch/parse error
-
-## Features in Detail
-
-### RSS Feed Parsing
-
-- Supports standard RSS 2.0 podcast feeds
-- Extracts: title, description, author, artwork, episodes
-- Prioritizes `content:encoded` for rich HTML descriptions
-- Falls back to `description` or `itunes:summary` for plain text
-- Handles network timeouts (configurable via `RSS_TIMEOUT`)
-
-### PodHaven Deep Links
-
-Generates deep links in the format:
-```
-podhaven://share?url=https://artisanalsoftware.com/podhaven/podcast?feedURL=...
-```
-
-These links allow users to open content directly in the PodHaven iOS app.
-
-### Responsive Design
-
-- Mobile-first CSS approach
-- Breakpoints: 768px (tablet), 1024px (desktop), 1440px (large desktop)
-- Touch-friendly buttons (48px minimum tap targets)
-- Optimized for both portrait and landscape orientations
-
-### SEO & Social Media
-
-Every page includes:
-- Open Graph meta tags for Facebook/LinkedIn
-- Twitter Card meta tags
-- Dynamic favicons using podcast/episode artwork
-- Semantic HTML structure
-- Descriptive page titles
-
-## Testing
-
-The project includes comprehensive test coverage:
-
-- **Unit Tests**: RSS parser, URL helper (17 tests)
-- **Integration Tests**: Routes, error handling (15 tests)
-- **SEO Tests**: Metadata validation (13 tests)
-
-All tests use local fixtures (no network calls during testing).
-
-## Error Handling
-
-The server handles errors gracefully:
-
-- **400 Bad Request**: Invalid input parameters
-- **404 Not Found**: Episode GUID not found
-- **500 Internal Server Error**: RSS feed issues
-- Request logging with timestamps
-- Different error messages for development/production
-
-## Dependencies
-
-### Production
-- `express` (v5.1.0): Web framework
-- `ejs` (v3.1.10): Template engine
-- `rss-parser` (v3.13.0): RSS feed parsing
-
-### Development
-- `mocha` (v11.7.4): Test framework
-- `chai` (v6.2.0): Assertion library
-- `supertest` (v7.1.4): HTTP testing
-
-## Performance Considerations
-
-- Server-side rendering (no client-side JavaScript)
-- Efficient RSS parsing with streaming
-- Static asset serving
-- Configurable timeouts
-
-### Future Enhancements
-- RSS feed caching
-- Pagination for large episode lists
-
-## Deployment
-
-Hosted on **Railway** with DNS in **Cloudflare**. Pushes to `main` auto-deploy.
-
-For CLI setup, env vars, domains, and troubleshooting, see [AGENTS.md — Railway](AGENTS.md#railway).
-
-## Browser Support
-
-- Modern browsers (Chrome, Firefox, Safari, Edge)
-- Mobile Safari (iOS)
-- Android Chrome
-- Responsive design works on all screen sizes
-
-## License
-
-ISC
-
-## Support
-
-For issues or questions, please file an issue at:
-https://github.com/jubishop/artisanalsoftware.com/issues
+The application retains its ISC license declaration. Copied foundation files
+retain the MIT notice in [LICENSE.project-starter](LICENSE.project-starter).

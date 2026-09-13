@@ -4,8 +4,10 @@
   "description": "Node.js Express server for displaying podcast information from RSS feeds",
   "main": "app.js",
   "scripts": {
+    "prestart": "node bin/check-node.cjs",
     "start": "node app.js",
-    "test": "mocha test/**/*.test.js"
+    "pretest": "node bin/check-node.cjs",
+    "test": "mocha \"test/**/*.test.js\""
   },
   "repository": {
     "type": "git",

@@ -1,3 +1,7 @@
+---
+status: current
+---
+
 # PodHaven website feature accounting
 
 Audited 2026-09-04 against PodHaven `main` at `f1d6e2b2acb724a468876ef387dbb59daa03666b`. Website base: `80c8adc2827854891b576a1b6f38728428880197`.
@@ -10,7 +14,9 @@ The homepage leads with recommendations powered entirely on device, Smart Lists 
 
 ## Coverage
 
-Source paths are relative to `jubishop/podhaven`. Website paths are the draft routes, pending publication.
+Source paths are relative to `jubishop/podhaven`. Website routes below are
+implemented in this checkout. The dated audit does not establish current
+production deployment or current app behavior.
 
 | User-facing area | Source evidence | Website coverage |
 | --- | --- | --- |

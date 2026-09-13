@@ -1,3 +1,7 @@
+---
+status: current
+---
+
 # PodHaven screenshot inventory
 
 Completed 2026-09-04 for the website refresh. **24 original captures: 13 new, 10 refreshed, and one supplementary lower podcast-settings capture.** Each image is wired to its feature and guide placements. All planned galleries are complete; features without a dedicated image remain covered in the copy.

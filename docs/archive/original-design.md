@@ -1,4 +1,12 @@
+---
+status: archived
+---
+
 # Design Document
+
+Historical material from the initial RSS server. Preserved as evidence; it
+does not describe current implementation or outstanding work. See the
+[current architecture](../architecture.md) and use GitHub Issues for new work.
 
 ## Overview
 

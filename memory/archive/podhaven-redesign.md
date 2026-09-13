@@ -1,12 +1,18 @@
 ---
-name: PodHaven marketing site redesign — shipped to production — 2026-06-01
-description: Visual redesign of /podhaven landing + feature/guide pages (CSS iPhone device frames, hero stage, bento, scroll reveal), 5 new screenshots, and the real app icon in the nav. Reviewed light+dark, terminology fixed, tests pass. SHIPPED to production on main.
+name: podhaven-redesign
+description: Historical context for the completed June 2026 marketing redesign.
 type: project
+status: resolved
 ---
+
+# PodHaven redesign in June 2026
+
+This is a historical record. Deployment, test counts, tooling paths, and
+follow-up notes below describe that work, not the current state.
 
 ## Status: SHIPPED to production on `main`
 
-Deployed via Railway. Key commits: `02533a0` redesign (21 files, +605/−103), `9ccc3d1` real app icon in nav, `97d9159` CSS cache-busting fix (see [[project_asset_cache_busting]] — the redesign briefly looked "stretched/broken" for returning visitors due to stale cached CSS; fixed with content-hash asset URLs). Verified live at a 1920px viewport — hero phone constrained to ~366px, not full-width.
+Deployed via Railway. Key commits: `02533a0` redesign (21 files, +605/−103), `9ccc3d1` real app icon in nav, `97d9159` CSS cache-busting fix (see [asset cache guidance](../asset-cache-busting.md) — the redesign briefly looked "stretched/broken" for returning visitors due to stale cached CSS; fixed with content-hash asset URLs). Verified live at a 1920px viewport — hero phone constrained to ~366px, not full-width.
 
 - Visually reviewed every page in **light + dark** (Playwright + Chrome, reduced-motion forced to defeat the scroll-reveal screenshot artifact). All device frames render cleanly — no distortion/overflow. The "black" phone screens are just genuinely dark-mode app screenshots, not broken images.
 - All 95 mocha tests pass.

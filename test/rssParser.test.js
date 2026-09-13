@@ -2,12 +2,27 @@ const { expect } = require('chai');
 const { parsePodcastFeed, findEpisodeByGuid } = require('../services/rssParser');
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
+const { pathToFileURL } = require('url');
 
 describe('RSS Parser Service', function() {
   // Increase timeout for RSS parsing
   this.timeout(5000);
 
   describe('parsePodcastFeed', function() {
+    it('should parse encoded fixture paths in worktrees with spaces', async function() {
+      const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'podhaven worktree '));
+      try {
+        const feedPath = path.join(directory, 'episode #1 100% café.xml');
+        fs.copyFileSync(path.join(__dirname, 'fixtures', 'sample-valid-feed.xml'), feedPath);
+        const podcastData = await parsePodcastFeed(pathToFileURL(feedPath).href);
+        expect(podcastData.title).to.equal('The Daily');
+        expect(podcastData.episodes.length).to.be.greaterThan(0);
+      } finally {
+        fs.rmSync(directory, { recursive: true, force: true });
+      }
+    });
+
     it('should parse a valid RSS feed from file', async function() {
       // Use file:// URL for local testing
       const feedPath = path.join(__dirname, 'fixtures', 'sample-valid-feed.xml');
