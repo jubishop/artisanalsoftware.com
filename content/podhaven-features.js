@@ -66,7 +66,7 @@ module.exports = {
       },
       {
         id: 'actions', title: 'Put your frequent actions first.',
-        body: `<p>Choose and reorder up to three left-swipe actions: Play/Pause, Rate, Mark Finished, Cache, Save in Cache, Tag, or Transcribe when available. The first action is the one a full swipe triggers.</p><p>Configure Next Track behavior and the Like and Dislike actions used by supported remotes. Set playback, queueing, downloads, transcription, freshness, and notifications independently for each podcast.</p>`,
+        body: `<p>Choose and reorder up to three left-swipe actions: Play/Pause, Rate, Mark Finished, Cache, Save in Cache, Tag, or Transcribe when available. The first action is the one a full swipe triggers.</p><p>Configure Next Track behavior and the Like and Dislike actions used by supported remotes. Set playback speed, silence skipping, Quiet Audio Protection, queueing, downloads, transcription, freshness, and notifications independently for each podcast.</p>`,
         screenshots: ['swipe-settings', 'remote-settings']
       },
       {
@@ -84,7 +84,7 @@ module.exports = {
   player: {
     label: 'Player',
     title: 'Stay in the story.',
-    description: 'Customize playback speed, skip intervals, chapter navigation, Undo Seek, remote controls, and synchronized transcripts.',
+    description: 'Find your pace with configurable silence skipping, playback speed, chapters, and Undo Seek. Take your queue, Smart Lists, and podcasts into CarPlay.',
     intro: 'Small, useful controls for the way you listen. Keep the player close while browsing, then open it when the episode deserves your full attention.',
     guide: 'listening-tactics',
     sections: [
@@ -97,6 +97,16 @@ module.exports = {
         id: 'pace', title: 'Find your pace. Find your place.',
         body: `<p>Set playback speed from <strong>0.8× to 2.0×</strong>, in 0.1× steps. Choose a global default, override it for a podcast, or adjust an individual episode.</p><p>Forward and backward skip intervals are independent: <strong>5, 10, 15, 30, 45, 60, 75, or 90 seconds</strong>. Set a short rewind to hear a sentence again and a longer forward skip when you need it.</p><p><strong>Undo Seek</strong> lets you return after moving the progress bar. The player also offers a return to your furthest played position after you go back. Timestamps in the episode description provide chapter markers and previous and next chapter controls.</p><p>Episode descriptions retain the publisher’s formatting and links. Recognized timestamps in show notes let you jump to the referenced moment.</p>`,
         screenshots: ['chapter-player']
+      },
+      {
+        id: 'silence-skipping', title: 'Less silence. More conversation.',
+        body: `<p><strong>Shorten Silence</strong> skips clear pauses in downloaded episodes while keeping space around speech. Choose <strong>Gentle</strong>, <strong>Balanced</strong>, or <strong>Aggressive</strong> to control how much is shortened. Choose <strong>Off</strong> to keep the original pauses. Higher playback speeds shorten pauses a little more automatically.</p><p>Set a global default, give a podcast its own setting, or make a temporary choice in the expanded player. <strong>Quiet Audio Protection</strong> lets you protect fainter sounds or allow more background noise within a pause.</p><p>Silence skipping requires downloaded audio and completed audio analysis. Playback continues normally while analysis is pending. <a href="/podhaven/guides/listening-tactics#silence-skipping">Set up silence skipping</a>.</p>`,
+        screenshots: []
+      },
+      {
+        id: 'carplay', title: 'Your next listen, on the road.',
+        body: `<p>Open PodHaven on your car’s <strong>CarPlay</strong> display to browse <strong>Up Next</strong>, your saved <strong>Smart Lists</strong>, and subscribed <strong>Podcasts</strong>. Pick an episode and use Now Playing to pause, skip, or change playback speed.</p><p>CarPlay uses the same queue and player as your iPhone. Download episodes before a trip for offline listening, and keep your favorite shows ready for the drive. <a href="/podhaven/guides/listening-tactics#carplay">Get started with CarPlay</a>.</p>`,
+        screenshots: []
       },
       {
         id: 'remote', title: 'Carry your controls into the day.',

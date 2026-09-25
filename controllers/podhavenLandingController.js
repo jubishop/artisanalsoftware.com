@@ -41,7 +41,7 @@ module.exports = {
   showPrivacy: (req, res) => render(res, 'podhaven/detail', privacy, '/podhaven/privacy', 'privacy'),
   showLanding: (req, res) => render(res, 'podhaven/landing', {
     label: 'Podcasts, at your pace',
-    description: 'Meet PodHaven: recommendations powered entirely on your device, Smart Lists and flexible filters, and extensive settings to make listening your own.'
+    description: 'Meet PodHaven: on-device recommendations, Smart Lists, configurable silence skipping, and CarPlay. Make every listen your own.'
   }, '/podhaven', 'landing'),
   showGuidesIndex: (req, res) => render(res, 'podhaven/guides/index', {
     label: 'Guides',

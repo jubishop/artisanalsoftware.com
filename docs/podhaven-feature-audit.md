@@ -8,6 +8,30 @@ Audited 2026-09-04 against PodHaven `main` at `f1d6e2b2acb724a468876ef387dbb59da
 
 Current app code is the authority for behavior. The ML and transcription initiative documents helped identify areas to inspect, but they contain old decisions and deferred work. The copy below reflects implemented user-facing behavior, rather than every proposal in those documents.
 
+## Silence skipping and CarPlay update
+
+Verified 2026-09-25 against PodHaven `main` at
+`43d5491911b928600616aa398bb34f91f8f3fb00`. The user approved publishing these
+feature descriptions before App Store 1.4 is live. This extends the earlier
+audit only for the two features below; it does not re-audit unrelated claims.
+
+- Silence skipping: `PodHaven/Play/Silence/SilenceMode.swift`,
+  `QuietAudioProtection.swift`, `PodHaven/Environment/UserSettings.swift`,
+  `PodHaven/Views/PlayBar/Components/SilenceModeMenu.swift`,
+  `QuietAudioProtectionMenu.swift`, `PlayBarSheet.swift`, `SettingsView.swift`,
+  `PodcastSettingsView.swift`, and `PodHaven/Play/PlayManager.swift` confirm the
+  presets, defaults, download and analysis requirement, and independent global,
+  podcast, and temporary playback settings.
+- CarPlay: `PodHaven/CarPlay/CarPlayRootTemplate.swift`, `CarPlayPodcasts.swift`,
+  and `CarPlayCoordinator.swift`, together with the current
+  `docs/carplay-playback.md`, confirm Up Next, saved Smart Lists, subscribed
+  podcasts, shared playback, and native Now Playing controls.
+
+Both features appear on the studio and PodHaven homepages, the player feature
+page, and the listening guide. Global and per-podcast settings guides explain
+silence controls. Existing URLs and screenshot placements remain in use; the
+new sections do not claim that older screenshots show these controls.
+
 ## Editorial priorities
 
 The homepage leads with recommendations powered entirely on device, Smart Lists and flexible filters, and extensive settings and customization. These areas lead the feature index, navigation, and featured guide links. Up Next and Smart Lists occupy the hero; settings have their own screenshot showcase. Transcription has a smaller, single-screenshot callout near the bottom of the homepage, after the everyday listening section. Its dedicated feature page and guide remain available.
@@ -78,9 +102,9 @@ production deployment or current app behavior.
 
 ## Not advertised as available
 
-Auto-skip silence, generated summaries/chapters, clip creation, speaker diarization, cloud library sync, a dedicated Watch app, and transcript-based recommendation embeddings are not represented as current features. The implemented ML recipe uses episode and podcast metadata. Publisher transcripts can preserve languages other than the local English (US) speech model, but availability depends on what a publisher supplies.
+Generated summaries/chapters, clip creation, speaker diarization, cloud library sync, a dedicated Watch app, and transcript-based recommendation embeddings are not represented as current features. The implemented ML recipe uses episode and podcast metadata. Publisher transcripts can preserve languages other than the local English (US) speech model, but availability depends on what a publisher supplies.
 
-The existing “App Store coming soon” status is retained. This audit does not claim a newly published listing or change distribution policy.
+The original September 4 audit retained “App Store coming soon.” The site now links to the published App Store listing. The September 25 update above records the approved timing for the new feature copy.
 
 ## Website implementation
 

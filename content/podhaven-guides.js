@@ -107,7 +107,7 @@ module.exports = {
       },
       {
         id: 'playback', title: 'Playback.',
-        body: `<dl><dt>Default Playback Rate</dt><dd>0.8×–2.0×, in 0.1× steps, for first playback of new episodes.</dd><dt>Next Track Behavior</dt><dd>Next Episode, Skip Interval, or Next Chapter. Chapter mode falls back to skips if chapters are unavailable.</dd><dt>Skip Forward / Backward Interval</dt><dd>Set each independently to 5, 10, 15, 30, 45, 60, 75, or 90 seconds.</dd><dt>Enable Undo Seek</dt><dd>Offers a return to the previous position after a progress-bar seek.</dd><dt>Command Center Scrubbing</dt><dd>Allows progress-bar seeks through system playback controls. Turn it off to prevent accidental remote seeks.</dd><dt>Like Button</dt><dd>Love, Like, Save in Cache, or Add Tag, where supported remotes expose this command.</dd><dt>Dislike Button</dt><dd>Dislike or Add Tag. Create tags first to use a tag assignment.</dd></dl>`,
+        body: `<dl><dt>Shorten Silence</dt><dd>Gentle, Balanced, or Aggressive shortens clear pauses in downloaded, analyzed audio. Off, the default, keeps the original pauses.</dd><dt>Quiet Audio Protection</dt><dd>High, the default, protects fainter sounds. Medium and Low allow more background noise within a pause, but may skip quiet speech. This setting does not enable skipping when Shorten Silence is Off.</dd><dt>Default Playback Rate</dt><dd>0.8×–2.0×, in 0.1× steps, for first playback of new episodes.</dd><dt>Next Track Behavior</dt><dd>Next Episode, Skip Interval, or Next Chapter. Chapter mode falls back to skips if chapters are unavailable.</dd><dt>Skip Forward / Backward Interval</dt><dd>Set each independently to 5, 10, 15, 30, 45, 60, 75, or 90 seconds.</dd><dt>Enable Undo Seek</dt><dd>Offers a return to the previous position after a progress-bar seek.</dd><dt>Command Center Scrubbing</dt><dd>Allows progress-bar seeks through system playback controls. Turn it off to prevent accidental remote seeks.</dd><dt>Like Button</dt><dd>Love, Like, Save in Cache, or Add Tag, where supported remotes expose this command.</dd><dt>Dislike Button</dt><dd>Dislike or Add Tag. Create tags first to use a tag assignment.</dd></dl><p>Follow the <a href="/podhaven/guides/listening-tactics#silence-skipping">silence skipping guide</a> to choose settings for a show or the current playback.</p>`,
         screenshots: ['remote-settings']
       },
       {
@@ -134,12 +134,12 @@ module.exports = {
   },
   'per-podcast-settings': {
     label: 'Per-podcast settings', title: 'Give every show its own routine.',
-    description: 'Set playback speed, automatic queueing and limits, downloads, transcription, freshness, and notifications for an individual podcast.',
+    description: 'Set playback speed, silence skipping, automatic queueing and limits, downloads, transcription, freshness, and notifications for an individual podcast.',
     intro: 'Open a subscribed podcast’s detail page and its settings control. These options let a daily briefing behave differently from a long-running interview series.',
     sections: [
       {
         id: 'playback', title: 'Playback and queueing.',
-        body: `<dl><dt>Playback Rate</dt><dd>Overrides the global default for new episodes from this show. Clear the override to follow the global rate again.</dd><dt>Queue All Episodes</dt><dd>Never leaves queueing manual. On Bottom appends newly discovered episodes; On Top puts them first.</dd><dt>Limit Episodes</dt><dd>Available when automatic queueing is enabled. Keeps the chosen number of latest episodes from this podcast as new ones are auto-queued.</dd></dl><p>A useful daily-news setup is On Top with a small episode limit. For a slower series, On Bottom leaves your current listening plan ahead of it.</p>`,
+        body: `<dl><dt>Shorten Silence</dt><dd>Choose Gentle, Balanced, Aggressive, or Off for this show. Use Global follows your default setting.</dd><dt>Quiet Audio Protection</dt><dd>Choose High, Medium, or Low independently of the silence mode. Use Global follows your default protection level.</dd><dt>Playback Rate</dt><dd>Overrides the global default for new episodes from this show. Clear the override to follow the global rate again.</dd><dt>Queue All Episodes</dt><dd>Never leaves queueing manual. On Bottom appends newly discovered episodes; On Top puts them first.</dd><dt>Limit Episodes</dt><dd>Available when automatic queueing is enabled. Keeps the chosen number of latest episodes from this podcast as new ones are auto-queued.</dd></dl><p>Silence skipping requires downloaded audio and completed analysis. A temporary choice in the expanded player takes precedence over the matching podcast setting for the current playback. <a href="/podhaven/guides/listening-tactics#silence-skipping">Learn how silence settings work together</a>.</p><p>A useful daily-news setup is On Top with a small episode limit. For a slower series, On Bottom leaves your current listening plan ahead of it.</p>`,
         screenshots: ['podcast-settings']
       },
       {
@@ -156,7 +156,7 @@ module.exports = {
   },
   'listening-tactics': {
     label: 'Player, queue & gestures', title: 'Make everyday listening easier.',
-    description: 'Use Up Next, batch actions, configurable swipes, playback shortcuts, chapter controls, and remote actions.',
+    description: 'Use silence skipping, CarPlay, Up Next, batch actions, configurable swipes, playback shortcuts, chapters, and remote controls.',
     intro: 'A few useful shortcuts for arranging episodes and staying in control while you listen.',
     sections: [
       {
@@ -173,6 +173,16 @@ module.exports = {
         id: 'player', title: 'Move around without losing your place.',
         body: `<p>Enable <strong>Undo Seek</strong> to return after an accidental progress-bar move. After going back, the furthest-position control can return you to the furthest point you have played.</p><p>Use chapter controls when the episode has embedded chapters. Tap recognized timestamps in the description to jump to a referenced moment. Use <strong>Show Transcript</strong> in the expanded player to follow stored text alongside playback.</p><p>Adjust playback speed for the episode, or set a default in global or per-podcast settings. The supported range is 0.8×–2.0×.</p>`,
         screenshots: ['chapter-player']
+      },
+      {
+        id: 'silence-skipping', title: 'Shorten pauses with silence skipping.',
+        body: `<ol><li>Download the episode you want to hear.</li><li>Open <strong>Settings → Playback → Shorten Silence</strong>.</li><li>Choose <strong>Gentle</strong> to keep more space, <strong>Balanced</strong> to shorten more, or <strong>Aggressive</strong> to remove the most. <strong>Off</strong> keeps the original pauses.</li><li>Let PodHaven finish analyzing the audio. Playback continues normally while analysis is pending.</li></ol><p><strong>Quiet Audio Protection</strong> controls how quiet a pause must be before it can be skipped. <strong>High</strong>, the default, protects fainter sounds. <strong>Medium</strong> and <strong>Low</strong> allow more background noise, but may skip quiet speech. Protection does not turn silence skipping on by itself.</p><p>For a particular show, open Podcast Settings and choose its silence mode and protection level. Each can follow <strong>Use Global</strong> or have its own override.</p><p>For a temporary change, expand the player and use <strong>Shorten Silence</strong> and <strong>Quiet Audio Protection</strong> beside the speed control. Each player choice overrides only that setting for the current playback. It survives pausing and seeking, then clears when playback ends or another episode is selected. It does not change your saved defaults.</p><p>Higher playback speeds shorten pauses a little more automatically. Choose Off at any time to stop automatic silence skips.</p>`,
+        screenshots: []
+      },
+      {
+        id: 'carplay', title: 'Listen with CarPlay.',
+        body: `<ol><li>Before your trip, organize your queue and download any episodes you need offline.</li><li>Connect your iPhone to a CarPlay-compatible vehicle and open PodHaven on its display.</li><li>Choose an episode from <strong>Up Next</strong>, <strong>Episodes</strong>, or <strong>Podcasts</strong>.</li></ol><dl><dt>Up Next</dt><dd>Browse your current episode, queue, and available recommendations.</dd><dt>Episodes</dt><dd>Open your saved Smart Lists in their configured order.</dd><dt>Podcasts</dt><dd>Browse Recently Updated shows or All Podcasts. A show opens with unfinished episodes; choose All Episodes to include finished ones.</dd></dl><p>Use <strong>Now Playing</strong> to pause, skip, change playback speed, or return to Up Next. CarPlay shares your iPhone’s player and queue. Your configured skip intervals and Next Track behavior still apply.</p><p>Vehicle restrictions can limit how many items are available to browse. Downloads must be complete before you rely on offline playback.</p>`,
+        screenshots: []
       },
       {
         id: 'remote', title: 'Set the behavior of external controls.',
