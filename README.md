@@ -39,6 +39,13 @@ successful full check before merge or release. See the
 [development workflow](docs/development-workflow.md) for setup, focused tests,
 check selection, hooks, and isolated worktrees.
 
+## Deployment
+
+Push release changes to `main` for Railway deployment. Documentation and local
+task-tracking changes can skip deployment while CI still runs. See the
+[deployment policy](docs/deployment.md#nonfunctional-changes) for watch paths
+and the manual option for other nonfunctional edits.
+
 ## Project knowledge
 
 - [Documentation](docs/README.md): architecture, content, operations, and decisions.
