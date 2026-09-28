@@ -27,7 +27,7 @@ class KnowledgeTests(unittest.TestCase):
             shutil.copytree(SOURCE / ".github", self.repo / ".github")
         (self.repo / ".config").mkdir()
         shutil.copy2(SOURCE / ".config/knowledge.json", self.repo / ".config/knowledge.json")
-        for name in ("README.md", "AGENTS.md", ".gitignore", ".project-starter.json", "LICENSE.project-starter"):
+        for name in ("README.md", "AGENTS.md", ".gitignore", ".project-starter.json", "LICENSE.project-starter", "railway.json"):
             shutil.copy2(SOURCE / name, self.repo / name)
         if (SOURCE / ".envrc").exists():
             shutil.copy2(SOURCE / ".envrc", self.repo / ".envrc")

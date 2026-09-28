@@ -8,7 +8,13 @@ and the [content guide](docs/podhaven-content.md) for affected work.
 
 Keep designs, decisions, and research in [docs](docs/README.md). Use
 [GitHub Issues](https://github.com/jubishop/artisanalsoftware.com/issues) for
-work items and implementation progress.
+shared work and acceptance criteria.
+
+Use `td` for local tasks, progress, blockers, and handoffs. In each new agent
+context, run `td usage --new-session -q` once; use `td usage` for full workflow
+guidance. Follow the [task workflow](docs/task-tracking.md), including first-time
+setup. Keep GitHub Issues for shared scope and acceptance criteria; link related
+issues from td.
 
 Before non-trivial work or writing memory, search the relevant knowledge.
 Use `bin/knowledge search "term"` for known terms and
@@ -52,6 +58,8 @@ result for ordinary code changes; otherwise run the full check locally before
 delivery. Do not run checks for discussion or read-only work. Batch edits
 before checking; reuse passing results while relevant inputs are unchanged.
 See [the workflow](docs/development-workflow.md#checks-and-project-extensions).
+Nonfunctional changes may be pushed without deployment; follow the
+[deployment policy](docs/deployment.md#nonfunctional-changes).
 Use `bin/doctor` to inspect local setup and `bin/qmd-index` to refresh search
 after uncommitted knowledge edits when current search results are needed.
 Hooks refresh search after Git events.

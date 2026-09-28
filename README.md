@@ -43,7 +43,7 @@ check selection, hooks, and isolated worktrees.
 
 - [Documentation](docs/README.md): architecture, content, operations, and decisions.
 - [Memory](memory/README.md): durable lessons and historical context.
-- [GitHub Issues](https://github.com/jubishop/artisanalsoftware.com/issues): work items and progress.
+- [GitHub Issues](https://github.com/jubishop/artisanalsoftware.com/issues): shared work and acceptance criteria.
 - [Agent instructions](AGENTS.md): project constraints and working conventions.
 
 Use `git knowledge search "term"` after setup, or read the Markdown directly.
@@ -58,3 +58,11 @@ auto-deploy. Follow [the deployment runbook](docs/deployment.md).
 
 The application retains its ISC license declaration. Copied foundation files
 retain the MIT notice in [LICENSE.project-starter](LICENSE.project-starter).
+
+## Local task tracking
+
+Use `td` for local tasks, progress, blockers, and session handoffs. After cloning,
+install td and run `td init` in the primary checkout. Use `td status` or
+`td monitor` to inspect progress. Follow the [task workflow](docs/task-tracking.md)
+for setup, review, worktrees, and local data. Keep GitHub Issues for shared scope
+and acceptance criteria, linked from related td tasks.

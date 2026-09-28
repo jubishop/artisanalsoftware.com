@@ -1,0 +1,25 @@
+{
+  "$schema": "https://railway.com/railway.schema.json",
+  "build": {
+    "watchPatterns": [
+      "/*.js",
+      "/config/**",
+      "/controllers/**",
+      "/middleware/**",
+      "/services/**",
+      "/content/**",
+      "/views/**",
+      "/public/**",
+      "/package*.json",
+      "/.npmrc",
+      "/.nvmrc",
+      "/.env.example",
+      "/bin/check-node.cjs",
+      "/railway.json",
+      "/railway.toml",
+      "/Dockerfile*",
+      "/Procfile",
+      "/.dockerignore"
+    ]
+  }
+}

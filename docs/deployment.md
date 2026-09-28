@@ -4,7 +4,7 @@ status: current
 
 # Railway deployment
 
-The website runs on Railway behind Cloudflare. Pushing or merging to `main`
+The website runs on Railway behind Cloudflare. Pushing or merging release inputs to `main`
 starts Railway's GitHub deployment. This records the existing repository
 configuration; inspect Railway for live deployment and DNS values.
 
@@ -21,6 +21,31 @@ configuration; inspect Railway for live deployment and DNS values.
 The domain's registrar and DNS provider are Cloudflare. See
 [domain management](../memory/domain-management.md) for transfer history.
 Use Railway **Settings → Domains** as the authority for current DNS targets.
+
+## Nonfunctional changes
+
+Documentation, agent instructions, task tracking, comments, and other
+nonfunctional changes may be committed and pushed without deployment. Run
+appropriate checks and assess all changes since the last successful release.
+Do not skip a release that includes undeployed material changes.
+
+[`railway.json`](../railway.json) configures Railway's
+[watch paths](https://docs.railway.com/builds/build-configuration#configure-watch-paths).
+Application code, content, views, assets, dependencies, startup checks, and
+runtime configuration trigger deployment. Documentation, memory, td setup,
+tests, and knowledge tooling alone do not. Keep these patterns current when
+adding or moving release inputs. The configuration change itself triggers a
+deployment; subsequent documentation changes can skip it.
+
+Watch paths cannot judge comment-only edits inside application files. For
+those changes, inspect the full difference from the deployed revision, then
+[disable autodeploy](https://docs.railway.com/deployments/github-autodeploys#disable-automatic-deployments)
+in the service settings before pushing. Keep required CI running. Record the
+reason and deployed revision in the commit message, then restore autodeploy
+after the push has been processed. This is an authorized delivery choice and
+does not require a separate deployment approval. If a deployment is needed
+later, use **Deploy Latest Commit** for the connected `main` branch. Do not
+use `[skip ci]` as a deployment control.
 
 ## Environment
 

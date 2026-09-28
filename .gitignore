@@ -57,3 +57,6 @@ coverage/
 __pycache__/
 *.py[cod]
 worktrees/
+
+# Local td task state
+.todos/
