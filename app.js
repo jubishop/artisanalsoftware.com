@@ -4,7 +4,7 @@ const fs = require('fs')
 const crypto = require('crypto')
 const helmet = require('helmet')
 const compression = require('compression')
-const rateLimit = require('express-rate-limit')
+const { rateLimit, ipKeyGenerator } = require('express-rate-limit')
 
 const config = require('./config')
 const podcastController = require('./controllers/podcastController')
@@ -86,13 +86,14 @@ app.get(['/podhaven/open/podcast', '/podhaven/open/episode'], universalLinkContr
 
 // Rate limiting. Prefer Cloudflare's CF-Connecting-IP (always the true client)
 // and fall back to req.ip, which is now correct thanks to `trust proxy`.
+// ipKeyGenerator groups IPv6 clients by /56 so one allocation is one client.
 const limiter = rateLimit({
   windowMs: config.rateLimitWindowMs,
   max: config.rateLimitMaxRequests,
   message: 'Too many requests from this IP, please try again later.',
   standardHeaders: true,
   legacyHeaders: false,
-  keyGenerator: (req) => req.headers['cf-connecting-ip'] || req.ip
+  keyGenerator: (req) => ipKeyGenerator(req.headers['cf-connecting-ip'] || req.ip)
 })
 app.use(limiter)
 
