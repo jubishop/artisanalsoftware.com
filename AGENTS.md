@@ -22,6 +22,8 @@ Project Starter manages this block; add project rules after it.
   `bin/check --documents-only` for Markdown, application checks for code, and
   `bin/check --full` before merge or release unless an enforced CI gate runs
   it. Skip checks for read-only work and reuse passing results.
+- Keep accepted decisions separate from proposals, preserve unrelated changes,
+  and keep secrets and generated caches out of Git.
 - Run `bin/setup` after cloning, `bin/doctor` to diagnose setup, and
   `bin/qmd-index` after uncommitted knowledge edits. Managed files listed in
   `.project-starter.json` change only through Project Starter or a recorded
@@ -46,5 +48,3 @@ the full check locally before pushing a release; see the
 [development workflow](docs/development-workflow.md#checks). Nonfunctional
 changes may be pushed without deployment; follow the
 [deployment policy](docs/deployment.md#nonfunctional-changes).
-
-Preserve unrelated changes. Keep secrets and generated caches out of Git.
