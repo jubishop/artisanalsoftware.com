@@ -1,15 +1,5 @@
 #!/usr/bin/env python3
 import sys
 sys.dont_write_bytecode = True
-from pathlib import Path
-import subprocess
 from _checks import main
-
-result = main()
-if result == 0 and sys.argv[1:] == ['--full']:
-    try:
-        result = subprocess.run(['npm', 'test'], cwd=Path(__file__).resolve().parents[1]).returncode
-    except OSError as error:
-        print(f'Cannot run application checks: {error}. Select Node 24 and run npm ci.', file=sys.stderr)
-        result = 1
-sys.exit(result)
+sys.exit(main())

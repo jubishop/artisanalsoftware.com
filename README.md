@@ -32,12 +32,13 @@ The app reads process environment variables, not `.env` automatically. See
 | `bin/check --documents-only` | Markdown metadata, indexes, and local links. |
 | `bin/check` | Foundation syntax, shell lint, docs, and whitespace. |
 | `npm test` | Mocha application tests with local fixtures. |
-| `bin/check --full` | All foundation behavior tests, then the application suite. |
+| `bin/check --full` | Foundation checks, then `bin/check-application`: Python tests and the application suite. |
 
 Full checks run in [GitHub Actions](.github/workflows/check.yml). Require a
 successful full check before merge or release. See the
 [development workflow](docs/development-workflow.md) for setup, focused tests,
-check selection, hooks, and isolated worktrees.
+and isolated worktrees, and the [foundation pages](docs/foundation/README.md)
+for check selection, search, and hooks.
 
 ## Deployment
 
@@ -70,6 +71,6 @@ retain the MIT notice in [LICENSE.project-starter](LICENSE.project-starter).
 
 Use `td` for local tasks, progress, blockers, and session handoffs. After cloning,
 install td and run `td init` in the primary checkout. Use `td status` or
-`td monitor` to inspect progress. Follow the [task workflow](docs/task-tracking.md)
+`td monitor` to inspect progress. Follow the [task workflow](docs/foundation/task-tracking.md)
 for setup, review, worktrees, and local data. Keep GitHub Issues for shared scope
 and acceptance criteria, linked from related td tasks.
