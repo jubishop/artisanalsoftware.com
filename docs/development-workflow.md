@@ -52,10 +52,12 @@ require no model downloads.
 The [GitHub workflow](../.github/workflows/check.yml) runs `npm ci` under
 the latest Node LTS and then `bin/check --full` on the latest Ubuntu runner
 for pull requests and pushes to `main`. It uses read-only permissions and does not retain checkout credentials.
-Local full validation is required until an enforced CI gate is confirmed.
-Railway's automatic deployment is separate; do not assume it waits for CI.
-After an authorized push, verify CI for the exact pushed commit. The workflow
-file and a local pass alone do not prove that hosted CI passed.
+Railway waits for the commit's GitHub check suites before it builds, and
+skips the deployment if they fail, so this workflow gates releases; a local
+full check before pushing is optional. On 2026-10-10 Railway held 5027492 in
+`WAITING` until its CI run passed. `test/deployment.test.js` keeps the
+setting in [`.railway/railway.ts`](../.railway/railway.ts). After an
+authorized push, verify CI and the deployment for the exact pushed commit.
 
 ## Runtime and toolchain versions
 
@@ -70,7 +72,9 @@ The `prestart` and `pretest` npm hooks run `bin/check-node.cjs` before
 starting the server or Mocha. It rejects only majors below the minimum and
 reports the detected version, the minimum, and how to select the latest LTS.
 Use `npm start` and `npm test` as the application entry points; direct
-`node app.js` and direct Mocha calls bypass npm's guard.
+`node app.js` and direct Mocha calls bypass npm's guard. Railway starts
+production with `node app.js`; its build runs `npm install` on the same Node,
+so `engine-strict` enforces the minimum there.
 
 Document and foundation checks do not require Node or npm. Raise the minimum
 when the application starts relying on a newer Node release.

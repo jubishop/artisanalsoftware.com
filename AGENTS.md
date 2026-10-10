@@ -44,8 +44,8 @@ for shared work and acceptance criteria.
 
 For code edits, run relevant application checks explicitly, such as
 `npm test -- --grep "episode"`. `bin/check --full` adds `bin/check-application`:
-the Python tests, then `npm test`. Until an enforced CI gate is verified, run
-the full check locally before pushing a release; see the
+the Python tests, then `npm test`. Railway deploys a commit only after its CI
+checks pass, so CI's full check is the release gate; see the
 [development workflow](docs/development-workflow.md#checks). Nonfunctional
 changes may be pushed without deployment; follow the
 [deployment policy](docs/deployment.md#nonfunctional-changes).

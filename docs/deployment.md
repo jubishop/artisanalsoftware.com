@@ -119,9 +119,12 @@ uses a push to `main`; `railway up` is the manual route. `railway logs` reads
 service logs. Environment changes require a redeploy.
 
 Before a release, require a successful `bin/check --full`. The
-[GitHub workflow](../.github/workflows/check.yml) runs it, but the existence of
-that file does not establish branch protection or that Railway waits for CI.
-Until an enforced gate is verified, run the full check locally before pushing.
+[GitHub workflow](../.github/workflows/check.yml) runs it, and Railway builds
+a pushed commit only after its check suites pass; see
+[checks](development-workflow.md#checks). Railway's builders can fail for
+reasons outside the repository, such as a full builder disk (`ENOSPC`) on
+2026-10-10. Read the build log; if the failure is not in the project, run
+`railway redeploy --from-source` once before investigating further.
 
 After an authorized deploy, confirm Railway reports a successful deployment
 for the intended commit. Read back `/health` and the changed pages on the

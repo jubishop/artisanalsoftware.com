@@ -63,3 +63,13 @@ describe('Railway deployment watch paths', function () {
     assert.equal(watches(['docs/foundation/task-tracking.md', 'app.js']), true);
   });
 });
+
+describe('Railway deployment source', function () {
+  // The docs rely on this gate instead of a local full check before pushing.
+  it('deploys main only after the commit\'s GitHub check suites pass', async function () {
+    const { source } = await railwayService('artisanalsoftware');
+    assert.deepEqual(source, {
+      type: 'github', repo: 'jubishop/artisanalsoftware.com', branch: 'main', checkSuites: true,
+    });
+  });
+});
