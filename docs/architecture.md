@@ -73,5 +73,5 @@ dates are not recorded here.
 | `test/` | Mocha application tests and local RSS fixtures. |
 | `tests/`, `bin/` | Foundation tests and repository tools. |
 
-There is no application build step. Railway runs `npm start`. See
+There is no application build step. Railway runs `node app.js`. See
 [deployment](deployment.md) for service settings and verification.

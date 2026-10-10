@@ -1,22 +1,34 @@
 const assert = require('node:assert/strict');
 const { spawnSync } = require('node:child_process');
-const { mkdtempSync, readFileSync, rmSync, writeFileSync } = require('node:fs');
+const { mkdtempSync, rmSync, writeFileSync } = require('node:fs');
 const { tmpdir } = require('node:os');
 const path = require('node:path');
+const { pathToFileURL } = require('node:url');
+
+// Evaluate the Infrastructure as Code file the way `railway config plan` does.
+async function railwayService(name) {
+  const { createRailwayContext, project } = await import('railway/iac');
+  const { default: program } = await import(pathToFileURL(path.join(__dirname, '../.railway/railway.ts')).href);
+  const definition = await program(createRailwayContext({ environment: 'production' }), project);
+  const service = definition.resources.find((resource) => resource.type === 'service' && resource.name === name);
+  assert.ok(service, `service ${name} is not defined in .railway/railway.ts`);
+  return service;
+}
 
 describe('Railway deployment watch paths', function () {
   let directory;
 
-  before(function () {
+  before(async function () {
+    const { build } = await railwayService('artisanalsoftware');
+    assert.ok(Array.isArray(build?.watchPatterns), 'artisanalsoftware has no build.watchPatterns');
     directory = mkdtempSync(path.join(tmpdir(), 'railway-watch-'));
     assert.equal(spawnSync('git', ['init', '-q', directory]).status, 0);
-    const config = JSON.parse(readFileSync(path.join(__dirname, '../railway.json')));
     // Railway documents gitignore-style matching. Matching here means watched.
-    writeFileSync(path.join(directory, '.gitignore'), config.build.watchPatterns.join('\n') + '\n');
+    writeFileSync(path.join(directory, '.gitignore'), build.watchPatterns.join('\n') + '\n');
   });
 
   after(function () {
-    rmSync(directory, { recursive: true, force: true });
+    if (directory) rmSync(directory, { recursive: true, force: true });
   });
 
   function watches(files) {
@@ -34,11 +46,15 @@ describe('Railway deployment watch paths', function () {
       'tests/test_check_application.py']), false);
   });
 
+  it('skips Railway configuration, which `railway config apply` deploys itself', function () {
+    assert.equal(watches(['.railway/railway.ts', '.railway/package.json']), false);
+  });
+
   it('deploys application, asset, dependency, and runtime configuration changes', function () {
     for (const file of ['app.js', 'config/index.js', 'controllers/siteController.js',
       'middleware/validateFeedUrl.js', 'services/rssParser.js', 'content/podhaven-features.js',
       'views/podhaven.ejs', 'public/stylesheets/style.css', 'package-lock.json',
-      'package.json', '.nvmrc', '.npmrc', 'bin/check-node.cjs', 'railway.json', 'Dockerfile']) {
+      'package.json', '.nvmrc', '.npmrc', 'bin/check-node.cjs', 'Dockerfile', 'Procfile']) {
       assert.equal(watches([file]), true, file);
     }
   });

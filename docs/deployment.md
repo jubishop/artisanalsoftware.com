@@ -14,8 +14,12 @@ configuration; inspect Railway for live deployment and DNS values.
 | Railway project | `artisanal` |
 | Railway service | `artisanalsoftware` |
 | Railway environment | `production` |
+| Configuration | [`.railway/railway.ts`](../.railway/railway.ts); see [Railway configuration](#railway-configuration) |
 | Runtime | Latest Node LTS, selected by `.nvmrc`; see [Node runtime selection](#node-runtime-selection) |
-| Start command | `npm start` |
+| Build command | `npm install` |
+| Start command | `node app.js` |
+| Health check | `/health` |
+| Replicas | One, in `us-west2` |
 | Custom domains | `artisanalsoftware.com`, `www.artisanalsoftware.com` |
 
 The domain's registrar and DNS provider are Cloudflare. See
@@ -26,7 +30,7 @@ Use Railway **Settings → Domains** as the authority for current DNS targets.
 
 Railway builds this service with
 [Railpack](https://railpack.com/languages/node), its default builder;
-`railway.json` does not choose one. Railpack's source at commit `08ca893`
+`.railway/railway.ts` does not choose one. Railpack's source at commit `08ca893`
 (checked 2026-10-09) selects Node this way:
 
 - It starts from its `lts` default, applies `engines.node`, then a
@@ -43,6 +47,30 @@ moves to a newer LTS release only on its next deployment, after Railpack's
 bundled mise recognizes it. The build log's package list shows the selected
 version and its source.
 
+## Railway configuration
+
+[`.railway/railway.ts`](../.railway/railway.ts) is the service's
+[Infrastructure as Code](https://docs.railway.com/infrastructure-as-code)
+file. It declares the `artisanalsoftware` partial and manages the GitHub
+source (`main`, waiting for the commit's check suites), build command, watch
+paths, start command, health check, replica, and custom domains.
+Variables are unmanaged, so set them in Railway.
+
+Railway does not read `.railway/` during deploys. To change a setting, run
+`npm ci` (it installs the `railway` SDK that evaluates the file), edit the file,
+review `railway config plan`, then run `railway config apply`. Apply updates
+the service and starts a deployment of the current `main` commit. Afterward,
+`railway config plan --detailed-exit-code` exits 0 when Railway matches the
+file. `.railway/package.json` marks the file as an ES module because the
+application package is CommonJS.
+
+This replaced `railway.json`. Railway deprecated that Config as Code file and
+stops reading such files on 2026-12-01. On 2026-10-09, Railway CLI 5.64.2's
+`railway config migrate --apply --variables=unmanaged --service
+artisanalsoftware` imported the live settings, but left the watch paths as a
+comment. They were added by hand without `/railway.json` and `/railway.toml`;
+the first apply changed only `build.watchPatterns`.
+
 ## Nonfunctional changes
 
 Documentation, agent instructions, task tracking, comments, and other
@@ -50,13 +78,14 @@ nonfunctional changes may be committed and pushed without deployment. Run
 appropriate checks and assess all changes since the last successful release.
 Do not skip a release that includes undeployed material changes.
 
-[`railway.json`](../railway.json) configures Railway's
-[watch paths](https://docs.railway.com/builds/build-configuration#configure-watch-paths).
+[`.railway/railway.ts`](../.railway/railway.ts) configures Railway's
+[watch paths](https://docs.railway.com/builds/build-configuration#configure-watch-paths)
+as `build.watchPatterns`, and `test/deployment.test.js` evaluates that file.
 Application code, content, views, assets, dependencies, startup checks, and
 runtime configuration trigger deployment. Documentation, memory, td setup,
-tests, and knowledge tooling alone do not. Keep these patterns current when
-adding or moving release inputs. The configuration change itself triggers a
-deployment; subsequent documentation changes can skip it.
+tests, knowledge tooling, and `.railway/` alone do not; `railway config apply`
+deploys Railway configuration changes. Keep these patterns current when
+adding or moving release inputs, and apply them before relying on them.
 
 Watch paths cannot judge comment-only edits inside application files. For
 those changes, inspect the full difference from the deployed revision, then
