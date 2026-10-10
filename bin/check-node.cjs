@@ -1,9 +1,11 @@
 const { engines } = require('../package.json')
 
-// This project deliberately supports one Node major. Read the package policy
-// so the installation and command guards cannot drift independently.
-const supported = /^(\d+)\.x$/.exec(engines.node)
-if (!supported || process.versions.node.split('.')[0] !== supported[1]) {
-  console.error(`This project requires Node ${engines.node}; detected ${process.version}. Select a compatible version with your version manager (see .nvmrc), then retry.`)
+// Read the minimum from the package policy so the installation and command
+// guards cannot drift independently. Newer Node majors are accepted.
+const declared = /^>=\s*(\d+)$/.exec(engines.node)
+const minimum = declared ? Number(declared[1]) : NaN
+const detected = Number(process.versions.node.split('.')[0])
+if (!declared || detected < minimum) {
+  console.error(`This project requires Node ${declared ? `${minimum} or later` : `matching ${engines.node}`}; detected ${process.version}. Select the latest LTS with your version manager (see .nvmrc), then retry.`)
   process.exit(1)
 }

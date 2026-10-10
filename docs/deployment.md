@@ -14,13 +14,34 @@ configuration; inspect Railway for live deployment and DNS values.
 | Railway project | `artisanal` |
 | Railway service | `artisanalsoftware` |
 | Railway environment | `production` |
-| Runtime | Node 24.x, declared in `package.json` |
+| Runtime | Latest Node LTS, selected by `.nvmrc`; see [Node runtime selection](#node-runtime-selection) |
 | Start command | `npm start` |
 | Custom domains | `artisanalsoftware.com`, `www.artisanalsoftware.com` |
 
 The domain's registrar and DNS provider are Cloudflare. See
 [domain management](../memory/domain-management.md) for transfer history.
 Use Railway **Settings → Domains** as the authority for current DNS targets.
+
+## Node runtime selection
+
+Railway builds this service with
+[Railpack](https://railpack.com/languages/node), its default builder;
+`railway.json` does not choose one. Railpack's source at commit `08ca893`
+(checked 2026-10-09) selects Node this way:
+
+- It starts from its `lts` default, applies `engines.node`, then a
+  `NODE_VERSION` or `RAILPACK_NODE_VERSION` service variable. Version files
+  that mise reads, including `.nvmrc`, then override all of these.
+- mise reads `lts/*` in `.nvmrc` as its `lts` alias, the newest LTS major
+  (24 on that date). Railpack installs that major's newest release that is at
+  least 14 days old, so a newer Current line is not selected.
+- Without `.nvmrc`, Railpack would reduce `engines.node` (`>=24`) to major 24
+  and stay there after a newer LTS line arrives.
+
+Keep `.nvmrc` at `lts/*` and leave the version variables unset. Production
+moves to a newer LTS release only on its next deployment, after Railpack's
+bundled mise recognizes it. The build log's package list shows the selected
+version and its source.
 
 ## Nonfunctional changes
 

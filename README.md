@@ -6,8 +6,8 @@ feeds. EJS and CSS provide the interface without client-side JavaScript.
 
 ## Start locally
 
-Use Node 24.x (see `package.json` and `.nvmrc`), npm, Git, Python 3.9+, and
-ShellCheck. QMD search and direnv are optional.
+Use the latest Node LTS (24 or later; see `package.json` and `.nvmrc`), npm,
+Git, Python 3.9+, and ShellCheck. QMD search and direnv are optional.
 
 ```sh
 npm ci
@@ -20,8 +20,9 @@ Open `http://localhost:3000`. Use `/podhaven` for the app website,
 `/podhaven/podcast?feedURL=<RSS_FEED_URL>` for a podcast, or
 `/podhaven/episode?feedURL=<RSS_FEED_URL>&guid=<EPISODE_GUID>` for an episode.
 
-`npm ci` enforces the declared Node version. `npm start` and `npm test` also
-check it before running. Select Node 24 with your version manager first.
+`npm ci` enforces the declared minimum Node version. `npm start` and
+`npm test` also check it before running. Select the latest LTS with your
+version manager first.
 The app reads process environment variables, not `.env` automatically. See
 [configuration and deployment](docs/deployment.md).
 

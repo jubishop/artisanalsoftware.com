@@ -17,7 +17,7 @@ def main():
     try:
         return subprocess.run(["npm", "test"], cwd=ROOT).returncode
     except OSError as error:
-        print(f"Cannot run application checks: {error}. Select Node 24 and run npm ci.", file=sys.stderr)
+        print(f"Cannot run application checks: {error}. Select Node 24 or later (the latest LTS) and run npm ci.", file=sys.stderr)
         return 1
 
 

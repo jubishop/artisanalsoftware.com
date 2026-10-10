@@ -16,8 +16,8 @@ bin/doctor
 bin/check --full
 ```
 
-Select Node 24 before `npm ci`. For fnm, run `fnm use 24`; install that major
-with your version manager if needed.
+Select the latest Node LTS before `npm ci`. `.nvmrc` requests `lts/*`; with
+fnm, run `fnm use --install-if-missing`.
 
 Foundation setup needs Git and Python 3.9 or later, and checks also need
 ShellCheck. QMD and direnv are optional; setup reports skipped features.
@@ -28,11 +28,11 @@ project needs environment settings, and review it before running
 
 If an installed QMD fails with a native database module version error, its
 Node runtime differs from the one used to build that installation. Keep the
-application on Node 24. Point `knowledge.qmdPath` at a local launcher that
-selects QMD's matching runtime, or repair that QMD installation deliberately.
-Keep machine-specific executable paths in local Git settings and the launcher
-outside tracked files. Test `bin/qmd-index` with the application runtime active;
-`qmd --version` alone does not exercise the database module.
+application on the latest Node LTS. Point `knowledge.qmdPath` at a local
+launcher that selects QMD's matching runtime, or repair that QMD installation
+deliberately. Keep machine-specific executable paths in local Git settings and
+the launcher outside tracked files. Test `bin/qmd-index` with the application
+runtime active; `qmd --version` alone does not exercise the database module.
 
 ## Checks
 
@@ -50,8 +50,8 @@ Mocha discovery. Keep both suites independent of production services; they
 require no model downloads.
 
 The [GitHub workflow](../.github/workflows/check.yml) runs `npm ci` under
-Node 24 and then `bin/check --full` on Ubuntu for pull requests and pushes to
-`main`. It uses read-only permissions and does not retain checkout credentials.
+the latest Node LTS and then `bin/check --full` on the latest Ubuntu runner
+for pull requests and pushes to `main`. It uses read-only permissions and does not retain checkout credentials.
 Local full validation is required until an enforced CI gate is confirmed.
 Railway's automatic deployment is separate; do not assume it waits for CI.
 After an authorized push, verify CI for the exact pushed commit. The workflow
@@ -59,28 +59,28 @@ file and a local pass alone do not prove that hosted CI passed.
 
 ## Runtime and toolchain versions
 
-The application supports Node 24.x, declared in `package.json`. `.nvmrc`
-selects that major for local version managers and GitHub Actions. Railway
-uses the package engine declaration. Keep these settings in agreement.
-
-`.npmrc` enables `engine-strict`, so installation fails on an unsupported
-runtime. The `prestart` and `pretest` npm hooks run `bin/check-node.cjs` before
-starting the server or Mocha. They report the detected version and the
-required range. Use `npm start` and `npm test` as the application entry points;
-direct `node app.js` and direct Mocha calls bypass npm's guard.
-
-Document and foundation checks do not require Node or npm. Upgrade Node
-deliberately, check dependency compatibility, and update development, CI, and
-Railway together, following the
+The application runs on the latest Node LTS, following the
 [version policy](foundation/engineering-policy.md#runtime-and-toolchain-versions).
-Use maintained releases and avoid an unbounded major.
+`package.json` declares the minimum, `"node": ">=24"`, with no upper bound.
+`.nvmrc` requests `lts/*` for local version managers, GitHub Actions, and
+Railway; see [Railway's Node selection](deployment.md#node-runtime-selection).
+
+`.npmrc` enables `engine-strict`, so installation fails below the minimum.
+The `prestart` and `pretest` npm hooks run `bin/check-node.cjs` before
+starting the server or Mocha. It rejects only majors below the minimum and
+reports the detected version, the minimum, and how to select the latest LTS.
+Use `npm start` and `npm test` as the application entry points; direct
+`node app.js` and direct Mocha calls bypass npm's guard.
+
+Document and foundation checks do not require Node or npm. Raise the minimum
+when the application starts relying on a newer Node release.
 
 ## Worktrees and checkout isolation
 
 Shared worktree rules are in
 [worktrees and models](foundation/knowledge-search.md#worktrees-and-models).
-For application work in a new checkout, select Node 24 and run `npm ci`
-there. Dependencies, configuration files, and any test output belong to that
+For application work in a new checkout, select the latest Node LTS and run
+`npm ci` there. Dependencies, configuration files, and any test output belong to that
 checkout. No application environment file or dependency directory is copied
 by the knowledge hooks. Choose a distinct `PORT` for each manual server, for
 example `env PORT=3101 npm start`. HTTP tests use ephemeral ports.

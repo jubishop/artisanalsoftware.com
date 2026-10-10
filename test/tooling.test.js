@@ -56,17 +56,23 @@ describe('Repository application commands', function () {
   }
 
   for (const command of ['start', 'test']) {
-    it(`rejects unsupported Node before npm ${command} starts work`, function () {
-      for (const version of ['22.0.0', '26.0.0']) {
+    it(`rejects Node below the minimum before npm ${command} starts work`, function () {
+      for (const version of ['22.0.0', '23.11.0']) {
         const result = npm([command], version)
         assert.notEqual(result.status, 0, result.stdout)
-        assert.match(result.stderr, /requires Node 24\.x/)
+        assert.match(result.stderr, /requires Node 24 or later/)
         assert.match(result.stderr, new RegExp(version.replaceAll('.', '\\.')))
         assert.equal(fs.existsSync(path.join(directory, 'command-ran')), false)
       }
-      const supported = npm([command])
-      assert.equal(supported.status, 0, supported.stderr)
-      assert.equal(fs.readFileSync(path.join(directory, 'command-ran'), 'utf8'), 'yes')
+    })
+
+    it(`runs npm ${command} on the minimum and newer Node majors`, function () {
+      for (const version of [undefined, '24.0.0', '26.0.0', '28.0.0']) {
+        fs.rmSync(path.join(directory, 'command-ran'), { force: true })
+        const result = npm([command], version)
+        assert.equal(result.status, 0, `${version}: ${result.stderr}`)
+        assert.equal(fs.readFileSync(path.join(directory, 'command-ran'), 'utf8'), 'yes')
+      }
     })
   }
 
@@ -75,11 +81,14 @@ describe('Repository application commands', function () {
       name: manifest.name, version: manifest.version, lockfileVersion: 3,
       packages: { '': { name: manifest.name, version: manifest.version, engines: manifest.engines } }
     }))
-    const rejected = npm(['ci', '--offline', '--ignore-scripts', '--no-audit', '--no-fund'], '26.0.0')
+    const install = ['ci', '--offline', '--ignore-scripts', '--no-audit', '--no-fund']
+    const rejected = npm(install, '23.11.0')
     assert.notEqual(rejected.status, 0, rejected.stdout)
     assert.match(rejected.stderr, /EBADENGINE/)
-    const supported = npm(['ci', '--offline', '--ignore-scripts', '--no-audit', '--no-fund'])
-    assert.equal(supported.status, 0, supported.stderr)
+    for (const version of [undefined, '26.0.0', '28.0.0']) {
+      const supported = npm(install, version)
+      assert.equal(supported.status, 0, `${version}: ${supported.stderr}`)
+    }
   })
 
   it('keeps Mocha discovery inside the active checkout and reports active failures', function () {

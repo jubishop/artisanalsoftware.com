@@ -68,7 +68,7 @@ class CheckApplicationTests(unittest.TestCase):
         result = self.check()
         self.assertEqual(result.returncode, 1)
         self.assertIn("Cannot run application checks:", result.stderr)
-        self.assertIn("Select Node 24 and run npm ci.", result.stderr)
+        self.assertIn("Select Node 24 or later (the latest LTS) and run npm ci.", result.stderr)
 
 
 if __name__ == "__main__":

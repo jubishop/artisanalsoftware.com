@@ -4,9 +4,10 @@ status: current
 
 # Application architecture
 
-Artisanal Software is an Express 5 application on Node 24. EJS templates
-render the studio homepage, PodHaven marketing pages, and RSS podcast pages.
-All pages use server-rendered HTML and CSS. Do not add client-side JavaScript.
+Artisanal Software is an Express 5 application on the latest Node LTS
+(minimum 24). EJS templates render the studio homepage, PodHaven marketing
+pages, and RSS podcast pages. All pages use server-rendered HTML and CSS. Do
+not add client-side JavaScript.
 
 ## Request handling
 

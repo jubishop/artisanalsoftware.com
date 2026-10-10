@@ -32,9 +32,10 @@ Project Starter manages this block; add project rules after it.
 
 ## Project
 
-This is a Node 24 Express/EJS site hosted on Railway behind Cloudflare.
-Keep server-side rendering only: no client-side JavaScript. Preserve public
-PodHaven URLs, the trusted RSS HTML model, and versioned static asset URLs.
+This is an Express/EJS site on the latest Node LTS (minimum 24), hosted on
+Railway behind Cloudflare. Keep server-side rendering only: no client-side
+JavaScript. Preserve public PodHaven URLs, the trusted RSS HTML model, and
+versioned static asset URLs.
 Read [architecture](docs/architecture.md), [deployment](docs/deployment.md),
 and the [content guide](docs/podhaven-content.md) for affected work.
 
