@@ -18,6 +18,14 @@ describe('PodHaven feature site', function () {
     expect(response.text).to.include('href="/podhaven/smart-lists"')
   })
 
+  it('discloses that a failed OPML import can send a copy of the chosen file', async function () {
+    const response = await request(app).get('/podhaven/privacy').expect(200)
+    const diagnostics = response.text.match(/<section\b[^>]*id="diagnostics"[\s\S]*?<\/section>/)
+    expect(diagnostics, 'diagnostics section').to.not.equal(null)
+    expect(diagnostics[0]).to.include('OPML')
+    expect(diagnostics[0]).to.include('a copy of the file')
+  })
+
   it('keeps every feature and guide reachable with valid local links and images', async function () {
     const paths = [
       '/podhaven', '/podhaven/privacy', '/podhaven/recommendations', '/podhaven/transcripts',
