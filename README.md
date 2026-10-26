@@ -43,8 +43,8 @@ for check selection, search, and hooks.
 
 ## Deployment
 
-Push release changes to `main` for Railway deployment. Documentation and local
-task-tracking changes can skip deployment while CI still runs. See the
+Push release changes to `main` for Railway deployment. Documentation changes
+can skip deployment while CI still runs. See the
 [deployment policy](docs/deployment.md#nonfunctional-changes) for watch paths
 and the manual option for other nonfunctional edits.
 
@@ -67,11 +67,3 @@ auto-deploy. Follow [the deployment runbook](docs/deployment.md).
 
 The application retains its ISC license declaration. Copied foundation files
 retain the MIT notice in [LICENSE.project-starter](LICENSE.project-starter).
-
-## Local task tracking
-
-Use `td` for local tasks, progress, blockers, and session handoffs. After cloning,
-install td and run `td init` in the primary checkout. Use `td status` or
-`td monitor` to inspect progress. Follow the [task workflow](docs/foundation/task-tracking.md)
-for setup, review, worktrees, and local data. Keep GitHub Issues for shared scope
-and acceptance criteria, linked from related td tasks.

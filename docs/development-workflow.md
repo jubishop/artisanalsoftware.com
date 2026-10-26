@@ -20,9 +20,7 @@ Select the latest Node LTS before `npm ci`. `.nvmrc` requests `lts/*`; with
 fnm, run `fnm use --install-if-missing`.
 
 Foundation setup needs Git and Python 3.9 or later, and checks also need
-ShellCheck. QMD and direnv are optional; setup reports skipped features.
-Install td and run `td init` as described in
-[task tracking](foundation/task-tracking.md). Create `.envrc` only when the
+ShellCheck. QMD and direnv are optional; setup reports skipped features. Create `.envrc` only when the
 project needs environment settings, and review it before running
 `direnv allow`; search does not need it.
 

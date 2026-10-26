@@ -47,8 +47,6 @@ coverage/
 
 # Project knowledge and worktree state
 
-# Local td task state
-
 # project-starter:begin
 .DS_Store
 .cache/
@@ -60,5 +58,4 @@ coverage/
 __pycache__/
 *.py[cod]
 worktrees/
-.todos/
 # project-starter:end

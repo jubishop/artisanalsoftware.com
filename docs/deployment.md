@@ -73,7 +73,7 @@ the first apply changed only `build.watchPatterns`.
 
 ## Nonfunctional changes
 
-Documentation, agent instructions, task tracking, comments, and other
+Documentation, agent instructions, comments, and other
 nonfunctional changes may be committed and pushed without deployment. Run
 appropriate checks and assess all changes since the last successful release.
 Do not skip a release that includes undeployed material changes.
@@ -82,7 +82,7 @@ Do not skip a release that includes undeployed material changes.
 [watch paths](https://docs.railway.com/builds/build-configuration#configure-watch-paths)
 as `build.watchPatterns`, and `test/deployment.test.js` evaluates that file.
 Application code, content, views, assets, dependencies, startup checks, and
-runtime configuration trigger deployment. Documentation, memory, td setup,
+runtime configuration trigger deployment. Documentation, memory,
 tests, knowledge tooling, and `.railway/` alone do not; `railway config apply`
 deploys Railway configuration changes. Keep these patterns current when
 adding or moving release inputs, and apply them before relying on them.

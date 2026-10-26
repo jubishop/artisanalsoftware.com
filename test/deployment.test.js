@@ -39,9 +39,9 @@ describe('Railway deployment watch paths', function () {
     return result.status === 0;
   }
 
-  it('skips changes confined to docs, local tracking, tests, and knowledge tooling', function () {
-    assert.equal(watches(['README.md', 'AGENTS.md', 'docs/foundation/task-tracking.md',
-      'memory/README.md', '.project-starter.json', '.gitignore', '.todos/issues.db',
+  it('skips changes confined to docs, tests, and knowledge tooling', function () {
+    assert.equal(watches(['README.md', 'AGENTS.md', 'docs/foundation/engineering-policy.md',
+      'memory/README.md', '.project-starter.json', '.gitignore',
       'bin/_knowledge.py', 'bin/check-application', 'test/routes.test.js',
       'tests/test_check_application.py']), false);
   });
@@ -60,7 +60,7 @@ describe('Railway deployment watch paths', function () {
   });
 
   it('deploys mixed documentation and application changes', function () {
-    assert.equal(watches(['docs/foundation/task-tracking.md', 'app.js']), true);
+    assert.equal(watches(['docs/foundation/engineering-policy.md', 'app.js']), true);
   });
 });
 
