@@ -7,7 +7,8 @@ feeds. EJS and CSS provide the interface without client-side JavaScript.
 ## Start locally
 
 Use the latest Node LTS (24 or later; see `package.json` and `.nvmrc`), npm,
-Git, Python 3.9+, and ShellCheck. QMD search and direnv are optional.
+Git, Python 3, QMD, and ShellCheck, plus direnv when the project has an
+`.envrc`.
 
 ```sh
 npm ci
