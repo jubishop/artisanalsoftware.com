@@ -49,8 +49,21 @@ Mocha discovery. Keep both suites independent of production services; they
 require no model downloads.
 
 The [GitHub workflow](../.github/workflows/check.yml) runs `npm ci` under
-the latest Node LTS and then `bin/check --full` on the latest Ubuntu runner
-for pull requests and pushes to `main`. It uses read-only permissions and does not retain checkout credentials.
+the latest Node LTS and then `bin/check --full` for pull requests and pushes
+to `main`. It uses read-only permissions and does not retain checkout credentials.
+Its job runs on the NVR's self-hosted runner, `nvr-artisanalsoftware.com-1`,
+or on GitHub's `ubuntu-latest` when the `CI_TIER` repository variable, which
+the job reads as it queues, is `github`. Home-infra's CI router sets that
+while the NVR can't run the job, and moves the runs already waiting. While
+GitHub also refuses hosted jobs, the router sets `local`, for the primary
+Mac's Colima VM, which the job leaves unmapped, so it runs on the NVR, until
+the VM's job image can run Node
+([#4](https://github.com/jubishop/artisanalsoftware.com/issues/4)). See
+home-infra's `memory/nvr-ci-runners.md#hosted-fallback`. The 40-minute
+timeout includes up to 30 minutes waiting for one of the NVR's four CI slots.
+The NVR's runners have no `sudo`, so the job installs nothing: a tool it
+starts needing that a runner lacks gets an install step that runs only when
+the tool is missing, and an entry in home-infra's `nvr/apt-packages.txt`.
 Railway waits for the commit's GitHub check suites before it builds, and
 skips the deployment if they fail, so this workflow gates releases; a local
 full check before pushing is optional. On 2026-10-10 Railway held 5027492 in
