@@ -18,21 +18,13 @@ concurrency:
 
 jobs:
   check:
-    # The NVR's runner, or GitHub's whenever the NVR can't run the job, or the primary Mac's Colima VM while GitHub
-    # also refuses hosted jobs: home-infra's CI router sets the CI_TIER repository variable to github or local then, and
-    # a job reads it as it queues. Unset, or anything else, CI runs on the NVR.
-    # See jubishop/home-infra's memory/nvr-ci-runners.md#hosted-fallback.
-    runs-on: ${{ fromJSON(vars.CI_TIER == 'github' && '"ubuntu-latest"' || vars.CI_TIER == 'local' && '["self-hosted","local-vm"]' || '["self-hosted","nvr"]') }}
-    # On the NVR's runner, a job waits up to 30 minutes for one of its four CI slots, and the wait counts here.
-    timeout-minutes: 40
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 0
-      # Every runner has ShellCheck, curl, and jq; the NVR's and the VM's get them from home-infra's
-      # nvr/apt-packages.txt and have no sudo. A tool one lacks gets an install step that runs only when it is missing,
-      # and an entry in that list.
       - name: Verify ShellCheck
         run: shellcheck --version
       # setup-node's lts/* can lag nodejs.org when a new major turns LTS; see
