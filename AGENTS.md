@@ -34,17 +34,14 @@ take precedence over this block and the foundation pages wherever they differ.
 This is an Express/EJS site on the latest Node LTS (minimum 24), hosted on
 Railway behind Cloudflare. Keep server-side rendering only: no client-side
 JavaScript. Preserve public PodHaven URLs, the trusted RSS HTML model, and
-versioned static asset URLs.
-Read [architecture](docs/architecture.md), [deployment](docs/deployment.md),
-and the [content guide](docs/podhaven-content.md) for affected work.
+versioned static asset URLs. Read [architecture](docs/architecture.md),
+[deployment](docs/deployment.md), and the
+[content guide](docs/podhaven-content.md) for affected work.
 
-Use [GitHub Issues](https://github.com/jubishop/artisanalsoftware.com/issues)
-for shared work and acceptance criteria.
-
-For code edits, run relevant application checks explicitly, such as
-`npm test -- --grep "episode"`. `bin/check --full` adds `bin/check-application`:
-the Python tests, then `npm test`. Railway deploys a commit only after its CI
-checks pass, so CI's full check is the release gate; see the
-[development workflow](docs/development-workflow.md#checks). Nonfunctional
-changes may be pushed without deployment; follow the
+While editing code, run focused application checks, such as
+`npm test -- --grep "episode"`, or all of them with `bin/check-application`.
+Railway deploys a commit only after its CI checks pass, so CI's
+`bin/check --full` is the enforced release gate; see
+[checks](docs/development-workflow.md#checks). Nonfunctional changes may be
+pushed without deployment; follow the
 [deployment policy](docs/deployment.md#nonfunctional-changes).
